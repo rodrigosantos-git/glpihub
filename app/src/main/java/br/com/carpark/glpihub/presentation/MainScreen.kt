@@ -79,8 +79,8 @@ fun MainScreen(
     // KPIs dinâmicos atualizados
     val totalTickets = tickets.size
     
-    val myName = savedUsername.replace(".", " ")
-    val assignedToMeTickets = tickets.count { it.atribuido.contains(myName, ignoreCase = true) }
+    val myName = (savedUsername ?: "").replace(".", " ")
+    val assignedToMeTickets = tickets.count { myName.isNotEmpty() && it.atribuido.contains(myName, ignoreCase = true) }
     
     val filteredTicketsCount = filteredTickets.size
 
