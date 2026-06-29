@@ -368,10 +368,10 @@ fun TicketCard(
                         Spacer(modifier = Modifier.width(4.dp))
                         Text("Solução", fontSize = 12.dp.value.toInt().dp.value.let { androidx.compose.ui.unit.TextUnit(it, androidx.compose.ui.unit.TextUnitType.Sp) })
                     }
-                    Button(onClick = onClickAcompanhamento, modifier = Modifier.weight(1.3f), shape = RoundedCornerShape(50)) {
+                    TextButton(onClick = onClickAcompanhamento, modifier = Modifier.weight(1.2f)) {
                         Icon(Icons.Default.Message, contentDescription = "Acompanhamentos", modifier = Modifier.size(16.dp))
                         Spacer(modifier = Modifier.width(4.dp))
-                        Text("Acompanhamento", fontSize = 11.dp.value.toInt().dp.value.let { androidx.compose.ui.unit.TextUnit(it, androidx.compose.ui.unit.TextUnitType.Sp) }, maxLines = 1)
+                        Text("Acompanhar", fontSize = 12.dp.value.toInt().dp.value.let { androidx.compose.ui.unit.TextUnit(it, androidx.compose.ui.unit.TextUnitType.Sp) }, maxLines = 1)
                     }
                 }
             }
