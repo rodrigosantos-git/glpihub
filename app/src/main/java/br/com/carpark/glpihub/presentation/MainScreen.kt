@@ -44,6 +44,10 @@ fun MainScreen(
     var showBottomSheet by remember { mutableStateOf(false) }
     val settingsSheetState = rememberModalBottomSheetState()
     var showSettingsSheet by remember { mutableStateOf(false) }
+    
+    val solutionSheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+    var selectedTicketIdForSolution by remember { mutableStateOf<String?>(null) }
+    
     var searchQuery by remember { mutableStateOf("") }
 
     LaunchedEffect(Unit) {
@@ -161,7 +165,7 @@ fun MainScreen(
                             ticket = ticket, 
                             onClickAcompanhamento = { onTicketClick(ticket.id) },
                             onClickAtribuir = { /* TODO */ },
-                            onClickFechar = { /* TODO */ }
+                            onClickSolucao = { selectedTicketIdForSolution = ticket.id }
                         )
                     }
                 }
@@ -196,6 +200,18 @@ fun MainScreen(
             }
         )
     }
+
+    if (selectedTicketIdForSolution != null) {
+        SolutionBottomSheet(
+            ticketId = selectedTicketIdForSolution!!,
+            onDismiss = { selectedTicketIdForSolution = null },
+            sheetState = solutionSheetState,
+            onSolucionar = { modelo, tipo, desc ->
+                // TODO: Integrar com a API/Scraper no futuro
+                selectedTicketIdForSolution = null
+            }
+        )
+    }
 }
 
 @Composable
@@ -220,7 +236,7 @@ fun TicketCard(
     ticket: Ticket, 
     onClickAcompanhamento: () -> Unit,
     onClickAtribuir: () -> Unit,
-    onClickFechar: () -> Unit
+    onClickSolucao: () -> Unit
 ) {
     val isSolved = ticket.status.contains("solucionado", true) || ticket.status.contains("fechado", true)
     val isNew = ticket.status.contains("novo", true)
@@ -344,10 +360,10 @@ fun TicketCard(
                         Spacer(modifier = Modifier.width(4.dp))
                         Text("Atribuir", fontSize = 12.dp.value.toInt().dp.value.let { androidx.compose.ui.unit.TextUnit(it, androidx.compose.ui.unit.TextUnitType.Sp) })
                     }
-                    TextButton(onClick = onClickFechar, modifier = Modifier.weight(1f), colors = ButtonDefaults.textButtonColors(contentColor = MaterialTheme.colorScheme.error)) {
-                        Icon(Icons.Default.CheckCircle, contentDescription = "Fechar Chamado", modifier = Modifier.size(16.dp))
+                    TextButton(onClick = onClickSolucao, modifier = Modifier.weight(1f), colors = ButtonDefaults.textButtonColors(contentColor = MaterialTheme.colorScheme.error)) {
+                        Icon(Icons.Default.CheckCircle, contentDescription = "Adicionar Solução", modifier = Modifier.size(16.dp))
                         Spacer(modifier = Modifier.width(4.dp))
-                        Text("Fechar", fontSize = 12.dp.value.toInt().dp.value.let { androidx.compose.ui.unit.TextUnit(it, androidx.compose.ui.unit.TextUnitType.Sp) })
+                        Text("Solução", fontSize = 12.dp.value.toInt().dp.value.let { androidx.compose.ui.unit.TextUnit(it, androidx.compose.ui.unit.TextUnitType.Sp) })
                     }
                     Button(onClick = onClickAcompanhamento, modifier = Modifier.weight(1.3f), shape = RoundedCornerShape(50)) {
                         Icon(Icons.Default.Message, contentDescription = "Acompanhamentos", modifier = Modifier.size(16.dp))
@@ -629,6 +645,150 @@ fun SettingsBottomSheet(
                 modifier = Modifier.fillMaxWidth().height(48.dp)
             ) {
                 Text("SAIR DA CONTA", fontWeight = FontWeight.Bold, color = Color.White)
+            }
+            Spacer(modifier = Modifier.height(32.dp))
+        }
+    }
+}
+
+@OptIn(androidx.compose.material3.ExperimentalMaterial3Api::class)
+@Composable
+fun SolutionBottomSheet(
+    ticketId: String,
+    onDismiss: () -> Unit,
+    sheetState: androidx.compose.material3.SheetState,
+    onSolucionar: (String, String, String) -> Unit
+) {
+    var modeloExpanded by remember { mutableStateOf(false) }
+    var selectedModelo by remember { mutableStateOf("") }
+    val modelos = listOf(
+        "CAR PARK",
+        "01 - ACESSO REMOTO (3)",
+        "02 - VISITA TECNICA CARPARK (2)",
+        "03 - RESOLVIDO (1)",
+        "04 - CUSTOMIZACAO (5)",
+        "05 - TREINAMENTO (4)",
+        "06 - CANCELADO (6)"
+    )
+
+    var tipoExpanded by remember { mutableStateOf(false) }
+    var selectedTipo by remember { mutableStateOf("") }
+    val tipos = listOf(
+        "01 - OK REMOTAMENTE (4)",
+        "02 - OK INLOCO (1)",
+        "03 - OK SEM INTERVENCAO TECNICA (5)",
+        "03 - OK VIA PRESTADOR DE SERVICO (11)",
+        "04 - NAO RESOLVIDO (3)",
+        "05 - CANCELADO (2)",
+        "06 - PLANTAO TECNICO (12)",
+        "CUSTOMIZACAO (7)",
+        "DESENVOLVIMENTO (8)",
+        "RESTART APLICACAO (10)",
+        "TREINAMENTO (6)"
+    )
+
+    var descricao by remember { mutableStateOf("") }
+
+    androidx.compose.material3.ModalBottomSheet(
+        onDismissRequest = onDismiss,
+        sheetState = sheetState,
+        windowInsets = androidx.compose.foundation.layout.WindowInsets.ime
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 24.dp)
+                .navigationBarsPadding()
+                .verticalScroll(rememberScrollState())
+        ) {
+            Text("Novo item - Solução", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            Text("Chamado ID: $ticketId", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Spacer(modifier = Modifier.height(24.dp))
+
+            // Dropdown: Modelo de Solução
+            androidx.compose.material3.ExposedDropdownMenuBox(
+                expanded = modeloExpanded,
+                onExpandedChange = { modeloExpanded = !modeloExpanded }
+            ) {
+                OutlinedTextField(
+                    value = selectedModelo,
+                    onValueChange = {},
+                    readOnly = true,
+                    label = { Text("Modelo de solução") },
+                    trailingIcon = { androidx.compose.material3.ExposedDropdownMenuDefaults.TrailingIcon(expanded = modeloExpanded) },
+                    modifier = Modifier.menuAnchor().fillMaxWidth(),
+                    shape = RoundedCornerShape(12.dp)
+                )
+                androidx.compose.material3.ExposedDropdownMenu(
+                    expanded = modeloExpanded,
+                    onDismissRequest = { modeloExpanded = false }
+                ) {
+                    modelos.forEach { item ->
+                        androidx.compose.material3.DropdownMenuItem(
+                            text = { Text(item) },
+                            onClick = {
+                                selectedModelo = item
+                                modeloExpanded = false
+                            }
+                        )
+                    }
+                }
+            }
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Dropdown: Tipo da Solução
+            androidx.compose.material3.ExposedDropdownMenuBox(
+                expanded = tipoExpanded,
+                onExpandedChange = { tipoExpanded = !tipoExpanded }
+            ) {
+                OutlinedTextField(
+                    value = selectedTipo,
+                    onValueChange = {},
+                    readOnly = true,
+                    label = { Text("Tipo da solução") },
+                    trailingIcon = { androidx.compose.material3.ExposedDropdownMenuDefaults.TrailingIcon(expanded = tipoExpanded) },
+                    modifier = Modifier.menuAnchor().fillMaxWidth(),
+                    shape = RoundedCornerShape(12.dp)
+                )
+                androidx.compose.material3.ExposedDropdownMenu(
+                    expanded = tipoExpanded,
+                    onDismissRequest = { tipoExpanded = false }
+                ) {
+                    tipos.forEach { item ->
+                        androidx.compose.material3.DropdownMenuItem(
+                            text = { Text(item) },
+                            onClick = {
+                                selectedTipo = item
+                                tipoExpanded = false
+                            }
+                        )
+                    }
+                }
+            }
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Text Area: Descrição
+            OutlinedTextField(
+                value = descricao,
+                onValueChange = { descricao = it },
+                label = { Text("Descrição") },
+                minLines = 5,
+                shape = RoundedCornerShape(12.dp),
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            Spacer(modifier = Modifier.height(24.dp))
+
+            // Botão Adicionar
+            Button(
+                onClick = { onSolucionar(selectedModelo, selectedTipo, descricao) },
+                colors = ButtonDefaults.buttonColors(containerColor = androidx.compose.ui.graphics.Color(0xFFF59E0B)),
+                shape = RoundedCornerShape(16.dp),
+                modifier = Modifier.fillMaxWidth().height(48.dp)
+            ) {
+                Icon(Icons.Default.CheckCircle, contentDescription = null, tint = androidx.compose.ui.graphics.Color.White)
+                Spacer(modifier = Modifier.width(8.dp))
+                Text("Adicionar Solução", fontWeight = FontWeight.Bold, color = androidx.compose.ui.graphics.Color.White)
             }
             Spacer(modifier = Modifier.height(32.dp))
         }
