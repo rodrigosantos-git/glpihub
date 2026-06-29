@@ -45,6 +45,7 @@ class MainViewModel(
 
     val themeType = dataStoreManager.themeTypeFlow.stateIn(viewModelScope, SharingStarted.Eagerly, "light")
     val aiApiKey = dataStoreManager.aiApiKeyFlow.stateIn(viewModelScope, SharingStarted.Eagerly, "")
+    val lockPortrait = dataStoreManager.lockPortraitFlow.stateIn(viewModelScope, SharingStarted.Eagerly, true)
 
     fun saveThemeType(theme: String) {
         viewModelScope.launch {
@@ -55,6 +56,12 @@ class MainViewModel(
     fun saveAiApiKey(key: String) {
         viewModelScope.launch {
             dataStoreManager.saveAiApiKey(key)
+        }
+    }
+
+    fun saveLockPortrait(lock: Boolean) {
+        viewModelScope.launch {
+            dataStoreManager.saveLockPortrait(lock)
         }
     }
 

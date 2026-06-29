@@ -28,6 +28,7 @@ class DataStoreManager(private val context: Context) {
         
         val THEME_TYPE = stringPreferencesKey("theme_type")
         val AI_API_KEY = stringPreferencesKey("ai_api_key")
+        val LOCK_PORTRAIT = booleanPreferencesKey("lock_portrait")
     }
 
     val sessionCookieFlow: Flow<String?> = context.dataStore.data.map { it[COOKIE_SESSION] }
@@ -38,6 +39,7 @@ class DataStoreManager(private val context: Context) {
     
     val themeTypeFlow: Flow<String> = context.dataStore.data.map { it[THEME_TYPE] ?: "light" }
     val aiApiKeyFlow: Flow<String> = context.dataStore.data.map { it[AI_API_KEY] ?: "" }
+    val lockPortraitFlow: Flow<Boolean> = context.dataStore.data.map { it[LOCK_PORTRAIT] ?: true }
     
     val filterAssigneeFlow: Flow<String> = context.dataStore.data.map { it[FILTER_ASSIGNEE] ?: "" }
     val filterCategoryFlow: Flow<String> = context.dataStore.data.map { it[FILTER_CATEGORY] ?: "" }
@@ -84,6 +86,12 @@ class DataStoreManager(private val context: Context) {
     suspend fun saveAiApiKey(key: String) {
         context.dataStore.edit { preferences ->
             preferences[AI_API_KEY] = key
+        }
+    }
+
+    suspend fun saveLockPortrait(lock: Boolean) {
+        context.dataStore.edit { preferences ->
+            preferences[LOCK_PORTRAIT] = lock
         }
     }
 }

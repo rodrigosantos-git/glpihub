@@ -39,6 +39,17 @@ fun MainScreen(
 ) {
     val tickets by viewModel.tickets.collectAsState()
     val isLoading by viewModel.isLoading.collectAsState()
+    val lockPortrait by viewModel.lockPortrait.collectAsState()
+    val context = androidx.compose.ui.platform.LocalContext.current
+    val activity = remember(context) { context as? android.app.Activity }
+
+    LaunchedEffect(lockPortrait) {
+        activity?.requestedOrientation = if (lockPortrait) {
+            android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        } else {
+            android.content.pm.ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
+        }
+    }
     
     val sheetState = rememberModalBottomSheetState()
     var showBottomSheet by remember { mutableStateOf(false) }
@@ -674,6 +685,27 @@ fun SettingsBottomSheet(
                         }
                     }
                 }
+            }
+
+            Spacer(modifier = Modifier.height(24.dp))
+            Divider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Configuração de Trava de Orientação
+            val lockPortraitState by viewModel.lockPortrait.collectAsState()
+            Row(
+                modifier = Modifier.fillMaxWidth().clickable { viewModel.saveLockPortrait(!lockPortraitState) },
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Column(modifier = Modifier.weight(1f)) {
+                    Text("Bloquear Rotação de Tela", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                    Text("Mantém o aplicativo travado em modo vertical (retrato)", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                }
+                androidx.compose.material3.Switch(
+                    checked = lockPortraitState,
+                    onCheckedChange = { viewModel.saveLockPortrait(it) }
+                )
             }
 
             Spacer(modifier = Modifier.height(32.dp))
