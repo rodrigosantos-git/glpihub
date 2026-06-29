@@ -337,19 +337,49 @@ fun TicketCard(
                     }
                 }
                 Spacer(modifier = Modifier.height(8.dp))
-                Text("CATEGORIA", fontSize = 10.dp.value.toInt().dp.value.let { androidx.compose.ui.unit.TextUnit(it, androidx.compose.ui.unit.TextUnitType.Sp) }, fontWeight = FontWeight.ExtraBold, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                Spacer(modifier = Modifier.height(4.dp))
-                Surface(
-                    shape = RoundedCornerShape(8.dp),
-                    color = catColor.copy(alpha = 0.15f)
-                ) {
-                    Text(
-                        ticket.categoria,
-                        fontSize = 11.dp.value.toInt().dp.value.let { androidx.compose.ui.unit.TextUnit(it, androidx.compose.ui.unit.TextUnitType.Sp) },
-                        fontWeight = FontWeight.Bold,
-                        color = catColor,
-                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
-                    )
+                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                    Column(modifier = Modifier.weight(1f)) {
+                        Text("CATEGORIA", fontSize = 10.dp.value.toInt().dp.value.let { androidx.compose.ui.unit.TextUnit(it, androidx.compose.ui.unit.TextUnitType.Sp) }, fontWeight = FontWeight.ExtraBold, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        Spacer(modifier = Modifier.height(4.dp))
+                        Surface(
+                            shape = RoundedCornerShape(8.dp),
+                            color = catColor.copy(alpha = 0.15f)
+                        ) {
+                            Text(
+                                ticket.categoria,
+                                fontSize = 11.dp.value.toInt().dp.value.let { androidx.compose.ui.unit.TextUnit(it, androidx.compose.ui.unit.TextUnitType.Sp) },
+                                fontWeight = FontWeight.Bold,
+                                color = catColor,
+                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+                            )
+                        }
+                    }
+                    if (ticket.entidade.isNotEmpty()) {
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Column(modifier = Modifier.weight(1f)) {
+                            Text("ENTIDADE", fontSize = 10.dp.value.toInt().dp.value.let { androidx.compose.ui.unit.TextUnit(it, androidx.compose.ui.unit.TextUnitType.Sp) }, fontWeight = FontWeight.ExtraBold, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            Spacer(modifier = Modifier.height(4.dp))
+                            val entClean = if (ticket.entidade.contains("-")) {
+                                ticket.entidade.substringAfter("-").trim()
+                            } else if (ticket.entidade.contains(">")) {
+                                ticket.entidade.substringAfterLast(">").trim()
+                            } else {
+                                ticket.entidade.trim()
+                            }
+                            Surface(
+                                shape = RoundedCornerShape(8.dp),
+                                color = MaterialTheme.colorScheme.secondary.copy(alpha = 0.15f)
+                            ) {
+                                Text(
+                                    entClean,
+                                    fontSize = 11.dp.value.toInt().dp.value.let { androidx.compose.ui.unit.TextUnit(it, androidx.compose.ui.unit.TextUnitType.Sp) },
+                                    fontWeight = FontWeight.Bold,
+                                    color = MaterialTheme.colorScheme.secondary,
+                                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+                                )
+                            }
+                        }
+                    }
                 }
                 
                 Spacer(modifier = Modifier.height(16.dp))
