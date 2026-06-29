@@ -719,7 +719,7 @@ fun SolutionBottomSheet(
                     modifier = Modifier.menuAnchor().fillMaxWidth(),
                     shape = RoundedCornerShape(12.dp)
                 )
-                androidx.compose.material3.ExposedDropdownMenu(
+                ExposedDropdownMenu(
                     expanded = modeloExpanded,
                     onDismissRequest = { modeloExpanded = false }
                 ) {
@@ -750,7 +750,7 @@ fun SolutionBottomSheet(
                     modifier = Modifier.menuAnchor().fillMaxWidth(),
                     shape = RoundedCornerShape(12.dp)
                 )
-                androidx.compose.material3.ExposedDropdownMenu(
+                ExposedDropdownMenu(
                     expanded = tipoExpanded,
                     onDismissRequest = { tipoExpanded = false }
                 ) {
