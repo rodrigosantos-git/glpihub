@@ -28,8 +28,20 @@ fun LoginScreen(
 
     val isLoggedIn by viewModel.isLoggedIn.collectAsState()
     val isLoading by viewModel.isLoading.collectAsState()
-
     val loginError by viewModel.loginError.collectAsState()
+
+    val savedUsername by viewModel.savedUsername.collectAsState()
+    val savedPassword by viewModel.savedPassword.collectAsState()
+    val savedSaveLogin by viewModel.savedSaveLogin.collectAsState()
+
+    // Preenche as credenciais se a opção "Lembrar de mim" estiver ativa no DataStore
+    LaunchedEffect(savedUsername, savedPassword, savedSaveLogin) {
+        if (savedSaveLogin) {
+            username = savedUsername ?: ""
+            password = savedPassword ?: ""
+            saveLogin = true
+        }
+    }
 
     LaunchedEffect(isLoggedIn) {
         if (isLoggedIn == true) {

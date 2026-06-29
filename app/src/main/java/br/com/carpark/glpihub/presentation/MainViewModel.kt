@@ -39,6 +39,10 @@ class MainViewModel(
     val filterRequerente = dataStoreManager.filterRequerenteFlow.stateIn(viewModelScope, SharingStarted.Lazily, "")
     val filterEntidade = dataStoreManager.filterEntidadeFlow.stateIn(viewModelScope, SharingStarted.Lazily, "")
 
+    val savedUsername = dataStoreManager.usernameFlow.stateIn(viewModelScope, SharingStarted.Lazily, "")
+    val savedPassword = dataStoreManager.passwordFlow.stateIn(viewModelScope, SharingStarted.Lazily, "")
+    val savedSaveLogin = dataStoreManager.saveLoginFlow.stateIn(viewModelScope, SharingStarted.Lazily, false)
+
     fun saveFilters(assignee: String, category: String, requerente: String, entidade: String) {
         viewModelScope.launch {
             dataStoreManager.saveFilters(assignee, category, requerente, entidade)
