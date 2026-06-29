@@ -119,7 +119,6 @@ class MainViewModel(
         viewModelScope.launch {
             scraper.clearSession()
             dataStoreManager.clearSession()
-            dataStoreManager.saveCredentials("", "", false)
             _isLoggedIn.value = false
         }
     }
