@@ -50,11 +50,7 @@ fun MainScreen(
         viewModel.loadTickets()
     }
 
-    // KPIs dinâmicos
-    val totalTickets = tickets.size
-    val solvedTickets = tickets.count { it.status.contains("solucionado", ignoreCase = true) || it.status.contains("fechado", ignoreCase = true) }
-    val openTickets = totalTickets - solvedTickets
-
+    val savedUsername by viewModel.savedUsername.collectAsState()
     val filterAssignee by viewModel.filterAssignee.collectAsState()
     val filterCategory by viewModel.filterCategory.collectAsState()
     val filterRequerente by viewModel.filterRequerente.collectAsState()
@@ -79,6 +75,14 @@ fun MainScreen(
         
         matchesSearch && matchesAssignee && matchesCategory && matchesRequerente && matchesEntidade
     }
+
+    // KPIs dinâmicos atualizados
+    val totalTickets = tickets.size
+    
+    val myName = savedUsername.replace(".", " ")
+    val assignedToMeTickets = tickets.count { it.atribuido.contains(myName, ignoreCase = true) }
+    
+    val filteredTicketsCount = filteredTickets.size
 
     Scaffold(
         topBar = {
@@ -132,8 +136,8 @@ fun MainScreen(
             // KPI Row
             Row(modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 KpiCard(title = "TOTAL", value = totalTickets.toString(), color = androidx.compose.ui.graphics.Color(0xFF6366F1), modifier = Modifier.weight(1f))
-                KpiCard(title = "ABERTOS", value = openTickets.toString(), color = androidx.compose.ui.graphics.Color(0xFFF59E0B), modifier = Modifier.weight(1f))
-                KpiCard(title = "SOLUCIONADOS", value = solvedTickets.toString(), color = androidx.compose.ui.graphics.Color(0xFF10B981), modifier = Modifier.weight(1f))
+                KpiCard(title = "ATRIB. A MIM", value = assignedToMeTickets.toString(), color = androidx.compose.ui.graphics.Color(0xFFF59E0B), modifier = Modifier.weight(1f))
+                KpiCard(title = "PESQUISA", value = filteredTicketsCount.toString(), color = androidx.compose.ui.graphics.Color(0xFF10B981), modifier = Modifier.weight(1f))
             }
 
             Spacer(modifier = Modifier.height(8.dp))
