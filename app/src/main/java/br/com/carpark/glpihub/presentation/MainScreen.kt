@@ -341,12 +341,22 @@ fun TicketCard(
                     Column(modifier = Modifier.weight(1f)) {
                         Text("CATEGORIA", fontSize = 10.dp.value.toInt().dp.value.let { androidx.compose.ui.unit.TextUnit(it, androidx.compose.ui.unit.TextUnitType.Sp) }, fontWeight = FontWeight.ExtraBold, color = MaterialTheme.colorScheme.onSurfaceVariant)
                         Spacer(modifier = Modifier.height(4.dp))
+                        val catLastNode = if (ticket.categoria.contains(">")) {
+                            ticket.categoria.substringAfterLast(">").trim()
+                        } else {
+                            ticket.categoria.trim()
+                        }
+                        val catClean = if (catLastNode.contains("-")) {
+                            catLastNode.substringAfter("-").trim()
+                        } else {
+                            catLastNode
+                        }
                         Surface(
                             shape = RoundedCornerShape(8.dp),
                             color = catColor.copy(alpha = 0.15f)
                         ) {
                             Text(
-                                ticket.categoria,
+                                catClean,
                                 fontSize = 11.dp.value.toInt().dp.value.let { androidx.compose.ui.unit.TextUnit(it, androidx.compose.ui.unit.TextUnitType.Sp) },
                                 fontWeight = FontWeight.Bold,
                                 color = catColor,
