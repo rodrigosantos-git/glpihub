@@ -1,0 +1,417 @@
+﻿<!DOCTYPE html>
+<html lang="pt"><head><title>GLPI - Chamados</title><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta property="glpi:csrf_token" content="60de90809e4638ecc1a403c3fdb4964a719479aa854fdf0aa741f400a0e1c90c" /><link rel="stylesheet" type="text/css" href="/public/lib/base.min.css?v=9.5.8" media="all"><link rel="stylesheet" type="text/css" href="/css/jstree-glpi.min.css?v=9.5.8" media="all"><link rel="stylesheet" type="text/css" href="/public/lib/leaflet.min.css?v=9.5.8" media="all"><link rel="stylesheet" type="text/css" href="/public/lib/flatpickr.min.css?v=9.5.8" media="all"><link rel="stylesheet" type="text/css" href="/public/lib/flatpickr/themes/light.min.css?v=9.5.8" media="all"><link rel="stylesheet" type="text/css" href="/public/lib/jquery.rateit.min.css?v=9.5.8" media="all"><link rel="stylesheet" type="text/css" href="/css_compiled/css_dashboard.min.css?v=9.5.8" media="all"><link rel="stylesheet" type="text/css" href="/public/lib/gridstack.min.css?v=9.5.8" media="all"><link rel="stylesheet" type="text/css" href="/public/lib/chartist.min.css?v=9.5.8" media="all"><link rel="stylesheet" type="text/css" href="/css/chartists-glpi.min.css?v=9.5.8" media="all"><link rel="stylesheet" type="text/css" href="/public/lib/photoswipe.min.css?v=9.5.8" media="all"><link rel="stylesheet" type="text/css" href="/css/jquery-glpi.min.css?v=9.5.8" media="all"><link rel="stylesheet" type="text/css" href="/css_compiled/css_styles.min.css?v=9.5.8" media="all"><link rel="stylesheet" type="text/css" href="/css_compiled/css_highcontrast.min.css?v=9.5.8" media="all"><link rel="stylesheet" type="text/css" href="/css/print.min.css?v=9.5.8" media="print"><link rel='shortcut icon' type='images/x-icon' href='/pics/favicon.ico' >
+<link rel="stylesheet" type="text/css" href="/css_compiled/css_palettes_clockworkorange.min.css?v=9.5.8" media="all"><script type="text/javascript" src="/public/lib/base.min.js?v=9.5.8"></script><script type="text/javascript">
+//<![CDATA[
+
+            $(function() {
+               i18n.setLocale('pt_BR');
+            });
+
+//]]>
+</script><script type="text/javascript">
+//<![CDATA[
+
+               $(function() {
+                  $.ajax({
+                     type: 'GET',
+                     url: '/front/locale.php?domain=glpi&version=9.5.8',
+                     success: function(json) {
+                        i18n.loadJSON(json, 'glpi');
+                     }
+                  });
+               });
+
+//]]>
+</script><script type="text/javascript">
+//<![CDATA[
+
+               $(function() {
+                  $.ajax({
+                     type: 'GET',
+                     url: '/front/locale.php?domain=costs&version=2.2.3',
+                     success: function(json) {
+                        i18n.loadJSON(json, 'costs');
+                     }
+                  });
+               });
+
+//]]>
+</script></head>
+<body class='layout_lefttab'><div id='header'><header role='banner' id='header_top'><div id='c_logo'><a href='/front/central.php'
+               accesskey='1'
+               title='Home'><span class='sr-only'>Home</span></a></div><div id='c_preference' ><ul><li id='deconnexion'><a href='/front/logout.php?noAUTO=1' title="Sair" class='fa fa-sign-out-alt'><span class='sr-only'>Sair></span></a></li>
+<li id='preferences_link'><a href='/front/preference.php' title="Minhas configura&ccedil;&otilde;es - Rodrigo Santos" class='fa fa-cog'><span class='sr-only'>Minhas configura&ccedil;&otilde;es</span><span id='myname'>Rodrigo Santos</span></a></li><li id='bookmark_link'><script type='text/javascript'>
+$(function() {$('<div id=\'showSavedSearches\' class=\'slidepanel onright\'><div class="header"><button type=\'button\' class=\'close ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only ui-dialog-titlebar-close\' title=\'Fechar\'><span class=\'ui-button-icon-primary ui-icon ui-icon-closethick\'></span><span class=\'ui-button-text\'>Fechar</span></button><a href=\'/front/savedsearch.php\'><img class=\'icon\' src=\'/pics/menu_config.png\' alt=\'Gerenciar pesquisas salvas\' title=\'Gerenciar pesquisas salvas\'/></a><h3>Pesquisas salvas</h3></div><div class=\'contents\'></div></div>')
+         .hide()
+         .appendTo('body');
+$('#showSavedSearches .close').on('click', function() {
+         $('#showSavedSearches').hide(
+            'slow',
+            function () {
+               $(this).find('.contents').empty();
+            }
+         );
+       });
+$('#showSavedSearchesLink').on('click', function() {
+         $('#showSavedSearches').show(
+            'slow',
+            function() {
+               _loadshowSavedSearches();
+            }
+         );
+      });
+});var _loadshowSavedSearches = function() {
+            $.ajax({
+               url: '/ajax/savedsearch.php?action=show',
+               beforeSend: function() {
+                  var _loader = $('<div id=\'loadingslide\'><div class=\'loadingindicator\'>Carregando...</div></div>');
+                  $('#showSavedSearches .contents').html(_loader);
+               }
+            })
+            .always( function() {
+               $('#loadingslide').remove();
+            })
+            .done(function(res) {
+               $('#showSavedSearches .contents').html(res);
+            });
+         };
+</script><a href='#' id='showSavedSearchesLink' class='fa fa-star' title="Carregar uma pesquisa salva"><span class='sr-only'>Pesquisas salvas</span></a></li><li id='help_link'><a href='http://glpi-project.org/help-central' target='_blank' title="Ajuda" class='fa fa-question'><span class='sr-only'>Ajuda</span></a></li><li id='language_link'><a href='/front/preference.php?forcetab=User$1' title="Português do Brasil">Português do Brasil</a></li><li id='c_recherche'>
+<form role='search' method='get' action='/front/search.php'>
+<span id='champRecherche'><input size='15' type='search' name='globalsearch' placeholder='Pesquisar' aria-labelledby='globalsearchglass'><button type='submit' name='globalsearchglass' id='globalsearchglass'><i class='fa fa-search'></i><span class='sr-only'>Pesquisar</span></button></span>
+<input type="hidden" name="_glpi_csrf_token" value="bb95c905fc10de80b8ac09773ec3c610cb3d8715a7cedd057e7427e8d2b520f7" />
+</form>
+</li></ul></div>
+</header><div id='c_menu'><ul id='menu' class='fullmenu'><li id='menu1' data-id='1' class=''><a href='/front/dashboard_assets.php' class='itemP'>Ativos</a><ul class='ssmenu'><li class=''>
+                        <a href='/front/computer.php'  accesskey='o'>
+                           <i class='fa-fw fas fa-laptop'></i>
+                           C<u>o</u>mputadores
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/monitor.php' >
+                           <i class='fa-fw fas fa-desktop'></i>
+                           Monitores
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/software.php'  accesskey='s'>
+                           <i class='fa-fw fas fa-cube'></i>
+                           <u>S</u>oftwares
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/networkequipment.php' >
+                           <i class='fa-fw fas fa-network-wired'></i>
+                           Dispositivos de rede
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/peripheral.php' >
+                           <i class='fa-fw fab fa-usb'></i>
+                           Dispositivos
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/printer.php' >
+                           <i class='fa-fw fas fa-print'></i>
+                           Impressoras
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/cartridgeitem.php' >
+                           <i class='fa-fw fas fa-fill-drip'></i>
+                           Cartuchos
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/consumableitem.php' >
+                           <i class='fa-fw fas fa-box-open'></i>
+                           Insumos
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/phone.php' >
+                           <i class='fa-fw fas fa-phone'></i>
+                           Telefones
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/rack.php' >
+                           <i class='fa-fw fas fa-server'></i>
+                           Racks
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/enclosure.php' >
+                           <i class='fa-fw fas fa-th'></i>
+                           Chassis
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/pdu.php' >
+                           <i class='fa-fw fas fa-plug'></i>
+                           PDUs
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/passivedcequipment.php' >
+                           <i class='fa-fw fas fa-th-list'></i>
+                           Dispositivos passivo
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/allassets.php' >
+                           <i class='fa-fw fas fa-list'></i>
+                           Global
+                        </a>
+                     </li></ul></li><li id='menu2' data-id='2' class='active'><a href='/front/dashboard_helpdesk.php' class='itemP'>Assistência</a><ul class='ssmenu'><li class='active'>
+                        <a href='/front/ticket.php'  accesskey='t'>
+                           <i class='fa-fw fas fa-exclamation-circle'></i>
+                           Chamados
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/ticket.form.php' >
+                           <i class='fa-fw fas fa-plus'></i>
+                           Criar chamado
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/problem.php' >
+                           <i class='fa-fw fas fa-exclamation-triangle'></i>
+                           Problemas
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/change.php' >
+                           <i class='fa-fw fas fa-clipboard-check'></i>
+                           Mudanças
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/planning.php'  accesskey='p'>
+                           <i class='fa-fw far fa-calendar-alt'></i>
+                           <u>P</u>lanejamento
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/stat.php'  accesskey='a'>
+                           <i class='fa-fw fas fa-chart-bar'></i>
+                           Est<u>a</u>tísticas
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/ticketrecurrent.php'  accesskey='n'>
+                           <i class='fa-fw fas fa-stopwatch'></i>
+                           Chamados recorre<u>n</u>tes
+                        </a>
+                     </li></ul></li><li id='menu3' data-id='3' class=''><a href='/front/softwarelicense.php' class='itemP'>Gerência</a><ul class='ssmenu'><li class=''>
+                        <a href='/front/softwarelicense.php' >
+                           <i class='fa-fw fas fa-key'></i>
+                           Lice<u>n</u>ças
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/budget.php' >
+                           <i class='fa-fw fas fa-calculator'></i>
+                           Orçame<u>n</u>tos
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/supplier.php' >
+                           <i class='fa-fw fas fa-dolly'></i>
+                           Fornecedores
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/contact.php' >
+                           <i class='fa-fw fas fa-user-tie'></i>
+                           Contatos
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/contract.php' >
+                           <i class='fa-fw fas fa-file-signature'></i>
+                           Contratos
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/document.php'  accesskey='d'>
+                           <i class='fa-fw far fa-file'></i>
+                           <u>D</u>ocumentos
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/line.php' >
+                           <i class='fa-fw fas fa-phone'></i>
+                           Linhas
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/certificate.php' >
+                           <i class='fa-fw fas fa-certificate'></i>
+                           Certificados
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/datacenter.php' >
+                           <i class='fa-fw fas fa-warehouse'></i>
+                           Data centers
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/cluster.php' >
+                           <i class='fa-fw fas fa-project-diagram'></i>
+                           Clusters
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/domain.php' >
+                           <i class='fa-fw fas fa-globe-americas'></i>
+                           Domí<u>n</u>ios
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/appliance.php' >
+                           <i class='fa-fw fas fa-cubes'></i>
+                           Aplicação
+                        </a>
+                     </li></ul></li><li id='menu4' data-id='4' class=''><a href='/front/project.php' class='itemP'>Ferramentas</a><ul class='ssmenu'><li class=''>
+                        <a href='/front/project.php' >
+                           <i class='fa-fw fas fa-columns'></i>
+                           Projetos
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/reminder.php' >
+                           <i class='fa-fw far fa-sticky-note'></i>
+                           Lembretes
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/rssfeed.php' >
+                           <i class='fa-fw fas fa-rss'></i>
+                           RSS feed
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/knowbaseitem.php'  accesskey='b'>
+                           <i class='fa-fw fas fa-question'></i>
+                           <u>B</u>ase de Conhecimento
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/reservationitem.php' >
+                           <i class='fa-fw fas fa-calendar-check'></i>
+                           Reservas
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/report.php'  accesskey='e'>
+                           <i class='fa-fw fas fa-file-medical-alt'></i>
+                           R<u>e</u>latórios
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/savedsearch.php' >
+                           <i class='fa-fw far fa-bookmark'></i>
+                           Pesquisas salvas
+                        </a>
+                     </li></ul></li><li id='menu5' data-id='5' class=''><a href='/front/user.php' class='itemP'>Administração</a><ul class='ssmenu'><li class=''>
+                        <a href='/front/user.php'  accesskey='u'>
+                           <i class='fa-fw fas fa-user'></i>
+                           <u>U</u>suários
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/group.php'  accesskey='g'>
+                           <i class='fa-fw fas fa-users'></i>
+                           <u>G</u>rupos
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/entity.php' >
+                           <i class='fa-fw fas fa-layer-group'></i>
+                           E<u>n</u>tidades
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/rule.php' >
+                           <i class='fa-fw fas fa-book'></i>
+                           Regras
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/profile.php' >
+                           <i class='fa-fw fas fa-user-check'></i>
+                           Perfis
+                        </a>
+                     </li></ul></li><li id='menu6' data-id='6' class=''><a href='/front/dropdown.php' class='itemP'>Configurar</a><ul class='ssmenu'><li class=''>
+                        <a href='/front/dropdown.php' >
+                           <i class='fa-fw fas fa-edit'></i>
+                           Listas suspe<u>n</u>sas
+                        </a>
+                     </li></ul></li></ul><div id='show_all_menu' class='invisible'><dl><dt class='primary-bg primary-fg'><a class='primary-fg' href='/front/dashboard_assets.php' title="Ativos" class='itemP'>Ativos</a></dt><dd><a href='/front/computer.php'><i class='fa-fw fas fa-laptop'></i>&nbsp;Computadores</a></dd><dd><a href='/front/monitor.php'><i class='fa-fw fas fa-desktop'></i>&nbsp;Monitores</a></dd><dd><a href='/front/software.php'><i class='fa-fw fas fa-cube'></i>&nbsp;Softwares</a></dd><dd><a href='/front/networkequipment.php'><i class='fa-fw fas fa-network-wired'></i>&nbsp;Dispositivos de rede</a></dd><dd><a href='/front/peripheral.php'><i class='fa-fw fab fa-usb'></i>&nbsp;Dispositivos</a></dd><dd><a href='/front/printer.php'><i class='fa-fw fas fa-print'></i>&nbsp;Impressoras</a></dd><dd><a href='/front/cartridgeitem.php'><i class='fa-fw fas fa-fill-drip'></i>&nbsp;Cartuchos</a></dd><dd><a href='/front/consumableitem.php'><i class='fa-fw fas fa-box-open'></i>&nbsp;Insumos</a></dd><dd><a href='/front/phone.php'><i class='fa-fw fas fa-phone'></i>&nbsp;Telefones</a></dd><dd><a href='/front/rack.php'><i class='fa-fw fas fa-server'></i>&nbsp;Racks</a></dd><dd><a href='/front/enclosure.php'><i class='fa-fw fas fa-th'></i>&nbsp;Chassis</a></dd><dd><a href='/front/pdu.php'><i class='fa-fw fas fa-plug'></i>&nbsp;PDUs</a></dd><dd><a href='/front/passivedcequipment.php'><i class='fa-fw fas fa-th-list'></i>&nbsp;Dispositivos passivo</a></dd><dd><a href='/front/allassets.php'><i class='fa-fw fas fa-list'></i>&nbsp;Global</a></dd></dl><dl><dt class='primary-bg primary-fg'><a class='primary-fg' href='/front/dashboard_helpdesk.php' title="Assistência" class='itemP'>Assistência</a></dt><dd><a href='/front/ticket.php'><i class='fa-fw fas fa-exclamation-circle'></i>&nbsp;Chamados</a></dd><dd><a href='/front/ticket.form.php'><i class='fa-fw fas fa-plus'></i>&nbsp;Criar chamado</a></dd><dd><a href='/front/problem.php'><i class='fa-fw fas fa-exclamation-triangle'></i>&nbsp;Problemas</a></dd><dd><a href='/front/change.php'><i class='fa-fw fas fa-clipboard-check'></i>&nbsp;Mudanças</a></dd><dd><a href='/front/planning.php'><i class='fa-fw far fa-calendar-alt'></i>&nbsp;Planejamento</a></dd><dd><a href='/front/stat.php'><i class='fa-fw fas fa-chart-bar'></i>&nbsp;Estatísticas</a></dd><dd><a href='/front/ticketrecurrent.php'><i class='fa-fw fas fa-stopwatch'></i>&nbsp;Chamados recorrentes</a></dd></dl><dl><dt class='primary-bg primary-fg'><a class='primary-fg' href='/front/softwarelicense.php' title="Gerência" class='itemP'>Gerência</a></dt><dd><a href='/front/softwarelicense.php'><i class='fa-fw fas fa-key'></i>&nbsp;Licenças</a></dd><dd><a href='/front/budget.php'><i class='fa-fw fas fa-calculator'></i>&nbsp;Orçamentos</a></dd><dd><a href='/front/supplier.php'><i class='fa-fw fas fa-dolly'></i>&nbsp;Fornecedores</a></dd><dd><a href='/front/contact.php'><i class='fa-fw fas fa-user-tie'></i>&nbsp;Contatos</a></dd><dd><a href='/front/contract.php'><i class='fa-fw fas fa-file-signature'></i>&nbsp;Contratos</a></dd><dd><a href='/front/document.php'><i class='fa-fw far fa-file'></i>&nbsp;Documentos</a></dd><dd><a href='/front/line.php'><i class='fa-fw fas fa-phone'></i>&nbsp;Linhas</a></dd><dd><a href='/front/certificate.php'><i class='fa-fw fas fa-certificate'></i>&nbsp;Certificados</a></dd><dd><a href='/front/datacenter.php'><i class='fa-fw fas fa-warehouse'></i>&nbsp;Data centers</a></dd><dd><a href='/front/cluster.php'><i class='fa-fw fas fa-project-diagram'></i>&nbsp;Clusters</a></dd><dd><a href='/front/domain.php'><i class='fa-fw fas fa-globe-americas'></i>&nbsp;Domínios</a></dd><dd><a href='/front/appliance.php'><i class='fa-fw fas fa-cubes'></i>&nbsp;Aplicação</a></dd></dl><dl><dt class='primary-bg primary-fg'><a class='primary-fg' href='/front/project.php' title="Ferramentas" class='itemP'>Ferramentas</a></dt><dd><a href='/front/project.php'><i class='fa-fw fas fa-columns'></i>&nbsp;Projetos</a></dd><dd><a href='/front/reminder.php'><i class='fa-fw far fa-sticky-note'></i>&nbsp;Lembretes</a></dd><dd><a href='/front/rssfeed.php'><i class='fa-fw fas fa-rss'></i>&nbsp;RSS feed</a></dd><dd><a href='/front/knowbaseitem.php'><i class='fa-fw fas fa-question'></i>&nbsp;Base de Conhecimento</a></dd><dd><a href='/front/reservationitem.php'><i class='fa-fw fas fa-calendar-check'></i>&nbsp;Reservas</a></dd><dd><a href='/front/report.php'><i class='fa-fw fas fa-file-medical-alt'></i>&nbsp;Relatórios</a></dd><dd><a href='/front/savedsearch.php'><i class='fa-fw far fa-bookmark'></i>&nbsp;Pesquisas salvas</a></dd></dl><dl><dt class='primary-bg primary-fg'><a class='primary-fg' href='/front/user.php' title="Administração" class='itemP'>Administração</a></dt><dd><a href='/front/user.php'><i class='fa-fw fas fa-user'></i>&nbsp;Usuários</a></dd><dd><a href='/front/group.php'><i class='fa-fw fas fa-users'></i>&nbsp;Grupos</a></dd><dd><a href='/front/entity.php'><i class='fa-fw fas fa-layer-group'></i>&nbsp;Entidades</a></dd><dd><a href='/front/rule.php'><i class='fa-fw fas fa-book'></i>&nbsp;Regras</a></dd><dd><a href='/front/profile.php'><i class='fa-fw fas fa-user-check'></i>&nbsp;Perfis</a></dd></dl><dl><dt class='primary-bg primary-fg'><a class='primary-fg' href='/front/dropdown.php' title="Configurar" class='itemP'>Configurar</a></dt><dd><a href='/front/dropdown.php'><i class='fa-fw fas fa-edit'></i>&nbsp;Listas suspensas</a></dd></dl></div><script type="text/javascript">
+//<![CDATA[
+
+
+         $(document).ready(
+            function() {
+               $('#show_all_menu').dialog({
+                  height: 'auto',
+                  width: 'auto',
+                  modal: true,
+                  autoOpen: false
+               });
+            }
+         );
+      
+
+//]]>
+</script><a href='#' onClick="$('#show_all_menu').dialog('open'); return false;"
+            id='menu_all_button'><i class='fa fa-bars'></i></a></div><div id='c_ssmenu2' ><ul><li class='breadcrumb_item'><a href='/front/central.php' title="Home">Home</a></li><li class='breadcrumb_item'><a href='/front/dashboard_helpdesk.php' title="Assistência">Assistência</a></li><li class='breadcrumb_item'><a href='/front/ticket.php' class='here' title="Chamados" ><i class='fas fa-exclamation-circle'></i>&nbsp;Chamados</a></li><li class='icons_block'><span><a href='/front/ticket.form.php' class='pointer'
+                                 title='Adicionar'><i class='fa fa-plus'></i>
+                                 <span class='sr-only'>Adicionar</span></a></span><span><a href='/front/ticket.php' class='pointer'
+                                 title='Pesquisar'><i class='fa fa-search'></i>
+                                 <span class='sr-only'>Pesquisar</span></a></span><span><a href="/front/tickettemplate.php" title="Gerenciar modelos..."><i class="pointer fa fa-layer-group"></i></a></span><span><a href="/front/ticket.php?reset=reset&amp;criteria%5B0%5D%5Bfield%5D=55&amp;criteria%5B0%5D%5Bsearchtype%5D=equals&amp;criteria%5B0%5D%5Bvalue%5D=2&amp;criteria%5B0%5D%5Blink%5D=AND&amp;criteria%5B1%5D%5Bfield%5D=59&amp;criteria%5B1%5D%5Bsearchtype%5D=equals&amp;criteria%5B1%5D%5Bvalue%5D=164&amp;criteria%5B1%5D%5Blink%5D=AND&amp;criteria%5B2%5D%5Bfield%5D=52&amp;criteria%5B2%5D%5Bsearchtype%5D=equals&amp;criteria%5B2%5D%5Bvalue%5D=2&amp;criteria%5B2%5D%5Blink%5D=AND&amp;criteria%5B3%5D%5Bfield%5D=12&amp;criteria%5B3%5D%5Bsearchtype%5D=equals&amp;criteria%5B3%5D%5Bvalue%5D=6&amp;criteria%5B3%5D%5Blink%5D=AND%20NOT&amp;criteria%5B4%5D%5Bfield%5D=12&amp;criteria%5B4%5D%5Bsearchtype%5D=equals&amp;criteria%5B4%5D%5Bvalue%5D=5&amp;criteria%5B4%5D%5Blink%5D=AND%20NOT" class="pointer"><img title="Chamado esperando sua aprova&ccedil;&atilde;o" alt="Chamado esperando sua aprova&ccedil;&atilde;o" src='/pics/menu_showall.png' class='pointer'></a></span></li><li class='profile-selector'><script type='text/javascript'>
+var entity_window;$(function() {entity_window=$('<div></div>').dialog({
+
+         width:800,
+
+         autoOpen: false,
+
+         height:400,
+
+         modal: true,
+
+         title: "Selecione a entidade desejada",
+
+         open: function (){
+            var fields = {"target":"\/front\/central.php"};
+            $(this).load('/ajax/entitytree.php', fields);
+         }
+      });
+});</script>
+<a onclick='entity_window.dialog("open");' href='#modal_entity_content' title="CAR PARK (estrutura de árvore)" class='entity_select' id='global_entity_select'>CAR PARK (estrutura de árvore)</a></li></ul></div></div>
+<span class='fa-stack fa-lg' id='backtotop' style='display: none'><i class='fa fa-circle fa-stack-2x primary-fg-inverse'></i><a href='#' class='fa fa-arrow-up fa-stack-1x primary-fg' title='Voltar ao in&iacute;cio da p&aacute;gina'><span class='sr-only'>Top of the page</span></a></span><main role='main' id='page'><script type="text/javascript">
+//<![CDATA[
+
+window.setInterval(function() {
+                  if ($('div[role="dialog"]:visible').length === 0) {
+      window.location.reload();
+   }
+            }, 300000);
+
+//]]>
+</script>      <div class="dashboard  mini" id="dashboard-8842163">
+         
+                  
+         <span class="toolbar">
+            <i class="fas fa-history auto-refresh" title="Alternar auto atualização"></i>
+            <i class="fas fa-moon night-mode" title="Alternar para modo nortuno"></i>
+            
+         </span>
+         
+                     <div class="grid-guide">
+               <div class='cell-add' data-x='0' data-y='0'>&nbsp;</div><div class='cell-add' data-x='1' data-y='0'>&nbsp;</div><div class='cell-add' data-x='2' data-y='0'>&nbsp;</div><div class='cell-add' data-x='3' data-y='0'>&nbsp;</div><div class='cell-add' data-x='4' data-y='0'>&nbsp;</div><div class='cell-add' data-x='5' data-y='0'>&nbsp;</div><div class='cell-add' data-x='6' data-y='0'>&nbsp;</div><div class='cell-add' data-x='7' data-y='0'>&nbsp;</div><div class='cell-add' data-x='8' data-y='0'>&nbsp;</div><div class='cell-add' data-x='9' data-y='0'>&nbsp;</div><div class='cell-add' data-x='10' data-y='0'>&nbsp;</div><div class='cell-add' data-x='11' data-y='0'>&nbsp;</div><div class='cell-add' data-x='12' data-y='0'>&nbsp;</div><div class='cell-add' data-x='13' data-y='0'>&nbsp;</div><div class='cell-add' data-x='14' data-y='0'>&nbsp;</div><div class='cell-add' data-x='15' data-y='0'>&nbsp;</div><div class='cell-add' data-x='16' data-y='0'>&nbsp;</div><div class='cell-add' data-x='17' data-y='0'>&nbsp;</div><div class='cell-add' data-x='18' data-y='0'>&nbsp;</div><div class='cell-add' data-x='19' data-y='0'>&nbsp;</div><div class='cell-add' data-x='20' data-y='0'>&nbsp;</div><div class='cell-add' data-x='21' data-y='0'>&nbsp;</div><div class='cell-add' data-x='22' data-y='0'>&nbsp;</div><div class='cell-add' data-x='23' data-y='0'>&nbsp;</div><div class='cell-add' data-x='24' data-y='0'>&nbsp;</div><div class='cell-add' data-x='25' data-y='0'>&nbsp;</div><div class='cell-add' data-x='26' data-y='0'>&nbsp;</div><div class='cell-add' data-x='27' data-y='0'>&nbsp;</div><div class='cell-add' data-x='28' data-y='0'>&nbsp;</div><div class='cell-add' data-x='29' data-y='0'>&nbsp;</div><div class='cell-add' data-x='30' data-y='0'>&nbsp;</div><div class='cell-add' data-x='31' data-y='0'>&nbsp;</div><div class='cell-add' data-x='32' data-y='0'>&nbsp;</div><div class='cell-add' data-x='0' data-y='1'>&nbsp;</div><div class='cell-add' data-x='1' data-y='1'>&nbsp;</div><div class='cell-add' data-x='2' data-y='1'>&nbsp;</div><div class='cell-add' data-x='3' data-y='1'>&nbsp;</div><div class='cell-add' data-x='4' data-y='1'>&nbsp;</div><div class='cell-add' data-x='5' data-y='1'>&nbsp;</div><div class='cell-add' data-x='6' data-y='1'>&nbsp;</div><div class='cell-add' data-x='7' data-y='1'>&nbsp;</div><div class='cell-add' data-x='8' data-y='1'>&nbsp;</div><div class='cell-add' data-x='9' data-y='1'>&nbsp;</div><div class='cell-add' data-x='10' data-y='1'>&nbsp;</div><div class='cell-add' data-x='11' data-y='1'>&nbsp;</div><div class='cell-add' data-x='12' data-y='1'>&nbsp;</div><div class='cell-add' data-x='13' data-y='1'>&nbsp;</div><div class='cell-add' data-x='14' data-y='1'>&nbsp;</div><div class='cell-add' data-x='15' data-y='1'>&nbsp;</div><div class='cell-add' data-x='16' data-y='1'>&nbsp;</div><div class='cell-add' data-x='17' data-y='1'>&nbsp;</div><div class='cell-add' data-x='18' data-y='1'>&nbsp;</div><div class='cell-add' data-x='19' data-y='1'>&nbsp;</div><div class='cell-add' data-x='20' data-y='1'>&nbsp;</div><div class='cell-add' data-x='21' data-y='1'>&nbsp;</div><div class='cell-add' data-x='22' data-y='1'>&nbsp;</div><div class='cell-add' data-x='23' data-y='1'>&nbsp;</div><div class='cell-add' data-x='24' data-y='1'>&nbsp;</div><div class='cell-add' data-x='25' data-y='1'>&nbsp;</div><div class='cell-add' data-x='26' data-y='1'>&nbsp;</div><div class='cell-add' data-x='27' data-y='1'>&nbsp;</div><div class='cell-add' data-x='28' data-y='1'>&nbsp;</div><div class='cell-add' data-x='29' data-y='1'>&nbsp;</div><div class='cell-add' data-x='30' data-y='1'>&nbsp;</div><div class='cell-add' data-x='31' data-y='1'>&nbsp;</div><div class='cell-add' data-x='32' data-y='1'>&nbsp;</div>
+            </div>
+         <div class="grid-stack grid-stack-33"
+            id="grid-stack-8842163"
+            style="width: 100%">
+                     <div class="grid-stack-item lock-bottom"
+            data-gs-no-resize="true"
+            data-gs-no-move="true"
+            data-gs-height="1"
+            data-gs-width="33"
+            data-gs-x="0"
+            data-gs-y="2"></div>
+         </div>
+      </div><script type="text/javascript">
+//<![CDATA[
+
+      $(function () {
+         Dashboard.display({
+            current:     'assistance',
+            cols:        33,
+            rows:        2,
+            cell_margin: 3,
+            rand:        '8842163',
+            embed:       false,
+            ajax_cards:  1,
+            all_cards:   {"bn_count_Computer":{"widgettype":["bigNumber"],"group":"Ativos","itemtype":"\\Computer","label":"N\u00famero de Computador","provider":"Glpi\\Dashboard\\Provider::bigNumberComputer","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"bn_count_Monitor":{"widgettype":["bigNumber"],"group":"Ativos","itemtype":"\\Monitor","label":"N\u00famero de Monitor","provider":"Glpi\\Dashboard\\Provider::bigNumberMonitor","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"bn_count_Software":{"widgettype":["bigNumber"],"group":"Ativos","itemtype":"\\Software","label":"N\u00famero de Software","provider":"Glpi\\Dashboard\\Provider::bigNumberSoftware","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"bn_count_NetworkEquipment":{"widgettype":["bigNumber"],"group":"Ativos","itemtype":"\\NetworkEquipment","label":"N\u00famero de Dispositivo de rede","provider":"Glpi\\Dashboard\\Provider::bigNumberNetworkEquipment","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"bn_count_Peripheral":{"widgettype":["bigNumber"],"group":"Ativos","itemtype":"\\Peripheral","label":"N\u00famero de Dispositivo","provider":"Glpi\\Dashboard\\Provider::bigNumberPeripheral","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"bn_count_Printer":{"widgettype":["bigNumber"],"group":"Ativos","itemtype":"\\Printer","label":"N\u00famero de Impressora","provider":"Glpi\\Dashboard\\Provider::bigNumberPrinter","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"bn_count_CartridgeItem":{"widgettype":["bigNumber"],"group":"Ativos","itemtype":"\\CartridgeItem","label":"N\u00famero de Modelo de Cartucho","provider":"Glpi\\Dashboard\\Provider::bigNumberCartridgeItem","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"bn_count_ConsumableItem":{"widgettype":["bigNumber"],"group":"Ativos","itemtype":"\\ConsumableItem","label":"N\u00famero de Modelo de insumo","provider":"Glpi\\Dashboard\\Provider::bigNumberConsumableItem","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"bn_count_Phone":{"widgettype":["bigNumber"],"group":"Ativos","itemtype":"\\Phone","label":"N\u00famero de Telefone","provider":"Glpi\\Dashboard\\Provider::bigNumberPhone","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"bn_count_Rack":{"widgettype":["bigNumber"],"group":"Ativos","itemtype":"\\Rack","label":"N\u00famero de Rack","provider":"Glpi\\Dashboard\\Provider::bigNumberRack","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"bn_count_Enclosure":{"widgettype":["bigNumber"],"group":"Ativos","itemtype":"\\Enclosure","label":"N\u00famero de Chassi","provider":"Glpi\\Dashboard\\Provider::bigNumberEnclosure","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"bn_count_PDU":{"widgettype":["bigNumber"],"group":"Ativos","itemtype":"\\PDU","label":"N\u00famero de PDU","provider":"Glpi\\Dashboard\\Provider::bigNumberPDU","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"bn_count_PassiveDCEquipment":{"widgettype":["bigNumber"],"group":"Ativos","itemtype":"\\PassiveDCEquipment","label":"N\u00famero de Dispositivo passivo","provider":"Glpi\\Dashboard\\Provider::bigNumberPassiveDCEquipment","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"bn_count_Item_DeviceSimcard":{"widgettype":["bigNumber"],"group":"Ativos","itemtype":"\\Item_DeviceSimcard","label":"N\u00famero de Cart\u00e3o SIM","provider":"Glpi\\Dashboard\\Provider::bigNumberItem_DeviceSimcard","filters":["dates","dates_mod","location"]},"bn_count_Ticket":{"widgettype":["bigNumber"],"group":"Assist\u00eancia","itemtype":"\\Ticket","label":"N\u00famero de Chamado","provider":"Glpi\\Dashboard\\Provider::bigNumberTicket","filters":["dates","dates_mod","requesttype","location"]},"bn_count_Problem":{"widgettype":["bigNumber"],"group":"Assist\u00eancia","itemtype":"\\Problem","label":"N\u00famero de Problema","provider":"Glpi\\Dashboard\\Provider::bigNumberProblem","filters":["dates","dates_mod"]},"bn_count_Change":{"widgettype":["bigNumber"],"group":"Assist\u00eancia","itemtype":"\\Change","label":"N\u00famero de Mudan\u00e7a","provider":"Glpi\\Dashboard\\Provider::bigNumberChange","filters":["dates","dates_mod"]},"bn_count_TicketRecurrent":{"widgettype":["bigNumber"],"group":"Assist\u00eancia","itemtype":"\\TicketRecurrent","label":"N\u00famero de Chamados recorrentes","provider":"Glpi\\Dashboard\\Provider::bigNumberTicketRecurrent","filters":["dates","dates_mod"]},"bn_count_SoftwareLicense":{"widgettype":["bigNumber"],"group":"Ger\u00eancia","itemtype":"\\SoftwareLicense","label":"N\u00famero de Licen\u00e7a","provider":"Glpi\\Dashboard\\Provider::bigNumberSoftwareLicense","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"bn_count_Budget":{"widgettype":["bigNumber"],"group":"Ger\u00eancia","itemtype":"\\Budget","label":"N\u00famero de Or\u00e7amento","provider":"Glpi\\Dashboard\\Provider::bigNumberBudget","filters":["dates","dates_mod","location"]},"bn_count_Supplier":{"widgettype":["bigNumber"],"group":"Ger\u00eancia","itemtype":"\\Supplier","label":"N\u00famero de Fornecedor","provider":"Glpi\\Dashboard\\Provider::bigNumberSupplier","filters":["dates","dates_mod"]},"bn_count_Contact":{"widgettype":["bigNumber"],"group":"Ger\u00eancia","itemtype":"\\Contact","label":"N\u00famero de Contato","provider":"Glpi\\Dashboard\\Provider::bigNumberContact","filters":["dates","dates_mod"]},"bn_count_Contract":{"widgettype":["bigNumber"],"group":"Ger\u00eancia","itemtype":"\\Contract","label":"N\u00famero de Contrato","provider":"Glpi\\Dashboard\\Provider::bigNumberContract","filters":["dates","dates_mod"]},"bn_count_Document":{"widgettype":["bigNumber"],"group":"Ger\u00eancia","itemtype":"\\Document","label":"N\u00famero de Documento","provider":"Glpi\\Dashboard\\Provider::bigNumberDocument","filters":["dates","dates_mod"]},"bn_count_Line":{"widgettype":["bigNumber"],"group":"Ger\u00eancia","itemtype":"\\Line","label":"N\u00famero de Linha","provider":"Glpi\\Dashboard\\Provider::bigNumberLine","filters":["dates","dates_mod","location"]},"bn_count_Certificate":{"widgettype":["bigNumber"],"group":"Ger\u00eancia","itemtype":"\\Certificate","label":"N\u00famero de Certificado","provider":"Glpi\\Dashboard\\Provider::bigNumberCertificate","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"bn_count_Datacenter":{"widgettype":["bigNumber"],"group":"Ger\u00eancia","itemtype":"\\Datacenter","label":"N\u00famero de Data center","provider":"Glpi\\Dashboard\\Provider::bigNumberDatacenter","filters":["dates","dates_mod","location"]},"bn_count_Cluster":{"widgettype":["bigNumber"],"group":"Ger\u00eancia","itemtype":"\\Cluster","label":"N\u00famero de Cluster","provider":"Glpi\\Dashboard\\Provider::bigNumberCluster","filters":["dates","dates_mod","group_tech","user_tech"]},"bn_count_Domain":{"widgettype":["bigNumber"],"group":"Ger\u00eancia","itemtype":"\\Domain","label":"N\u00famero de Dom\u00ednio","provider":"Glpi\\Dashboard\\Provider::bigNumberDomain","filters":["dates","dates_mod","group_tech","user_tech"]},"bn_count_Appliance":{"widgettype":["bigNumber"],"group":"Ger\u00eancia","itemtype":"\\Appliance","label":"N\u00famero de Appliance","provider":"Glpi\\Dashboard\\Provider::bigNumberAppliance","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"bn_count_Project":{"widgettype":["bigNumber"],"group":"Ferramentas","itemtype":"\\Project","label":"N\u00famero de Projeto","provider":"Glpi\\Dashboard\\Provider::bigNumberProject","filters":["dates","dates_mod"]},"bn_count_Reminder":{"widgettype":["bigNumber"],"group":"Ferramentas","itemtype":"\\Reminder","label":"N\u00famero de Anota\u00e7\u00e3o","provider":"Glpi\\Dashboard\\Provider::bigNumberReminder","filters":["dates","dates_mod"]},"bn_count_RSSFeed":{"widgettype":["bigNumber"],"group":"Ferramentas","itemtype":"\\RSSFeed","label":"N\u00famero de RSS feed","provider":"Glpi\\Dashboard\\Provider::bigNumberRSSFeed","filters":["dates","dates_mod"]},"bn_count_KnowbaseItem":{"widgettype":["bigNumber"],"group":"Ferramentas","itemtype":"\\KnowbaseItem","label":"N\u00famero de Base de Conhecimento","provider":"Glpi\\Dashboard\\Provider::bigNumberKnowbaseItem","filters":["dates","dates_mod"]},"bn_count_ReservationItem":{"widgettype":["bigNumber"],"group":"Ferramentas","itemtype":"\\ReservationItem","label":"N\u00famero de Item reserv\u00e1vel","provider":"Glpi\\Dashboard\\Provider::bigNumberReservationItem","filters":["dates","dates_mod"]},"bn_count_SavedSearch":{"widgettype":["bigNumber"],"group":"Ferramentas","itemtype":"\\SavedSearch","label":"N\u00famero de Pesquisas salvas","provider":"Glpi\\Dashboard\\Provider::bigNumberSavedSearch","filters":["dates","dates_mod"]},"bn_count_User":{"widgettype":["bigNumber"],"group":"Administra\u00e7\u00e3o","itemtype":"\\User","label":"N\u00famero de Usu\u00e1rio","provider":"Glpi\\Dashboard\\Provider::bigNumberUser","filters":["dates","dates_mod","location"]},"bn_count_Group":{"widgettype":["bigNumber"],"group":"Administra\u00e7\u00e3o","itemtype":"\\Group","label":"N\u00famero de Grupo","provider":"Glpi\\Dashboard\\Provider::bigNumberGroup","filters":["dates","dates_mod"]},"bn_count_Entity":{"widgettype":["bigNumber"],"group":"Administra\u00e7\u00e3o","itemtype":"\\Entity","label":"N\u00famero de Entidade","provider":"Glpi\\Dashboard\\Provider::bigNumberEntity","filters":["dates","dates_mod"]},"bn_count_Rule":{"widgettype":["bigNumber"],"group":"Administra\u00e7\u00e3o","itemtype":"\\Rule","label":"N\u00famero de Regra","provider":"Glpi\\Dashboard\\Provider::bigNumberRule","filters":["dates","dates_mod"]},"bn_count_Profile":{"widgettype":["bigNumber"],"group":"Administra\u00e7\u00e3o","itemtype":"\\Profile","label":"N\u00famero de Perfil","provider":"Glpi\\Dashboard\\Provider::bigNumberProfile","filters":["dates","dates_mod"]},"bn_count_QueuedNotification":{"widgettype":["bigNumber"],"group":"Administra\u00e7\u00e3o","itemtype":"\\QueuedNotification","label":"N\u00famero de Fila de notifica\u00e7\u00e3o","provider":"Glpi\\Dashboard\\Provider::bigNumberQueuedNotification","filters":["dates","dates_mod"]},"bn_count_Glpi_Event":{"widgettype":["bigNumber"],"group":"Administra\u00e7\u00e3o","itemtype":"\\Glpi\\Event","label":"N\u00famero de Log","provider":"Glpi\\Dashboard\\Provider::bigNumberGlpi\\Event","filters":["dates","dates_mod"]},"bn_count_Notification":{"widgettype":["bigNumber"],"group":"Configurar","itemtype":"\\Notification","label":"N\u00famero de Notifica\u00e7\u00e3o","provider":"Glpi\\Dashboard\\Provider::bigNumberNotification","filters":["dates","dates_mod"]},"bn_count_SLM":{"widgettype":["bigNumber"],"group":"Configurar","itemtype":"\\SLM","label":"N\u00famero de N\u00edvel de servi\u00e7o","provider":"Glpi\\Dashboard\\Provider::bigNumberSLM","filters":["dates","dates_mod"]},"bn_count_FieldUnicity":{"widgettype":["bigNumber"],"group":"Configurar","itemtype":"\\FieldUnicity","label":"N\u00famero de Unicidade de campos","provider":"Glpi\\Dashboard\\Provider::bigNumberFieldUnicity","filters":["dates","dates_mod"]},"bn_count_CronTask":{"widgettype":["bigNumber"],"group":"Configurar","itemtype":"\\CronTask","label":"N\u00famero de A\u00e7\u00e3o autom\u00e1tica","provider":"Glpi\\Dashboard\\Provider::bigNumberCronTask","filters":["dates","dates_mod"]},"bn_count_MailCollector":{"widgettype":["bigNumber"],"group":"Configurar","itemtype":"\\MailCollector","label":"N\u00famero de Destinat\u00e1rio","provider":"Glpi\\Dashboard\\Provider::bigNumberMailCollector","filters":["dates","dates_mod"]},"bn_count_Link":{"widgettype":["bigNumber"],"group":"Configurar","itemtype":"\\Link","label":"N\u00famero de Relacionamento externo","provider":"Glpi\\Dashboard\\Provider::bigNumberLink","filters":["dates","dates_mod"]},"bn_count_Plugin":{"widgettype":["bigNumber"],"group":"Configurar","itemtype":"\\Plugin","label":"N\u00famero de Plug-in","provider":"Glpi\\Dashboard\\Provider::bigNumberPlugin","filters":["dates","dates_mod"]},"count_Computer_State":{"widgettype":["summaryNumbers","multipleNumber","pie","donut","halfpie","halfdonut","bar","hbar"],"itemtype":"\\Computer","group":"Ativos","label":"Computadores por Status","provider":"Glpi\\Dashboard\\Provider::multipleNumberComputerByState","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"count_Computer_Entity":{"widgettype":["summaryNumbers","multipleNumber","pie","donut","halfpie","halfdonut","bar","hbar"],"itemtype":"\\Computer","group":"Ativos","label":"Computadores por Entidade","provider":"Glpi\\Dashboard\\Provider::multipleNumberComputerByEntity","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"count_Computer_Manufacturer":{"widgettype":["summaryNumbers","multipleNumber","pie","donut","halfpie","halfdonut","bar","hbar"],"itemtype":"\\Computer","group":"Ativos","label":"Computadores por Fabricante","provider":"Glpi\\Dashboard\\Provider::multipleNumberComputerByManufacturer","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"count_Computer_Location":{"widgettype":["summaryNumbers","multipleNumber","pie","donut","halfpie","halfdonut","bar","hbar"],"itemtype":"\\Computer","group":"Ativos","label":"Computadores por Localiza\u00e7\u00e3o","provider":"Glpi\\Dashboard\\Provider::multipleNumberComputerByLocation","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"count_Computer_ComputerType":{"widgettype":["summaryNumbers","multipleNumber","pie","donut","halfpie","halfdonut","bar","hbar"],"itemtype":"\\Computer","group":"Ativos","label":"Computadores por Tipo","provider":"Glpi\\Dashboard\\Provider::multipleNumberComputerByComputerType","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"count_Computer_ComputerModel":{"widgettype":["summaryNumbers","multipleNumber","pie","donut","halfpie","halfdonut","bar","hbar"],"itemtype":"\\Computer","group":"Ativos","label":"Computadores por Modelo","provider":"Glpi\\Dashboard\\Provider::multipleNumberComputerByComputerModel","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"count_Monitor_State":{"widgettype":["summaryNumbers","multipleNumber","pie","donut","halfpie","halfdonut","bar","hbar"],"itemtype":"\\Computer","group":"Ativos","label":"Monitores por Status","provider":"Glpi\\Dashboard\\Provider::multipleNumberMonitorByState","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"count_Monitor_Entity":{"widgettype":["summaryNumbers","multipleNumber","pie","donut","halfpie","halfdonut","bar","hbar"],"itemtype":"\\Computer","group":"Ativos","label":"Monitores por Entidade","provider":"Glpi\\Dashboard\\Provider::multipleNumberMonitorByEntity","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"count_Monitor_Manufacturer":{"widgettype":["summaryNumbers","multipleNumber","pie","donut","halfpie","halfdonut","bar","hbar"],"itemtype":"\\Computer","group":"Ativos","label":"Monitores por Fabricante","provider":"Glpi\\Dashboard\\Provider::multipleNumberMonitorByManufacturer","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"count_Monitor_Location":{"widgettype":["summaryNumbers","multipleNumber","pie","donut","halfpie","halfdonut","bar","hbar"],"itemtype":"\\Computer","group":"Ativos","label":"Monitores por Localiza\u00e7\u00e3o","provider":"Glpi\\Dashboard\\Provider::multipleNumberMonitorByLocation","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"count_Monitor_MonitorType":{"widgettype":["summaryNumbers","multipleNumber","pie","donut","halfpie","halfdonut","bar","hbar"],"itemtype":"\\Computer","group":"Ativos","label":"Monitores por Tipo","provider":"Glpi\\Dashboard\\Provider::multipleNumberMonitorByMonitorType","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"count_Monitor_MonitorModel":{"widgettype":["summaryNumbers","multipleNumber","pie","donut","halfpie","halfdonut","bar","hbar"],"itemtype":"\\Computer","group":"Ativos","label":"Monitores por Modelo","provider":"Glpi\\Dashboard\\Provider::multipleNumberMonitorByMonitorModel","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"count_NetworkEquipment_State":{"widgettype":["summaryNumbers","multipleNumber","pie","donut","halfpie","halfdonut","bar","hbar"],"itemtype":"\\Computer","group":"Ativos","label":"Dispositivos de rede por Status","provider":"Glpi\\Dashboard\\Provider::multipleNumberNetworkEquipmentByState","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"count_NetworkEquipment_Entity":{"widgettype":["summaryNumbers","multipleNumber","pie","donut","halfpie","halfdonut","bar","hbar"],"itemtype":"\\Computer","group":"Ativos","label":"Dispositivos de rede por Entidade","provider":"Glpi\\Dashboard\\Provider::multipleNumberNetworkEquipmentByEntity","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"count_NetworkEquipment_Manufacturer":{"widgettype":["summaryNumbers","multipleNumber","pie","donut","halfpie","halfdonut","bar","hbar"],"itemtype":"\\Computer","group":"Ativos","label":"Dispositivos de rede por Fabricante","provider":"Glpi\\Dashboard\\Provider::multipleNumberNetworkEquipmentByManufacturer","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"count_NetworkEquipment_Location":{"widgettype":["summaryNumbers","multipleNumber","pie","donut","halfpie","halfdonut","bar","hbar"],"itemtype":"\\Computer","group":"Ativos","label":"Dispositivos de rede por Localiza\u00e7\u00e3o","provider":"Glpi\\Dashboard\\Provider::multipleNumberNetworkEquipmentByLocation","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"count_NetworkEquipment_NetworkEquipmentType":{"widgettype":["summaryNumbers","multipleNumber","pie","donut","halfpie","halfdonut","bar","hbar"],"itemtype":"\\Computer","group":"Ativos","label":"Dispositivos de rede por Tipo","provider":"Glpi\\Dashboard\\Provider::multipleNumberNetworkEquipmentByNetworkEquipmentType","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"count_NetworkEquipment_NetworkEquipmentModel":{"widgettype":["summaryNumbers","multipleNumber","pie","donut","halfpie","halfdonut","bar","hbar"],"itemtype":"\\Computer","group":"Ativos","label":"Dispositivos de rede por Modelo","provider":"Glpi\\Dashboard\\Provider::multipleNumberNetworkEquipmentByNetworkEquipmentModel","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"count_Peripheral_State":{"widgettype":["summaryNumbers","multipleNumber","pie","donut","halfpie","halfdonut","bar","hbar"],"itemtype":"\\Computer","group":"Ativos","label":"Dispositivos por Status","provider":"Glpi\\Dashboard\\Provider::multipleNumberPeripheralByState","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"count_Peripheral_Entity":{"widgettype":["summaryNumbers","multipleNumber","pie","donut","halfpie","halfdonut","bar","hbar"],"itemtype":"\\Computer","group":"Ativos","label":"Dispositivos por Entidade","provider":"Glpi\\Dashboard\\Provider::multipleNumberPeripheralByEntity","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"count_Peripheral_Manufacturer":{"widgettype":["summaryNumbers","multipleNumber","pie","donut","halfpie","halfdonut","bar","hbar"],"itemtype":"\\Computer","group":"Ativos","label":"Dispositivos por Fabricante","provider":"Glpi\\Dashboard\\Provider::multipleNumberPeripheralByManufacturer","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"count_Peripheral_Location":{"widgettype":["summaryNumbers","multipleNumber","pie","donut","halfpie","halfdonut","bar","hbar"],"itemtype":"\\Computer","group":"Ativos","label":"Dispositivos por Localiza\u00e7\u00e3o","provider":"Glpi\\Dashboard\\Provider::multipleNumberPeripheralByLocation","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"count_Peripheral_PeripheralType":{"widgettype":["summaryNumbers","multipleNumber","pie","donut","halfpie","halfdonut","bar","hbar"],"itemtype":"\\Computer","group":"Ativos","label":"Dispositivos por Tipo","provider":"Glpi\\Dashboard\\Provider::multipleNumberPeripheralByPeripheralType","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"count_Peripheral_PeripheralModel":{"widgettype":["summaryNumbers","multipleNumber","pie","donut","halfpie","halfdonut","bar","hbar"],"itemtype":"\\Computer","group":"Ativos","label":"Dispositivos por Modelo","provider":"Glpi\\Dashboard\\Provider::multipleNumberPeripheralByPeripheralModel","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"count_Phone_State":{"widgettype":["summaryNumbers","multipleNumber","pie","donut","halfpie","halfdonut","bar","hbar"],"itemtype":"\\Computer","group":"Ativos","label":"Telefones por Status","provider":"Glpi\\Dashboard\\Provider::multipleNumberPhoneByState","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"count_Phone_Entity":{"widgettype":["summaryNumbers","multipleNumber","pie","donut","halfpie","halfdonut","bar","hbar"],"itemtype":"\\Computer","group":"Ativos","label":"Telefones por Entidade","provider":"Glpi\\Dashboard\\Provider::multipleNumberPhoneByEntity","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"count_Phone_Manufacturer":{"widgettype":["summaryNumbers","multipleNumber","pie","donut","halfpie","halfdonut","bar","hbar"],"itemtype":"\\Computer","group":"Ativos","label":"Telefones por Fabricante","provider":"Glpi\\Dashboard\\Provider::multipleNumberPhoneByManufacturer","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"count_Phone_Location":{"widgettype":["summaryNumbers","multipleNumber","pie","donut","halfpie","halfdonut","bar","hbar"],"itemtype":"\\Computer","group":"Ativos","label":"Telefones por Localiza\u00e7\u00e3o","provider":"Glpi\\Dashboard\\Provider::multipleNumberPhoneByLocation","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"count_Phone_PhoneType":{"widgettype":["summaryNumbers","multipleNumber","pie","donut","halfpie","halfdonut","bar","hbar"],"itemtype":"\\Computer","group":"Ativos","label":"Telefones por Tipo","provider":"Glpi\\Dashboard\\Provider::multipleNumberPhoneByPhoneType","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"count_Phone_PhoneModel":{"widgettype":["summaryNumbers","multipleNumber","pie","donut","halfpie","halfdonut","bar","hbar"],"itemtype":"\\Computer","group":"Ativos","label":"Telefones por Modelo","provider":"Glpi\\Dashboard\\Provider::multipleNumberPhoneByPhoneModel","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"count_Printer_State":{"widgettype":["summaryNumbers","multipleNumber","pie","donut","halfpie","halfdonut","bar","hbar"],"itemtype":"\\Computer","group":"Ativos","label":"Impressoras por Status","provider":"Glpi\\Dashboard\\Provider::multipleNumberPrinterByState","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"count_Printer_Entity":{"widgettype":["summaryNumbers","multipleNumber","pie","donut","halfpie","halfdonut","bar","hbar"],"itemtype":"\\Computer","group":"Ativos","label":"Impressoras por Entidade","provider":"Glpi\\Dashboard\\Provider::multipleNumberPrinterByEntity","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"count_Printer_Manufacturer":{"widgettype":["summaryNumbers","multipleNumber","pie","donut","halfpie","halfdonut","bar","hbar"],"itemtype":"\\Computer","group":"Ativos","label":"Impressoras por Fabricante","provider":"Glpi\\Dashboard\\Provider::multipleNumberPrinterByManufacturer","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"count_Printer_Location":{"widgettype":["summaryNumbers","multipleNumber","pie","donut","halfpie","halfdonut","bar","hbar"],"itemtype":"\\Computer","group":"Ativos","label":"Impressoras por Localiza\u00e7\u00e3o","provider":"Glpi\\Dashboard\\Provider::multipleNumberPrinterByLocation","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"count_Printer_PrinterType":{"widgettype":["summaryNumbers","multipleNumber","pie","donut","halfpie","halfdonut","bar","hbar"],"itemtype":"\\Computer","group":"Ativos","label":"Impressoras por Tipo","provider":"Glpi\\Dashboard\\Provider::multipleNumberPrinterByPrinterType","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"count_Printer_PrinterModel":{"widgettype":["summaryNumbers","multipleNumber","pie","donut","halfpie","halfdonut","bar","hbar"],"itemtype":"\\Computer","group":"Ativos","label":"Impressoras por Modelo","provider":"Glpi\\Dashboard\\Provider::multipleNumberPrinterByPrinterModel","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"count_SoftwareLicense_State":{"widgettype":["summaryNumbers","multipleNumber","pie","donut","halfpie","halfdonut","bar","hbar"],"itemtype":"\\Computer","group":"Ativos","label":"Licen\u00e7as por Status","provider":"Glpi\\Dashboard\\Provider::multipleNumberSoftwareLicenseByState","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"count_SoftwareLicense_Entity":{"widgettype":["summaryNumbers","multipleNumber","pie","donut","halfpie","halfdonut","bar","hbar"],"itemtype":"\\Computer","group":"Ativos","label":"Licen\u00e7as por Entidade","provider":"Glpi\\Dashboard\\Provider::multipleNumberSoftwareLicenseByEntity","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"count_SoftwareLicense_Manufacturer":{"widgettype":["summaryNumbers","multipleNumber","pie","donut","halfpie","halfdonut","bar","hbar"],"itemtype":"\\Computer","group":"Ativos","label":"Licen\u00e7as por Fabricante","provider":"Glpi\\Dashboard\\Provider::multipleNumberSoftwareLicenseByManufacturer","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"count_SoftwareLicense_Location":{"widgettype":["summaryNumbers","multipleNumber","pie","donut","halfpie","halfdonut","bar","hbar"],"itemtype":"\\Computer","group":"Ativos","label":"Licen\u00e7as por Localiza\u00e7\u00e3o","provider":"Glpi\\Dashboard\\Provider::multipleNumberSoftwareLicenseByLocation","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"count_SoftwareLicense_SoftwareLicenseType":{"widgettype":["summaryNumbers","multipleNumber","pie","donut","halfpie","halfdonut","bar","hbar"],"itemtype":"\\Computer","group":"Ativos","label":"Licen\u00e7as por Tipo","provider":"Glpi\\Dashboard\\Provider::multipleNumberSoftwareLicenseBySoftwareLicenseType","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"count_Certificate_State":{"widgettype":["summaryNumbers","multipleNumber","pie","donut","halfpie","halfdonut","bar","hbar"],"itemtype":"\\Computer","group":"Ativos","label":"Certificados por Status","provider":"Glpi\\Dashboard\\Provider::multipleNumberCertificateByState","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"count_Certificate_Entity":{"widgettype":["summaryNumbers","multipleNumber","pie","donut","halfpie","halfdonut","bar","hbar"],"itemtype":"\\Computer","group":"Ativos","label":"Certificados por Entidade","provider":"Glpi\\Dashboard\\Provider::multipleNumberCertificateByEntity","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"count_Certificate_Manufacturer":{"widgettype":["summaryNumbers","multipleNumber","pie","donut","halfpie","halfdonut","bar","hbar"],"itemtype":"\\Computer","group":"Ativos","label":"Certificados por Fabricante","provider":"Glpi\\Dashboard\\Provider::multipleNumberCertificateByManufacturer","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"count_Certificate_Location":{"widgettype":["summaryNumbers","multipleNumber","pie","donut","halfpie","halfdonut","bar","hbar"],"itemtype":"\\Computer","group":"Ativos","label":"Certificados por Localiza\u00e7\u00e3o","provider":"Glpi\\Dashboard\\Provider::multipleNumberCertificateByLocation","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"count_Certificate_CertificateType":{"widgettype":["summaryNumbers","multipleNumber","pie","donut","halfpie","halfdonut","bar","hbar"],"itemtype":"\\Computer","group":"Ativos","label":"Certificados por Tipo","provider":"Glpi\\Dashboard\\Provider::multipleNumberCertificateByCertificateType","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"count_Software_State":{"widgettype":["summaryNumbers","multipleNumber","pie","donut","halfpie","halfdonut","bar","hbar"],"itemtype":"\\Computer","group":"Ativos","label":"Softwares por Status","provider":"Glpi\\Dashboard\\Provider::multipleNumberSoftwareByState","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"count_Software_Entity":{"widgettype":["summaryNumbers","multipleNumber","pie","donut","halfpie","halfdonut","bar","hbar"],"itemtype":"\\Computer","group":"Ativos","label":"Softwares por Entidade","provider":"Glpi\\Dashboard\\Provider::multipleNumberSoftwareByEntity","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"count_Software_Manufacturer":{"widgettype":["summaryNumbers","multipleNumber","pie","donut","halfpie","halfdonut","bar","hbar"],"itemtype":"\\Computer","group":"Ativos","label":"Softwares por Fabricante","provider":"Glpi\\Dashboard\\Provider::multipleNumberSoftwareByManufacturer","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"count_Software_Location":{"widgettype":["summaryNumbers","multipleNumber","pie","donut","halfpie","halfdonut","bar","hbar"],"itemtype":"\\Computer","group":"Ativos","label":"Softwares por Localiza\u00e7\u00e3o","provider":"Glpi\\Dashboard\\Provider::multipleNumberSoftwareByLocation","filters":["dates","dates_mod","location","manufacturer","group_tech","user_tech"]},"bn_count_tickets_late":{"widgettype":["bigNumber"],"itemtype":"\\Ticket","group":"Assist\u00eancia","label":"N\u00famero de Chamados atrasados","provider":"Glpi\\Dashboard\\Provider::nbTicketsGeneric","args":{"case":"late","params":{"validation_check_user":true}},"cache":false,"filters":["dates","dates_mod","itilcategory","group_tech","user_tech","requesttype","location"]},"table_count_tickets_late":{"widgettype":["searchShowList"],"itemtype":"\\Ticket","group":"Assist\u00eancia","label":"Lista de Chamados atrasados","provider":"Glpi\\Dashboard\\Provider::nbTicketsGeneric","args":{"case":"late","params":{"validation_check_user":true}},"filters":["dates","dates_mod","itilcategory","group_tech","user_tech","requesttype","location"]},"bn_count_tickets_waiting_validation":{"widgettype":["bigNumber"],"itemtype":"\\Ticket","group":"Assist\u00eancia","label":"N\u00famero de Chamado esperando sua aprova\u00e7\u00e3o","provider":"Glpi\\Dashboard\\Provider::nbTicketsGeneric","args":{"case":"waiting_validation","params":{"validation_check_user":true}},"cache":false,"filters":["dates","dates_mod","itilcategory","group_tech","user_tech","requesttype","location"]},"table_count_tickets_waiting_validation":{"widgettype":["searchShowList"],"itemtype":"\\Ticket","group":"Assist\u00eancia","label":"Lista de Chamado esperando sua aprova\u00e7\u00e3o","provider":"Glpi\\Dashboard\\Provider::nbTicketsGeneric","args":{"case":"waiting_validation","params":{"validation_check_user":true}},"filters":["dates","dates_mod","itilcategory","group_tech","user_tech","requesttype","location"]},"bn_count_tickets_notold":{"widgettype":["bigNumber"],"itemtype":"\\Ticket","group":"Assist\u00eancia","label":"N\u00famero de Chamados n\u00e3o solucionados","provider":"Glpi\\Dashboard\\Provider::nbTicketsGeneric","args":{"case":"notold","params":{"validation_check_user":true}},"cache":false,"filters":["dates","dates_mod","itilcategory","group_tech","user_tech","requesttype","location"]},"table_count_tickets_notold":{"widgettype":["searchShowList"],"itemtype":"\\Ticket","group":"Assist\u00eancia","label":"Lista de Chamados n\u00e3o solucionados","provider":"Glpi\\Dashboard\\Provider::nbTicketsGeneric","args":{"case":"notold","params":{"validation_check_user":true}},"filters":["dates","dates_mod","itilcategory","group_tech","user_tech","requesttype","location"]},"bn_count_tickets_incoming":{"widgettype":["bigNumber"],"itemtype":"\\Ticket","group":"Assist\u00eancia","label":"N\u00famero de Novos chamados","provider":"Glpi\\Dashboard\\Provider::nbTicketsGeneric","args":{"case":"incoming","params":{"validation_check_user":true}},"cache":false,"filters":["dates","dates_mod","itilcategory","group_tech","user_tech","requesttype","location"]},"table_count_tickets_incoming":{"widgettype":["searchShowList"],"itemtype":"\\Ticket","group":"Assist\u00eancia","label":"Lista de Novos chamados","provider":"Glpi\\Dashboard\\Provider::nbTicketsGeneric","args":{"case":"incoming","params":{"validation_check_user":true}},"filters":["dates","dates_mod","itilcategory","group_tech","user_tech","requesttype","location"]},"bn_count_tickets_waiting":{"widgettype":["bigNumber"],"itemtype":"\\Ticket","group":"Assist\u00eancia","label":"N\u00famero de Chamados pendentes","provider":"Glpi\\Dashboard\\Provider::nbTicketsGeneric","args":{"case":"waiting","params":{"validation_check_user":true}},"cache":false,"filters":["dates","dates_mod","itilcategory","group_tech","user_tech","requesttype","location"]},"table_count_tickets_waiting":{"widgettype":["searchShowList"],"itemtype":"\\Ticket","group":"Assist\u00eancia","label":"Lista de Chamados pendentes","provider":"Glpi\\Dashboard\\Provider::nbTicketsGeneric","args":{"case":"waiting","params":{"validation_check_user":true}},"filters":["dates","dates_mod","itilcategory","group_tech","user_tech","requesttype","location"]},"bn_count_tickets_assigned":{"widgettype":["bigNumber"],"itemtype":"\\Ticket","group":"Assist\u00eancia","label":"N\u00famero de Chamados atribu\u00eddos","provider":"Glpi\\Dashboard\\Provider::nbTicketsGeneric","args":{"case":"assigned","params":{"validation_check_user":true}},"cache":false,"filters":["dates","dates_mod","itilcategory","group_tech","user_tech","requesttype","location"]},"table_count_tickets_assigned":{"widgettype":["searchShowList"],"itemtype":"\\Ticket","group":"Assist\u00eancia","label":"Lista de Chamados atribu\u00eddos","provider":"Glpi\\Dashboard\\Provider::nbTicketsGeneric","args":{"case":"assigned","params":{"validation_check_user":true}},"filters":["dates","dates_mod","itilcategory","group_tech","user_tech","requesttype","location"]},"bn_count_tickets_planned":{"widgettype":["bigNumber"],"itemtype":"\\Ticket","group":"Assist\u00eancia","label":"N\u00famero de Chamados planejados","provider":"Glpi\\Dashboard\\Provider::nbTicketsGeneric","args":{"case":"planned","params":{"validation_check_user":true}},"cache":false,"filters":["dates","dates_mod","itilcategory","group_tech","user_tech","requesttype","location"]},"table_count_tickets_planned":{"widgettype":["searchShowList"],"itemtype":"\\Ticket","group":"Assist\u00eancia","label":"Lista de Chamados planejados","provider":"Glpi\\Dashboard\\Provider::nbTicketsGeneric","args":{"case":"planned","params":{"validation_check_user":true}},"filters":["dates","dates_mod","itilcategory","group_tech","user_tech","requesttype","location"]},"bn_count_tickets_solved":{"widgettype":["bigNumber"],"itemtype":"\\Ticket","group":"Assist\u00eancia","label":"N\u00famero de Chamados solucionados","provider":"Glpi\\Dashboard\\Provider::nbTicketsGeneric","args":{"case":"solved","params":{"validation_check_user":true}},"cache":false,"filters":["dates","dates_mod","itilcategory","group_tech","user_tech","requesttype","location"]},"table_count_tickets_solved":{"widgettype":["searchShowList"],"itemtype":"\\Ticket","group":"Assist\u00eancia","label":"Lista de Chamados solucionados","provider":"Glpi\\Dashboard\\Provider::nbTicketsGeneric","args":{"case":"solved","params":{"validation_check_user":true}},"filters":["dates","dates_mod","itilcategory","group_tech","user_tech","requesttype","location"]},"bn_count_tickets_closed":{"widgettype":["bigNumber"],"itemtype":"\\Ticket","group":"Assist\u00eancia","label":"N\u00famero de Chamados fechados","provider":"Glpi\\Dashboard\\Provider::nbTicketsGeneric","args":{"case":"closed","params":{"validation_check_user":true}},"cache":false,"filters":["dates","dates_mod","itilcategory","group_tech","user_tech","requesttype","location"]},"table_count_tickets_closed":{"widgettype":["searchShowList"],"itemtype":"\\Ticket","group":"Assist\u00eancia","label":"Lista de Chamados fechados","provider":"Glpi\\Dashboard\\Provider::nbTicketsGeneric","args":{"case":"closed","params":{"validation_check_user":true}},"filters":["dates","dates_mod","itilcategory","group_tech","user_tech","requesttype","location"]},"nb_opened_ticket":{"widgettype":["line","area","bar"],"itemtype":"\\Ticket","group":"Assist\u00eancia","label":"N\u00famero de chamados por m\u00eas","provider":"Glpi\\Dashboard\\Provider::ticketsOpened","filters":["dates","dates_mod","itilcategory","group_tech","user_tech","requesttype","location"]},"ticket_evolution":{"widgettype":["lines","areas","bars","stackedbars"],"itemtype":"\\Ticket","group":"Assist\u00eancia","label":"Evolu\u00e7\u00e3o dos chamados no \u00faltimo ano","provider":"Glpi\\Dashboard\\Provider::getTicketsEvolution","filters":["dates","dates_mod","itilcategory","group_tech","user_tech","requesttype","location"]},"ticket_status":{"widgettype":["lines","areas","bars","stackedbars"],"itemtype":"\\Ticket","group":"Assist\u00eancia","label":"Status dos chamados por m\u00eas","provider":"Glpi\\Dashboard\\Provider::getTicketsStatus","filters":["dates","dates_mod","itilcategory","group_tech","user_tech","requesttype","location"]},"ticket_times":{"widgettype":["lines","areas","bars","stackedbars"],"itemtype":"\\Ticket","group":"Assist\u00eancia","label":"Tempo dos chamados (em horas)","provider":"Glpi\\Dashboard\\Provider::averageTicketTimes","filters":["dates","dates_mod","itilcategory","group_tech","user_tech","requesttype","location"]},"tickets_summary":{"widgettype":["summaryNumbers","multipleNumber","bar","hbar"],"itemtype":"\\Ticket","group":"Assist\u00eancia","label":"Resumos dos chamados","provider":"Glpi\\Dashboard\\Provider::getTicketSummary","filters":["dates","dates_mod","itilcategory","group_tech","user_tech","requesttype","location"]},"top_ticket_ITILCategory":{"widgettype":["summaryNumbers","pie","donut","halfpie","halfdonut","multipleNumber","bar","hbar"],"itemtype":"\\Ticket","group":"Assist\u00eancia","label":"Top chamados por categorias","provider":"Glpi\\Dashboard\\Provider::multipleNumberTicketByITILCategory","filters":["dates","dates_mod","itilcategory","group_tech","user_tech","requesttype","location"]},"top_ticket_Entity":{"widgettype":["summaryNumbers","pie","donut","halfpie","halfdonut","multipleNumber","bar","hbar"],"itemtype":"\\Ticket","group":"Assist\u00eancia","label":"Top chamados por entidades","provider":"Glpi\\Dashboard\\Provider::multipleNumberTicketByEntity","filters":["dates","dates_mod","itilcategory","group_tech","user_tech","requesttype","location"]},"top_ticket_RequestType":{"widgettype":["summaryNumbers","pie","donut","halfpie","halfdonut","multipleNumber","bar","hbar"],"itemtype":"\\Ticket","group":"Assist\u00eancia","label":"Top chamados por origem da requisi\u00e7\u00e3o","provider":"Glpi\\Dashboard\\Provider::multipleNumberTicketByRequestType","filters":["dates","dates_mod","itilcategory","group_tech","user_tech","requesttype","location"]},"top_ticket_Location":{"widgettype":["summaryNumbers","pie","donut","halfpie","halfdonut","multipleNumber","bar","hbar"],"itemtype":"\\Ticket","group":"Assist\u00eancia","label":"Top chamados por localiza\u00e7\u00e3o","provider":"Glpi\\Dashboard\\Provider::multipleNumberTicketByLocation","filters":["dates","dates_mod","itilcategory","group_tech","user_tech","requesttype","location"]},"top_ticket_user_requester":{"widgettype":["pie","donut","halfpie","halfdonut","summaryNumbers","multipleNumber","bar","hbar"],"itemtype":"\\Ticket","group":"Assist\u00eancia","label":"Top chamados por requerentes","provider":"Glpi\\Dashboard\\Provider::nbTicketsActor","args":{"case":"user_requester"},"filters":["dates","dates_mod","itilcategory","group_tech","user_tech","requesttype","location"]},"top_ticket_group_requester":{"widgettype":["pie","donut","halfpie","halfdonut","summaryNumbers","multipleNumber","bar","hbar"],"itemtype":"\\Ticket","group":"Assist\u00eancia","label":"Top chamados por grupos requerente","provider":"Glpi\\Dashboard\\Provider::nbTicketsActor","args":{"case":"group_requester"},"filters":["dates","dates_mod","itilcategory","group_tech","user_tech","requesttype","location"]},"top_ticket_user_observer":{"widgettype":["pie","donut","halfpie","halfdonut","summaryNumbers","multipleNumber","bar","hbar"],"itemtype":"\\Ticket","group":"Assist\u00eancia","label":"Top chamados por observadores","provider":"Glpi\\Dashboard\\Provider::nbTicketsActor","args":{"case":"user_observer"},"filters":["dates","dates_mod","itilcategory","group_tech","user_tech","requesttype","location"]},"top_ticket_group_observer":{"widgettype":["pie","donut","halfpie","halfdonut","summaryNumbers","multipleNumber","bar","hbar"],"itemtype":"\\Ticket","group":"Assist\u00eancia","label":"Top chamados por grupos observadores","provider":"Glpi\\Dashboard\\Provider::nbTicketsActor","args":{"case":"group_observer"},"filters":["dates","dates_mod","itilcategory","group_tech","user_tech","requesttype","location"]},"top_ticket_user_assign":{"widgettype":["pie","donut","halfpie","halfdonut","summaryNumbers","multipleNumber","bar","hbar"],"itemtype":"\\Ticket","group":"Assist\u00eancia","label":"Top chamados por atribui\u00e7\u00e3o","provider":"Glpi\\Dashboard\\Provider::nbTicketsActor","args":{"case":"user_assign"},"filters":["dates","dates_mod","itilcategory","group_tech","user_tech","requesttype","location"]},"top_ticket_group_assign":{"widgettype":["pie","donut","halfpie","halfdonut","summaryNumbers","multipleNumber","bar","hbar"],"itemtype":"\\Ticket","group":"Assist\u00eancia","label":"Top chamados por grupos atribu\u00eddos","provider":"Glpi\\Dashboard\\Provider::nbTicketsActor","args":{"case":"group_assign"},"filters":["dates","dates_mod","itilcategory","group_tech","user_tech","requesttype","location"]},"RemindersList":{"widgettype":["articleList"],"label":"Lista de lembretes.","group":"Ferramentas","provider":"Glpi\\Dashboard\\Provider::getArticleListReminder","filters":["dates","dates_mod"]},"markdown_editable":{"widgettype":["markdown"],"label":"Card com markdown edit\u00e1vel","group":"Outros","card_options":{"content":"Alternar o modo de edi\u00e7\u00e3o para editar o conte\u00fado"}}},
+            all_widgets: {"pie":{"label":"Pizza","function":"Glpi\\Dashboard\\Widget::pie","image":"\/pics\/charts\/pie.png","gradient":true,"limit":true,"width":3,"height":3},"donut":{"label":"Rosca","function":"Glpi\\Dashboard\\Widget::donut","image":"\/pics\/charts\/donut.png","gradient":true,"limit":true,"width":3,"height":3},"halfpie":{"label":"Meia torta","function":"Glpi\\Dashboard\\Widget::halfPie","image":"\/pics\/charts\/halfpie.png","gradient":true,"limit":true,"width":3,"height":2},"halfdonut":{"label":"Meia rosquinha","function":"Glpi\\Dashboard\\Widget::halfDonut","image":"\/pics\/charts\/halfdonut.png","gradient":true,"limit":true,"width":3,"height":2},"bar":{"label":"Barras","function":"Glpi\\Dashboard\\Widget::simpleBar","image":"\/pics\/charts\/bar.png","gradient":true,"limit":true,"pointlbl":true,"width":4,"height":3},"line":{"label":"Linha","function":"Glpi\\Dashboard\\Widget::simpleLine","image":"\/pics\/charts\/line.png","limit":true,"pointlbl":true,"width":4,"height":3},"lines":{"label":"Linhas m\u00faltiplas","function":"Glpi\\Dashboard\\Widget::multipleLines","image":"\/pics\/charts\/line.png","gradient":true,"limit":true,"pointlbl":true,"width":4,"height":3},"area":{"label":"\u00c1rea","function":"Glpi\\Dashboard\\Widget::simpleArea","image":"\/pics\/charts\/area.png","limit":true,"pointlbl":true,"width":4,"height":3},"areas":{"label":"\u00c1reas m\u00faltiplas","function":"Glpi\\Dashboard\\Widget::multipleAreas","image":"\/pics\/charts\/area.png","gradient":true,"limit":true,"pointlbl":true,"width":5,"height":3},"bars":{"label":"Barras m\u00faltiplas","function":"Glpi\\Dashboard\\Widget::multipleBars","image":"\/pics\/charts\/bar.png","gradient":true,"limit":true,"pointlbl":true,"width":5,"height":3},"stackedbars":{"label":"Barras empilhadas","function":"Glpi\\Dashboard\\Widget::StackedBars","image":"\/pics\/charts\/stacked.png","gradient":true,"limit":true,"pointlbl":true,"width":4,"height":3},"hbar":{"label":"Barras horizontais","function":"Glpi\\Dashboard\\Widget::simpleHbar","image":"\/pics\/charts\/hbar.png","gradient":true,"limit":true,"pointlbl":true,"width":3,"height":4},"bigNumber":{"label":"N\u00famero grande","function":"Glpi\\Dashboard\\Widget::bigNumber","image":"\/pics\/charts\/bignumber.png"},"multipleNumber":{"label":"M\u00faltiplos n\u00fameros","function":"Glpi\\Dashboard\\Widget::multipleNumber","image":"\/pics\/charts\/multiplenumbers.png","limit":true,"gradient":true,"width":3,"height":3},"markdown":{"label":"Remarca\u00e7\u00e3o edit\u00e1vel","function":"Glpi\\Dashboard\\Widget::markdown","image":"\/pics\/charts\/markdown.png","width":4,"height":4},"searchShowList":{"label":"Resultado da busca","function":"Glpi\\Dashboard\\Widget::searchShowList","image":"\/pics\/charts\/table.png","limit":true,"width":5,"height":4},"summaryNumbers":{"label":"N\u00fameros de resumo.","function":"Glpi\\Dashboard\\Widget::summaryNumber","image":"\/pics\/charts\/summarynumber.png","limit":true,"gradient":true,"width":4,"height":2},"articleList":{"label":"Lista de artigos.","function":"Glpi\\Dashboard\\Widget::articleList","image":"\/pics\/charts\/articles.png","limit":true,"width":3,"height":4}},
+            context:     "mini_core",
+            cache_key:   "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+         })
+      });
+
+//]]>
+</script><script type='text/javascript'>
+            NomNav = navigator.appName;
+            if (NomNav=='Konqueror') {
+               window.location='/front/ticket.php?is_deleted=0&as_map=0&search=Pesquisar&itemtype=Ticket&savedsearches_id=49&criteria%5B0%5D%5Blink%5D=AND&criteria%5B0%5D%5Bfield%5D=12&criteria%5B0%5D%5Bsearchtype%5D=equals&criteria%5B0%5D%5Bvalue%5D=notold&reset=reset&tokonq=2xjQ7';
+            } else {
+               window.location='/front/ticket.php?is_deleted=0&as_map=0&search=Pesquisar&itemtype=Ticket&savedsearches_id=49&criteria%5B0%5D%5Blink%5D=AND&criteria%5B0%5D%5Bfield%5D=12&criteria%5B0%5D%5Bsearchtype%5D=equals&criteria%5B0%5D%5Bvalue%5D=notold&reset=reset';
+            }
+         </script>

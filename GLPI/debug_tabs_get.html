@@ -1,0 +1,67 @@
+<div class='timeline_box'><script type='text/javascript' >
+      function change_task_state(tasks_id, target) {
+         $.post('/ajax/timeline.php',
+                {'action':     'change_task_state',
+                  'tasks_id':   tasks_id,
+                  'parenttype': 'Ticket',
+                  'tickets_id': 20818
+                })
+                .done(function(response) {
+                  $(target).removeClass('state_1 state_2')
+                           .addClass('state_'+response.state)
+                           .attr('title', response.label);
+                });
+      }
+
+      function viewEditSubitem208182023369032(e, itemtype, items_id, o, domid) {
+               domid = (typeof domid === 'undefined')
+                         ? 'viewitem208182023369032'
+                         : domid;
+               var target = e.target || window.event.srcElement;
+               if (target.nodeName == 'a') return;
+               if (target.className == 'read_more_button') return;
+
+               var _eltsel = '[data-uid='+domid+']';
+               var _elt = $(_eltsel);
+               _elt.addClass('edited');
+               $(_eltsel + ' .displayed_content').hide();
+               $(_eltsel + ' .cancel_edit_item_content').show()
+                                                        .click(function() {
+                                                            $(this).hide();
+                                                            _elt.removeClass('edited');
+                                                            $(_eltsel + ' .edit_item_content').empty().hide();
+                                                            $(_eltsel + ' .displayed_content').show();
+                                                        });
+               $(_eltsel + ' .edit_item_content').show()
+                                                 .load('/ajax/timeline.php',
+                                                       {'action'    : 'viewsubitem',
+                                                        'type'      : itemtype,
+                                                        'parenttype': 'Ticket',
+                                                        'tickets_id': 20818,
+                                                        'id'        : items_id
+                                                       });
+      };
+      </script><script type='text/javascript' >
+function viewAddSubitem208182023369032(itemtype) {
+$('#viewitem208182023369032').load('/ajax/timeline.php'
+,{action:"viewsubitem",type:itemtype,parenttype:"Ticket",tickets_id:20818,id:-1}
+)
+$('#approbation_form2023369032').remove()};</script>
+<div class='timeline_form'><ul class='timeline_choices'><h2>Adicionar : </h2><li class='followup' onclick='javascript:viewAddSubitem208182023369032("ITILFollowup");'><i class='far fa-comment'></i>Acompanhamento</li><li class='task' onclick='javascript:viewAddSubitem208182023369032("TicketTask");'><i class='far fa-check-square'></i>Tarefa</li><li class='document' onclick='javascript:viewAddSubitem208182023369032("Document_Item");'><i class='fa fa-paperclip'></i>Documento</li><li class='validation' onclick='javascript:viewAddSubitem208182023369032("TicketValidation");'><i class='far fa-thumbs-up'></i>Aprovação</li><li class='solution' onclick='javascript:viewAddSubitem208182023369032("Solution");'><i class='fa fa-check'></i>Solução</li></ul><div class='clear'>&nbsp;</div><div class='timeline_stats'></div></div><div class='ajax_box' id='viewitem208182023369032'></div>
+<div class='timeline_history'><h2>Histórico de ações : </h2><div class='filter_timeline'><h3>Filtro de linha do tempo : </h3><ul><li><a href='#' class='far fa-comment pointer' data-type='ITILFollowup' title='Acompanhamento'><span class='sr-only'>Acompanhamento</span></a></li><li><a href='#' class='far fa-check-square pointer' data-type='ITILTask' title='Tarefa'><span class='sr-only'>Tarefa</span></a></li><li><a href='#' class='fa fa-paperclip pointer' data-type='Document_Item' title='Documento'><span class='sr-only'>Documento</span></a></li><li><a href='#' class='far fa-thumbs-up pointer' data-type='ITILValidation' title='Valida&ccedil;&atilde;o'><span class='sr-only'>Validação</span></a></li><li><a href='#' class='fa fa-check pointer' data-type='Solution' title='Solu&ccedil;&atilde;o'><span class='sr-only'>Solução</span></a></li><li><a href='#' class='fa fa-ban pointer' data-type='reset' title="Redefinir op&ccedil;&otilde;es de visualiza&ccedil;&atilde;o"><span class='sr-only'>Redefinir opções de visualização</span></a></li></ul></div><script type='text/javascript'>$(function() {filter_timeline();});</script><div class='h_item right'><div class='h_info'><div class='h_date'><i class='far fa-clock'></i>2026-05-25 14:17</div><div class='h_user'><div class='tooltip_picture_border'><img class='user_picture' alt="Imagem" src='/front/document.send.php?file=_pictures/be/219_651b62d4b34be_min.png'></div><span class='h_user_name'><a  href='/front/user.form.php?id=219'  title="Edson da Fonseca Livramento">Edson da Fonseca Livramento (219)</a>&nbsp;<a id='tooltiplink1528607460' href='/front/user.form.php?id=219'><span id='tooltip1528607460' class='fas fa-info pointer'></span></a><div id='contenttooltip1528607460' class='invisible'><div class='tooltip_picture_border'><img  class='tooltip_picture' src='/front/document.send.php?file=_pictures/be/219_651b62d4b34be_min.png' /></div><div class='tooltip_text'><strong>Nome</strong>: Edson da Fonseca Livramento (219)<br><strong>Usuário</strong>: edson.fonseca<br><strong>E-mail</strong>: edson.fonseca@carpark.com.br<br><strong>Telefone</strong>: Ramal 945<br><strong>Localização</strong>: Administrativo<br><strong>Categoria</strong>: Área Técnica<br></div></div><script type="text/javascript">
+//<![CDATA[
+
+$(function(){$('#tooltip1528607460').qtip({
+         position: { viewport: $(window) },
+         content: {text: $('#contenttooltip1528607460')}, style: { classes: 'qtip-shadow qtip-bootstrap'}});});
+
+//]]>
+</script></span></div></div><div class='h_content ITILFollowup' id='viewitemitilfollowup31071' data-uid='viewitemITILFollowup310712023369032'><div class='edit_item_content'></div><span class='cancel_edit_item_content'></span><div class='displayed_content'><div class='h_controls'><a href="/front/ticket.form.php?_promoted_fup_id=31071" class="fa fa-code-branch control_item" title="Promover para Chamado"></a><span class='far fa-edit control_item' title='Editar'onclick='javascript:viewEditSubitem208182023369032(event, "ITILFollowup", 31071, this, "viewitemITILFollowup310712023369032")'></span></div><div class='item_content '><p></p><div class='rich_text_container'><p>Chamado na fila de atendimento.</p></div></div><div class='b_right'></div></div></div></div><div class='break'></div><div class='h_item middle'><div class='h_info'><div class='h_date'><i class='far fa-clock'></i>2026-05-25 13:40</div><div class='h_user'><div class='tooltip_picture_border'><img class='user_picture' alt="Imagem" src='/pics/picture_min.png'></div><a  href='/front/user.form.php?id=170'  title="Marco Fantini">Marco Fantini (170)</a>&nbsp;<a id='tooltiplink2090780255' href='/front/user.form.php?id=170'><span id='tooltip2090780255' class='fas fa-info pointer'></span></a><div id='contenttooltip2090780255' class='invisible'><strong>Nome</strong>: Marco Fantini (170)<br><strong>Usuário</strong>: marco.fantini<br><strong>E-mail</strong>: marco.fantini@carpark.com.br<br></div><script type="text/javascript">
+//<![CDATA[
+
+$(function(){$('#tooltip2090780255').qtip({
+         position: { viewport: $(window) },
+         content: {text: $('#contenttooltip2090780255')}, style: { classes: 'qtip-shadow qtip-bootstrap'}});});
+
+//]]>
+</script></div></div><div class='h_content ITILContent'><div class='displayed_content'><div class='b_right'>Ticket# 20818 description</div><div class='title'>informação errada no expedidor</div><div class='rich_text_container'><p>O expedidor de entrada assim que o veiculo aproxima aparece a msg de entrada liberada, siga em frente , antes mesmo de qqr ação do motorista gerando problema na entrada pois o motorista nao tira o tiquete e fica esperando a cancela abrir</p></div></div></div></div><div class='break'></div></div><script type='text/javascript'>$(function() {read_more();});</script></div>

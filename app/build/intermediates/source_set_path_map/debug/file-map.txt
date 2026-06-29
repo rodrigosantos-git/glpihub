@@ -1,0 +1,51 @@
+br.com.carpark.glpihub.app-datastore-1.0.0-0 C:\Users\RodzSantos\.gradle\caches\transforms-3\05775d4ce8bab4ef66d3a10ba6891e3c\transformed\datastore-1.0.0\res
+br.com.carpark.glpihub.app-ui-graphics-release-1 C:\Users\RodzSantos\.gradle\caches\transforms-3\0864d1df56a4b924385bcdf0653774ad\transformed\ui-graphics-release\res
+br.com.carpark.glpihub.app-activity-ktx-1.8.0-2 C:\Users\RodzSantos\.gradle\caches\transforms-3\0cacef7dd69b7822aecad190e19f65e0\transformed\activity-ktx-1.8.0\res
+br.com.carpark.glpihub.app-navigation-common-2.7.5-3 C:\Users\RodzSantos\.gradle\caches\transforms-3\2124aa40683a7234917333c53e77ca60\transformed\navigation-common-2.7.5\res
+br.com.carpark.glpihub.app-annotation-experimental-1.3.0-4 C:\Users\RodzSantos\.gradle\caches\transforms-3\21abf92605bc332dac70f7baa7991718\transformed\annotation-experimental-1.3.0\res
+br.com.carpark.glpihub.app-navigation-runtime-ktx-2.7.5-5 C:\Users\RodzSantos\.gradle\caches\transforms-3\221360a616eb9aaf3304bb38f73c176b\transformed\navigation-runtime-ktx-2.7.5\res
+br.com.carpark.glpihub.app-runtime-saveable-release-6 C:\Users\RodzSantos\.gradle\caches\transforms-3\2a78fa5dc93b025bb73e88b7ec8aab8b\transformed\runtime-saveable-release\res
+br.com.carpark.glpihub.app-lifecycle-viewmodel-compose-2.6.2-7 C:\Users\RodzSantos\.gradle\caches\transforms-3\2b6873a67d3a40c9c53c653210f1b2ea\transformed\lifecycle-viewmodel-compose-2.6.2\res
+br.com.carpark.glpihub.app-ui-unit-release-8 C:\Users\RodzSantos\.gradle\caches\transforms-3\31728323646505ffdee29376138160f1\transformed\ui-unit-release\res
+br.com.carpark.glpihub.app-core-ktx-1.12.0-9 C:\Users\RodzSantos\.gradle\caches\transforms-3\36ec00309b4855399e08cd171e91e41c\transformed\core-ktx-1.12.0\res
+br.com.carpark.glpihub.app-activity-1.8.0-10 C:\Users\RodzSantos\.gradle\caches\transforms-3\3962080df1fb2c61c98bbd44d66cee02\transformed\activity-1.8.0\res
+br.com.carpark.glpihub.app-material-ripple-release-11 C:\Users\RodzSantos\.gradle\caches\transforms-3\3bc07dd38b9cd567681cfbf83e4f4455\transformed\material-ripple-release\res
+br.com.carpark.glpihub.app-core-1.12.0-12 C:\Users\RodzSantos\.gradle\caches\transforms-3\46e7e51ca0a66b05e30534a78525755e\transformed\core-1.12.0\res
+br.com.carpark.glpihub.app-lifecycle-viewmodel-savedstate-2.6.2-13 C:\Users\RodzSantos\.gradle\caches\transforms-3\4b990124a1576db357153510da3478c9\transformed\lifecycle-viewmodel-savedstate-2.6.2\res
+br.com.carpark.glpihub.app-ui-geometry-release-14 C:\Users\RodzSantos\.gradle\caches\transforms-3\4cad8e813330ad61940c9a2724887d1b\transformed\ui-geometry-release\res
+br.com.carpark.glpihub.app-animation-core-release-15 C:\Users\RodzSantos\.gradle\caches\transforms-3\5ab7e13062280c97b3ed4b7814b474d3\transformed\animation-core-release\res
+br.com.carpark.glpihub.app-material-icons-extended-release-16 C:\Users\RodzSantos\.gradle\caches\transforms-3\5c9e87c99e3f22cd2b6c14d31f62fbc4\transformed\material-icons-extended-release\res
+br.com.carpark.glpihub.app-ui-release-17 C:\Users\RodzSantos\.gradle\caches\transforms-3\5da7f8b2d4ce71e28a1fa92deb2e8780\transformed\ui-release\res
+br.com.carpark.glpihub.app-lifecycle-runtime-2.6.2-18 C:\Users\RodzSantos\.gradle\caches\transforms-3\636dd74070033fb6774fe63f45074016\transformed\lifecycle-runtime-2.6.2\res
+br.com.carpark.glpihub.app-lifecycle-livedata-core-2.6.2-19 C:\Users\RodzSantos\.gradle\caches\transforms-3\6465df3fd35ad860bd86c1cabd4ea7ac\transformed\lifecycle-livedata-core-2.6.2\res
+br.com.carpark.glpihub.app-startup-runtime-1.1.1-20 C:\Users\RodzSantos\.gradle\caches\transforms-3\6efa72f88c72e21c87e24d6123b254fc\transformed\startup-runtime-1.1.1\res
+br.com.carpark.glpihub.app-ui-util-release-21 C:\Users\RodzSantos\.gradle\caches\transforms-3\7b8b03408d8cf734f190aff3b424adf4\transformed\ui-util-release\res
+br.com.carpark.glpihub.app-savedstate-1.2.1-22 C:\Users\RodzSantos\.gradle\caches\transforms-3\7c9f9aa416f69efc33cae6299a14c0c4\transformed\savedstate-1.2.1\res
+br.com.carpark.glpihub.app-material-icons-core-release-23 C:\Users\RodzSantos\.gradle\caches\transforms-3\7d1c2e58c31b5ef37ec5fc282cd94410\transformed\material-icons-core-release\res
+br.com.carpark.glpihub.app-ui-tooling-preview-release-24 C:\Users\RodzSantos\.gradle\caches\transforms-3\8160ff0cf734bc2a9891ebaefdfedf47\transformed\ui-tooling-preview-release\res
+br.com.carpark.glpihub.app-datastore-preferences-1.0.0-25 C:\Users\RodzSantos\.gradle\caches\transforms-3\86e72e9678b1100b4e6d39ffb5cfbc4e\transformed\datastore-preferences-1.0.0\res
+br.com.carpark.glpihub.app-emoji2-1.4.0-26 C:\Users\RodzSantos\.gradle\caches\transforms-3\87d611a44e4699c7b58dac25961fb14b\transformed\emoji2-1.4.0\res
+br.com.carpark.glpihub.app-core-runtime-2.2.0-27 C:\Users\RodzSantos\.gradle\caches\transforms-3\8e98809ba97afb9f66399bbc04e98976\transformed\core-runtime-2.2.0\res
+br.com.carpark.glpihub.app-profileinstaller-1.3.0-28 C:\Users\RodzSantos\.gradle\caches\transforms-3\981a3ab8ef3dcc7327f274b6d31b4963\transformed\profileinstaller-1.3.0\res
+br.com.carpark.glpihub.app-navigation-compose-2.7.5-29 C:\Users\RodzSantos\.gradle\caches\transforms-3\9a5f2d3a6999abbfe31ec3b3d63bf393\transformed\navigation-compose-2.7.5\res
+br.com.carpark.glpihub.app-lifecycle-runtime-ktx-2.6.2-30 C:\Users\RodzSantos\.gradle\caches\transforms-3\9b8341e45f88891a460ad9a569912702\transformed\lifecycle-runtime-ktx-2.6.2\res
+br.com.carpark.glpihub.app-lifecycle-viewmodel-ktx-2.6.2-31 C:\Users\RodzSantos\.gradle\caches\transforms-3\9ceec6ae580ac8b40d74a73ee3e5cdb5\transformed\lifecycle-viewmodel-ktx-2.6.2\res
+br.com.carpark.glpihub.app-lifecycle-process-2.6.2-32 C:\Users\RodzSantos\.gradle\caches\transforms-3\a15d42ef78b8ae4112ef0a86920c4661\transformed\lifecycle-process-2.6.2\res
+br.com.carpark.glpihub.app-runtime-release-33 C:\Users\RodzSantos\.gradle\caches\transforms-3\a4375f3b21ab5ee81cf7370321d262c9\transformed\runtime-release\res
+br.com.carpark.glpihub.app-lifecycle-viewmodel-2.6.2-34 C:\Users\RodzSantos\.gradle\caches\transforms-3\a6d7a805eadbf14f7c06a8a3deca34dc\transformed\lifecycle-viewmodel-2.6.2\res
+br.com.carpark.glpihub.app-foundation-release-35 C:\Users\RodzSantos\.gradle\caches\transforms-3\b6029dab1b5fe0221c81b33be111a905\transformed\foundation-release\res
+br.com.carpark.glpihub.app-foundation-layout-release-36 C:\Users\RodzSantos\.gradle\caches\transforms-3\b7ba0c686105244c3d91c8f56fb51cdb\transformed\foundation-layout-release\res
+br.com.carpark.glpihub.app-activity-compose-1.8.0-37 C:\Users\RodzSantos\.gradle\caches\transforms-3\bb472684da4b8cb2eba4baf1d7eca241\transformed\activity-compose-1.8.0\res
+br.com.carpark.glpihub.app-animation-release-38 C:\Users\RodzSantos\.gradle\caches\transforms-3\c0651d4c29c5425535254b5e808b8f18\transformed\animation-release\res
+br.com.carpark.glpihub.app-customview-poolingcontainer-1.0.0-39 C:\Users\RodzSantos\.gradle\caches\transforms-3\cbb4b77e83ffcacc4ada62f5f812a408\transformed\customview-poolingcontainer-1.0.0\res
+br.com.carpark.glpihub.app-ui-text-release-40 C:\Users\RodzSantos\.gradle\caches\transforms-3\e02378bee3b986adce38c0d1be0f457d\transformed\ui-text-release\res
+br.com.carpark.glpihub.app-savedstate-ktx-1.2.1-41 C:\Users\RodzSantos\.gradle\caches\transforms-3\eb17e781eee526cf4cf92959dd70f61c\transformed\savedstate-ktx-1.2.1\res
+br.com.carpark.glpihub.app-navigation-runtime-2.7.5-42 C:\Users\RodzSantos\.gradle\caches\transforms-3\eb9528fff0b30baff0d68b8477289dd1\transformed\navigation-runtime-2.7.5\res
+br.com.carpark.glpihub.app-material3-1.1.2-43 C:\Users\RodzSantos\.gradle\caches\transforms-3\f433fe651aeebbc61afe227880ae85dc\transformed\material3-1.1.2\res
+br.com.carpark.glpihub.app-navigation-common-ktx-2.7.5-44 C:\Users\RodzSantos\.gradle\caches\transforms-3\f7959cff5a1e2721c7a295105550ba01\transformed\navigation-common-ktx-2.7.5\res
+br.com.carpark.glpihub.app-resValues-45 C:\projetos\GLPI HUB\app\build\generated\res\resValues\debug
+br.com.carpark.glpihub.app-packageDebugResources-46 C:\projetos\GLPI HUB\app\build\intermediates\incremental\debug\packageDebugResources\merged.dir
+br.com.carpark.glpihub.app-packageDebugResources-47 C:\projetos\GLPI HUB\app\build\intermediates\incremental\debug\packageDebugResources\stripped.dir
+br.com.carpark.glpihub.app-merged_res-48 C:\projetos\GLPI HUB\app\build\intermediates\merged_res\debug
+br.com.carpark.glpihub.app-debug-49 C:\projetos\GLPI HUB\app\src\debug\res
+br.com.carpark.glpihub.app-main-50 C:\projetos\GLPI HUB\app\src\main\res

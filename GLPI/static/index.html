@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GLPI HUB - Dashboard de Chamados</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- Favicon padrão -->
+    <link rel="shortcut icon" type="image/x-icon" href="https://glpi-project.org/wp-content/uploads/2020/07/favicon.ico" />
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header da Aplicação -->
+        <header class="app-header">
+            <div class="brand-section">
+                <div class="brand-logo">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="12 2 2 7 12 12 22 7 12 2 12 2"/>
+                        <polyline points="2 17 12 22 22 17"/>
+                        <polyline points="2 12 12 17 22 12"/>
+                    </svg>
+                </div>
+                <div class="brand-title">
+                    <h1>GLPI HUB</h1>
+                    <p>PAINEL INTEGRADO DE MONITORAMENTO DE CHAMADOS</p>
+                </div>
+            </div>
+            
+            <div class="user-status-section">
+                <!-- Status do Sincronismo local -->
+                <div class="sync-badge">
+                    <div class="sync-dot" id="system-status-dot"></div>
+                    <span id="system-status-text">Conectando...</span>
+                </div>
+                
+                <!-- Detalhes do Usuário Autenticado -->
+                <div class="user-badge" id="user-badge" style="display: none;">
+                    <div class="user-avatar" id="avatar-letters">US</div>
+                    <span id="display-user">Usuário</span>
+                    <button class="btn-settings" id="btn-settings" title="Configurações do painel" style="margin-left: 8px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                        </svg>
+                    </button>
+                    <button class="btn-logout" id="btn-logout" title="Sair da sessão">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                            <polyline points="16 17 21 12 16 7"/>
+                            <line x1="21" y1="12" x2="9" y2="12"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Indicadores de Desempenho (KPIs) -->
+        <section class="kpi-row">
+            <div class="kpi-card purple">
+                <div class="kpi-info">
+                    <span class="kpi-label">TOTAL DE CHAMADOS</span>
+                    <div class="kpi-value" id="kpi-total">0</div>
+                </div>
+                <div class="kpi-icon-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14 2 14 8 20 8"/>
+                        <line x1="16" y1="13" x2="8" y2="13"/>
+                        <line x1="16" y1="17" x2="8" y2="17"/>
+                        <polyline points="10 9 9 9 8 9"/>
+                    </svg>
+                </div>
+            </div>
+            
+            <div class="kpi-card orange">
+                <div class="kpi-info">
+                    <span class="kpi-label">CHAMADOS EM ABERTO</span>
+                    <div class="kpi-value" id="kpi-pending">0</div>
+                </div>
+                <div class="kpi-icon-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="12" y1="8" x2="12" y2="12"/>
+                        <line x1="12" y1="16" x2="12.01" y2="16"/>
+                    </svg>
+                </div>
+            </div>
+            
+            <div class="kpi-card green">
+                <div class="kpi-info">
+                    <span class="kpi-label">CHAMADOS SOLUCIONADOS</span>
+                    <div class="kpi-value" id="kpi-solved">0</div>
+                </div>
+                <div class="kpi-icon-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                        <polyline points="22 4 12 14.01 9 11.01"/>
+                    </svg>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Barra de Controle e Filtros -->
+        <section class="control-bar">
+            <!-- Linha Principal: Busca, Ordenação e Refresh -->
+            <div class="search-sort-row">
+                <div class="search-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"/>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                    </svg>
+                    <input type="text" id="search-input" placeholder="Pesquisar por ID, assunto, técnico, entidade..." disabled>
+                </div>
+                
+                <div class="select-custom-wrapper sort-wrapper">
+                    <select id="sort-order">
+                        <option value="newest" selected>Mais Recentes Primeiro</option>
+                        <option value="oldest">Mais Antigos Primeiro</option>
+                    </select>
+                </div>
+                
+                <button class="btn-refresh" id="btn-refresh" disabled>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 1121.21 7.89M9 11l3-3 3 3m-3-3v12"/>
+                    </svg>
+                    <span>Atualizar</span>
+                </button>
+            </div>
+            
+            <!-- Linha de Filtros Dinâmicos -->
+            <div class="filter-dropdowns-row">
+                <!-- Filtro por Categoria -->
+                <div class="filter-select-group">
+                    <label for="category-filter">FILTRAR POR CATEGORIA</label>
+                    <div class="select-custom-wrapper">
+                        <select id="category-filter" disabled>
+                            <option value="all">TODAS AS CATEGORIAS</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Filtro por Técnico -->
+                <div class="filter-select-group">
+                    <label for="tech-filter">FILTRAR POR ATRIBUÍDO</label>
+                    <div class="select-custom-wrapper">
+                        <select id="tech-filter" disabled>
+                            <option value="all">TODOS OS TÉCNICOS</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Grid de Renderização dos Chamados (Cards) -->
+        <main class="tickets-grid" id="tickets-grid-container">
+            <!-- Esqueletos de carregamento e cards serão renderizados dinamicamente -->
+        </main>
+    </div>
+
+    <!-- Login Modal de Vidro com desfoque de fundo (Glassmorphism) -->
+    <div class="login-overlay" id="login-overlay">
+        <div class="login-card">
+            <div class="login-logo">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
+                <h2>Entrar no GLPI HUB</h2>
+            </div>
+            
+            <div class="login-error" id="login-error-message">
+                Usuário ou senha incorretos.
+            </div>
+            
+            <form class="login-form" id="login-form">
+                <div class="form-group">
+                    <label for="login-username">USUÁRIO CORPORATIVO</label>
+                    <input type="text" id="login-username" placeholder="Digite seu usuário corporativo" required autocomplete="username">
+                </div>
+                
+                <div class="form-group">
+                    <label for="login-password">SENHA</label>
+                    <input type="password" id="login-password" placeholder="Digite sua senha" required autocomplete="current-password">
+                </div>
+                
+                <div class="form-group">
+                    <label for="login-domain">DOMÍNIO DE AUTENTICAÇÃO</label>
+                    <div class="select-custom-wrapper login-select">
+                        <select id="login-domain">
+                            <option value="ldap-1" selected>carpark.local (LDAP Corporativo)</option>
+                            <option value="local">Banco de Dados Interno (GLPI)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group-checkbox">
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="login-remember-password">
+                        <span class="checkbox-custom"></span>
+                        <span>LEMBRAR MINHAS CREDENCIAIS</span>
+                    </label>
+                </div>
+                
+                <button type="submit" class="btn-login-submit" id="btn-login-submit">
+                    <span>Acessar Painel</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Configurações -->
+    <div class="settings-overlay" id="settings-overlay">
+        <div class="settings-card">
+            <div class="settings-header">
+                <h2>Configurações do Painel</h2>
+                <button class="btn-close-settings" id="btn-close-settings" title="Fechar configurações">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="settings-body">
+                <!-- Configuração: Tempo de Refresh -->
+                <div class="settings-group">
+                    <label for="settings-refresh-rate">INTERVALO DE ATUALIZAÇÃO AUTOMÁTICA</label>
+                    <div class="select-custom-wrapper settings-select">
+                        <select id="settings-refresh-rate">
+                            <option value="0">Desativado</option>
+                            <option value="30">30 Segundos</option>
+                            <option value="60">60 Segundos</option>
+                            <option value="90">90 Segundos</option>
+                            <option value="120">120 Segundos</option>
+                        </select>
+                    </div>
+                    <span class="settings-help">Tempo para recarregar a lista de chamados em segundo plano.</span>
+                </div>
+                
+                <!-- Configuração: Layout do Card -->
+                <div class="settings-group">
+                    <label>EXIBIÇÃO DE CARD DOS CHAMADOS</label>
+                    <div class="layout-toggle-options">
+                        <label class="layout-option">
+                            <input type="radio" name="settings-layout" value="grid" checked>
+                            <span class="layout-option-custom"></span>
+                            <span>Grade (Lado a lado)</span>
+                        </label>
+                        <label class="layout-option">
+                            <input type="radio" name="settings-layout" value="list">
+                            <span class="layout-option-custom"></span>
+                            <span>Lista (Corrida)</span>
+                        </label>
+                    </div>
+                    <span class="settings-help">Escolha como os cards de chamados são distribuídos na tela.</span>
+                </div>
+                
+                <!-- Configuração: Tema -->
+                <div class="settings-group">
+                    <label>TEMA DO SISTEMA</label>
+                    <div class="theme-toggle-options">
+                        <label class="theme-option">
+                            <input type="radio" name="settings-theme" value="light" checked>
+                            <span class="theme-option-custom"></span>
+                            <span>Claro</span>
+                        </label>
+                        <label class="theme-option">
+                            <input type="radio" name="settings-theme" value="dark">
+                            <span class="theme-option-custom"></span>
+                            <span>Escuro</span>
+                        </label>
+                    </div>
+                    <span class="settings-help">Escolha entre a paleta clara ou escura do painel.</span>
+                </div>
+                
+                <!-- Configuração: Notificações -->
+                <div class="settings-group">
+                    <label>NOTIFICAÇÕES DE NOVOS CHAMADOS</label>
+                    <div class="select-custom-wrapper settings-select">
+                        <select id="settings-notifications">
+                            <option value="all">TODAS (SOM + BANNER + SISTEMA)</option>
+                            <option value="toast">APENAS BANNER + SOM</option>
+                            <option value="disabled">DESATIVADO</option>
+                        </select>
+                    </div>
+                    <span class="settings-help">Escolha como deseja receber alertas de novos chamados abertos.</span>
+                </div>
+            </div>
+            
+            <button class="btn-settings-save" id="btn-settings-save">
+                <span>Salvar Configurações</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Botão de Rolagem Rápida (Voltar ao Topo) -->
+    <button class="btn-scroll-top" id="btn-scroll-top" title="Voltar ao topo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+            <polyline points="18 15 12 9 6 15"/>
+        </svg>
+    </button>
+
+    <script src="/js/dashboard.js"></script>
+</body>
+</html>

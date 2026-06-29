@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="pt"><head><title>GLPI - Chamados - 20559</title><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta property="glpi:csrf_token" content="15408c2cff181ebd144150fed07748b7a9617d59a7d765b568f43abca397feb3" /><link rel="stylesheet" type="text/css" href="/public/lib/base.min.css?v=9.5.8" media="all"><link rel="stylesheet" type="text/css" href="/css/jstree-glpi.min.css?v=9.5.8" media="all"><link rel="stylesheet" type="text/css" href="/public/lib/leaflet.min.css?v=9.5.8" media="all"><link rel="stylesheet" type="text/css" href="/public/lib/flatpickr.min.css?v=9.5.8" media="all"><link rel="stylesheet" type="text/css" href="/public/lib/flatpickr/themes/light.min.css?v=9.5.8" media="all"><link rel="stylesheet" type="text/css" href="/public/lib/jquery.rateit.min.css?v=9.5.8" media="all"><link rel="stylesheet" type="text/css" href="/css_compiled/css_dashboard.min.css?v=9.5.8" media="all"><link rel="stylesheet" type="text/css" href="/public/lib/gridstack.min.css?v=9.5.8" media="all"><link rel="stylesheet" type="text/css" href="/public/lib/chartist.min.css?v=9.5.8" media="all"><link rel="stylesheet" type="text/css" href="/css/chartists-glpi.min.css?v=9.5.8" media="all"><link rel="stylesheet" type="text/css" href="/public/lib/photoswipe.min.css?v=9.5.8" media="all"><link rel="stylesheet" type="text/css" href="/css/jquery-glpi.min.css?v=9.5.8" media="all"><link rel="stylesheet" type="text/css" href="/css_compiled/css_styles.min.css?v=9.5.8" media="all"><link rel="stylesheet" type="text/css" href="/css_compiled/css_highcontrast.min.css?v=9.5.8" media="all"><link rel="stylesheet" type="text/css" href="/css/print.min.css?v=9.5.8" media="print"><link rel='shortcut icon' type='images/x-icon' href='/pics/favicon.ico' >
+<link rel="stylesheet" type="text/css" href="/css_compiled/css_palettes_clockworkorange.min.css?v=9.5.8" media="all"><script type="text/javascript" src="/public/lib/base.min.js?v=9.5.8"></script><script type="text/javascript">
+//<![CDATA[
+
+            $(function() {
+               i18n.setLocale('pt_BR');
+            });
+
+//]]>
+</script><script type="text/javascript">
+//<![CDATA[
+
+               $(function() {
+                  $.ajax({
+                     type: 'GET',
+                     url: '/front/locale.php?domain=glpi&version=9.5.8',
+                     success: function(json) {
+                        i18n.loadJSON(json, 'glpi');
+                     }
+                  });
+               });
+
+//]]>
+</script><script type="text/javascript">
+//<![CDATA[
+
+               $(function() {
+                  $.ajax({
+                     type: 'GET',
+                     url: '/front/locale.php?domain=costs&version=2.2.3',
+                     success: function(json) {
+                        i18n.loadJSON(json, 'costs');
+                     }
+                  });
+               });
+
+//]]>
+</script></head>
+<body class='layout_lefttab form'><div id='header'><header role='banner' id='header_top'><div id='c_logo'><a href='/front/central.php'
+               accesskey='1'
+               title='Home'><span class='sr-only'>Home</span></a></div><div id='c_preference' ><ul><li id='deconnexion'><a href='/front/logout.php?noAUTO=1' title="Sair" class='fa fa-sign-out-alt'><span class='sr-only'>Sair></span></a></li>
+<li id='preferences_link'><a href='/front/preference.php' title="Minhas configura&ccedil;&otilde;es - Rodrigo Santos" class='fa fa-cog'><span class='sr-only'>Minhas configura&ccedil;&otilde;es</span><span id='myname'>Rodrigo Santos</span></a></li><li id='bookmark_link'><script type='text/javascript'>
+$(function() {$('<div id=\'showSavedSearches\' class=\'slidepanel onright\'><div class="header"><button type=\'button\' class=\'close ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only ui-dialog-titlebar-close\' title=\'Fechar\'><span class=\'ui-button-icon-primary ui-icon ui-icon-closethick\'></span><span class=\'ui-button-text\'>Fechar</span></button><a href=\'/front/savedsearch.php\'><img class=\'icon\' src=\'/pics/menu_config.png\' alt=\'Gerenciar pesquisas salvas\' title=\'Gerenciar pesquisas salvas\'/></a><h3>Pesquisas salvas</h3></div><div class=\'contents\'></div></div>')
+         .hide()
+         .appendTo('body');
+$('#showSavedSearches .close').on('click', function() {
+         $('#showSavedSearches').hide(
+            'slow',
+            function () {
+               $(this).find('.contents').empty();
+            }
+         );
+       });
+$('#showSavedSearchesLink').on('click', function() {
+         $('#showSavedSearches').show(
+            'slow',
+            function() {
+               _loadshowSavedSearches();
+            }
+         );
+      });
+});var _loadshowSavedSearches = function() {
+            $.ajax({
+               url: '/ajax/savedsearch.php?action=show',
+               beforeSend: function() {
+                  var _loader = $('<div id=\'loadingslide\'><div class=\'loadingindicator\'>Carregando...</div></div>');
+                  $('#showSavedSearches .contents').html(_loader);
+               }
+            })
+            .always( function() {
+               $('#loadingslide').remove();
+            })
+            .done(function(res) {
+               $('#showSavedSearches .contents').html(res);
+            });
+         };
+</script><a href='#' id='showSavedSearchesLink' class='fa fa-star' title="Carregar uma pesquisa salva"><span class='sr-only'>Pesquisas salvas</span></a></li><li id='help_link'><a href='http://glpi-project.org/help-central' target='_blank' title="Ajuda" class='fa fa-question'><span class='sr-only'>Ajuda</span></a></li><li id='language_link'><a href='/front/preference.php?forcetab=User$1' title="Português do Brasil">Português do Brasil</a></li><li id='c_recherche'>
+<form role='search' method='get' action='/front/search.php'>
+<span id='champRecherche'><input size='15' type='search' name='globalsearch' placeholder='Pesquisar' aria-labelledby='globalsearchglass'><button type='submit' name='globalsearchglass' id='globalsearchglass'><i class='fa fa-search'></i><span class='sr-only'>Pesquisar</span></button></span>
+<input type="hidden" name="_glpi_csrf_token" value="3b84d3b01dbc71bebfae754fb45b699d7b1021f6f40f2b01d8aa5dc572e57276" />
+</form>
+</li></ul></div>
+</header><div id='c_menu'><ul id='menu' class='fullmenu'><li id='menu1' data-id='1' class=''><a href='/front/dashboard_assets.php' class='itemP'>Ativos</a><ul class='ssmenu'><li class=''>
+                        <a href='/front/computer.php'  accesskey='o'>
+                           <i class='fa-fw fas fa-laptop'></i>
+                           C<u>o</u>mputadores
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/monitor.php' >
+                           <i class='fa-fw fas fa-desktop'></i>
+                           Monitores
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/software.php'  accesskey='s'>
+                           <i class='fa-fw fas fa-cube'></i>
+                           <u>S</u>oftwares
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/networkequipment.php' >
+                           <i class='fa-fw fas fa-network-wired'></i>
+                           Dispositivos de rede
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/peripheral.php' >
+                           <i class='fa-fw fab fa-usb'></i>
+                           Dispositivos
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/printer.php' >
+                           <i class='fa-fw fas fa-print'></i>
+                           Impressoras
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/cartridgeitem.php' >
+                           <i class='fa-fw fas fa-fill-drip'></i>
+                           Cartuchos
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/consumableitem.php' >
+                           <i class='fa-fw fas fa-box-open'></i>
+                           Insumos
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/phone.php' >
+                           <i class='fa-fw fas fa-phone'></i>
+                           Telefones
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/rack.php' >
+                           <i class='fa-fw fas fa-server'></i>
+                           Racks
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/enclosure.php' >
+                           <i class='fa-fw fas fa-th'></i>
+                           Chassis
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/pdu.php' >
+                           <i class='fa-fw fas fa-plug'></i>
+                           PDUs
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/passivedcequipment.php' >
+                           <i class='fa-fw fas fa-th-list'></i>
+                           Dispositivos passivo
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/allassets.php' >
+                           <i class='fa-fw fas fa-list'></i>
+                           Global
+                        </a>
+                     </li></ul></li><li id='menu2' data-id='2' class='active'><a href='/front/dashboard_helpdesk.php' class='itemP'>Assistência</a><ul class='ssmenu'><li class='active'>
+                        <a href='/front/ticket.php'  accesskey='t'>
+                           <i class='fa-fw fas fa-exclamation-circle'></i>
+                           Chamados
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/ticket.form.php' >
+                           <i class='fa-fw fas fa-plus'></i>
+                           Criar chamado
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/problem.php' >
+                           <i class='fa-fw fas fa-exclamation-triangle'></i>
+                           Problemas
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/change.php' >
+                           <i class='fa-fw fas fa-clipboard-check'></i>
+                           Mudanças
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/planning.php'  accesskey='p'>
+                           <i class='fa-fw far fa-calendar-alt'></i>
+                           <u>P</u>lanejamento
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/stat.php'  accesskey='a'>
+                           <i class='fa-fw fas fa-chart-bar'></i>
+                           Est<u>a</u>tísticas
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/ticketrecurrent.php'  accesskey='n'>
+                           <i class='fa-fw fas fa-stopwatch'></i>
+                           Chamados recorre<u>n</u>tes
+                        </a>
+                     </li></ul></li><li id='menu3' data-id='3' class=''><a href='/front/softwarelicense.php' class='itemP'>Gerência</a><ul class='ssmenu'><li class=''>
+                        <a href='/front/softwarelicense.php' >
+                           <i class='fa-fw fas fa-key'></i>
+                           Lice<u>n</u>ças
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/budget.php' >
+                           <i class='fa-fw fas fa-calculator'></i>
+                           Orçame<u>n</u>tos
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/supplier.php' >
+                           <i class='fa-fw fas fa-dolly'></i>
+                           Fornecedores
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/contact.php' >
+                           <i class='fa-fw fas fa-user-tie'></i>
+                           Contatos
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/contract.php' >
+                           <i class='fa-fw fas fa-file-signature'></i>
+                           Contratos
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/document.php'  accesskey='d'>
+                           <i class='fa-fw far fa-file'></i>
+                           <u>D</u>ocumentos
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/line.php' >
+                           <i class='fa-fw fas fa-phone'></i>
+                           Linhas
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/certificate.php' >
+                           <i class='fa-fw fas fa-certificate'></i>
+                           Certificados
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/datacenter.php' >
+                           <i class='fa-fw fas fa-warehouse'></i>
+                           Data centers
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/cluster.php' >
+                           <i class='fa-fw fas fa-project-diagram'></i>
+                           Clusters
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/domain.php' >
+                           <i class='fa-fw fas fa-globe-americas'></i>
+                           Domí<u>n</u>ios
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/appliance.php' >
+                           <i class='fa-fw fas fa-cubes'></i>
+                           Aplicação
+                        </a>
+                     </li></ul></li><li id='menu4' data-id='4' class=''><a href='/front/project.php' class='itemP'>Ferramentas</a><ul class='ssmenu'><li class=''>
+                        <a href='/front/project.php' >
+                           <i class='fa-fw fas fa-columns'></i>
+                           Projetos
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/reminder.php' >
+                           <i class='fa-fw far fa-sticky-note'></i>
+                           Lembretes
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/rssfeed.php' >
+                           <i class='fa-fw fas fa-rss'></i>
+                           RSS feed
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/knowbaseitem.php'  accesskey='b'>
+                           <i class='fa-fw fas fa-question'></i>
+                           <u>B</u>ase de Conhecimento
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/reservationitem.php' >
+                           <i class='fa-fw fas fa-calendar-check'></i>
+                           Reservas
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/report.php'  accesskey='e'>
+                           <i class='fa-fw fas fa-file-medical-alt'></i>
+                           R<u>e</u>latórios
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/savedsearch.php' >
+                           <i class='fa-fw far fa-bookmark'></i>
+                           Pesquisas salvas
+                        </a>
+                     </li></ul></li><li id='menu5' data-id='5' class=''><a href='/front/user.php' class='itemP'>Administração</a><ul class='ssmenu'><li class=''>
+                        <a href='/front/user.php'  accesskey='u'>
+                           <i class='fa-fw fas fa-user'></i>
+                           <u>U</u>suários
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/group.php'  accesskey='g'>
+                           <i class='fa-fw fas fa-users'></i>
+                           <u>G</u>rupos
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/entity.php' >
+                           <i class='fa-fw fas fa-layer-group'></i>
+                           E<u>n</u>tidades
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/rule.php' >
+                           <i class='fa-fw fas fa-book'></i>
+                           Regras
+                        </a>
+                     </li><li class=''>
+                        <a href='/front/profile.php' >
+                           <i class='fa-fw fas fa-user-check'></i>
+                           Perfis
+                        </a>
+                     </li></ul></li><li id='menu6' data-id='6' class=''><a href='/front/dropdown.php' class='itemP'>Configurar</a><ul class='ssmenu'><li class=''>
+                        <a href='/front/dropdown.php' >
+                           <i class='fa-fw fas fa-edit'></i>
+                           Listas suspe<u>n</u>sas
+                        </a>
+                     </li></ul></li></ul><div id='show_all_menu' class='invisible'><dl><dt class='primary-bg primary-fg'><a class='primary-fg' href='/front/dashboard_assets.php' title="Ativos" class='itemP'>Ativos</a></dt><dd><a href='/front/computer.php'><i class='fa-fw fas fa-laptop'></i>&nbsp;Computadores</a></dd><dd><a href='/front/monitor.php'><i class='fa-fw fas fa-desktop'></i>&nbsp;Monitores</a></dd><dd><a href='/front/software.php'><i class='fa-fw fas fa-cube'></i>&nbsp;Softwares</a></dd><dd><a href='/front/networkequipment.php'><i class='fa-fw fas fa-network-wired'></i>&nbsp;Dispositivos de rede</a></dd><dd><a href='/front/peripheral.php'><i class='fa-fw fab fa-usb'></i>&nbsp;Dispositivos</a></dd><dd><a href='/front/printer.php'><i class='fa-fw fas fa-print'></i>&nbsp;Impressoras</a></dd><dd><a href='/front/cartridgeitem.php'><i class='fa-fw fas fa-fill-drip'></i>&nbsp;Cartuchos</a></dd><dd><a href='/front/consumableitem.php'><i class='fa-fw fas fa-box-open'></i>&nbsp;Insumos</a></dd><dd><a href='/front/phone.php'><i class='fa-fw fas fa-phone'></i>&nbsp;Telefones</a></dd><dd><a href='/front/rack.php'><i class='fa-fw fas fa-server'></i>&nbsp;Racks</a></dd><dd><a href='/front/enclosure.php'><i class='fa-fw fas fa-th'></i>&nbsp;Chassis</a></dd><dd><a href='/front/pdu.php'><i class='fa-fw fas fa-plug'></i>&nbsp;PDUs</a></dd><dd><a href='/front/passivedcequipment.php'><i class='fa-fw fas fa-th-list'></i>&nbsp;Dispositivos passivo</a></dd><dd><a href='/front/allassets.php'><i class='fa-fw fas fa-list'></i>&nbsp;Global</a></dd></dl><dl><dt class='primary-bg primary-fg'><a class='primary-fg' href='/front/dashboard_helpdesk.php' title="Assistência" class='itemP'>Assistência</a></dt><dd><a href='/front/ticket.php'><i class='fa-fw fas fa-exclamation-circle'></i>&nbsp;Chamados</a></dd><dd><a href='/front/ticket.form.php'><i class='fa-fw fas fa-plus'></i>&nbsp;Criar chamado</a></dd><dd><a href='/front/problem.php'><i class='fa-fw fas fa-exclamation-triangle'></i>&nbsp;Problemas</a></dd><dd><a href='/front/change.php'><i class='fa-fw fas fa-clipboard-check'></i>&nbsp;Mudanças</a></dd><dd><a href='/front/planning.php'><i class='fa-fw far fa-calendar-alt'></i>&nbsp;Planejamento</a></dd><dd><a href='/front/stat.php'><i class='fa-fw fas fa-chart-bar'></i>&nbsp;Estatísticas</a></dd><dd><a href='/front/ticketrecurrent.php'><i class='fa-fw fas fa-stopwatch'></i>&nbsp;Chamados recorrentes</a></dd></dl><dl><dt class='primary-bg primary-fg'><a class='primary-fg' href='/front/softwarelicense.php' title="Gerência" class='itemP'>Gerência</a></dt><dd><a href='/front/softwarelicense.php'><i class='fa-fw fas fa-key'></i>&nbsp;Licenças</a></dd><dd><a href='/front/budget.php'><i class='fa-fw fas fa-calculator'></i>&nbsp;Orçamentos</a></dd><dd><a href='/front/supplier.php'><i class='fa-fw fas fa-dolly'></i>&nbsp;Fornecedores</a></dd><dd><a href='/front/contact.php'><i class='fa-fw fas fa-user-tie'></i>&nbsp;Contatos</a></dd><dd><a href='/front/contract.php'><i class='fa-fw fas fa-file-signature'></i>&nbsp;Contratos</a></dd><dd><a href='/front/document.php'><i class='fa-fw far fa-file'></i>&nbsp;Documentos</a></dd><dd><a href='/front/line.php'><i class='fa-fw fas fa-phone'></i>&nbsp;Linhas</a></dd><dd><a href='/front/certificate.php'><i class='fa-fw fas fa-certificate'></i>&nbsp;Certificados</a></dd><dd><a href='/front/datacenter.php'><i class='fa-fw fas fa-warehouse'></i>&nbsp;Data centers</a></dd><dd><a href='/front/cluster.php'><i class='fa-fw fas fa-project-diagram'></i>&nbsp;Clusters</a></dd><dd><a href='/front/domain.php'><i class='fa-fw fas fa-globe-americas'></i>&nbsp;Domínios</a></dd><dd><a href='/front/appliance.php'><i class='fa-fw fas fa-cubes'></i>&nbsp;Aplicação</a></dd></dl><dl><dt class='primary-bg primary-fg'><a class='primary-fg' href='/front/project.php' title="Ferramentas" class='itemP'>Ferramentas</a></dt><dd><a href='/front/project.php'><i class='fa-fw fas fa-columns'></i>&nbsp;Projetos</a></dd><dd><a href='/front/reminder.php'><i class='fa-fw far fa-sticky-note'></i>&nbsp;Lembretes</a></dd><dd><a href='/front/rssfeed.php'><i class='fa-fw fas fa-rss'></i>&nbsp;RSS feed</a></dd><dd><a href='/front/knowbaseitem.php'><i class='fa-fw fas fa-question'></i>&nbsp;Base de Conhecimento</a></dd><dd><a href='/front/reservationitem.php'><i class='fa-fw fas fa-calendar-check'></i>&nbsp;Reservas</a></dd><dd><a href='/front/report.php'><i class='fa-fw fas fa-file-medical-alt'></i>&nbsp;Relatórios</a></dd><dd><a href='/front/savedsearch.php'><i class='fa-fw far fa-bookmark'></i>&nbsp;Pesquisas salvas</a></dd></dl><dl><dt class='primary-bg primary-fg'><a class='primary-fg' href='/front/user.php' title="Administração" class='itemP'>Administração</a></dt><dd><a href='/front/user.php'><i class='fa-fw fas fa-user'></i>&nbsp;Usuários</a></dd><dd><a href='/front/group.php'><i class='fa-fw fas fa-users'></i>&nbsp;Grupos</a></dd><dd><a href='/front/entity.php'><i class='fa-fw fas fa-layer-group'></i>&nbsp;Entidades</a></dd><dd><a href='/front/rule.php'><i class='fa-fw fas fa-book'></i>&nbsp;Regras</a></dd><dd><a href='/front/profile.php'><i class='fa-fw fas fa-user-check'></i>&nbsp;Perfis</a></dd></dl><dl><dt class='primary-bg primary-fg'><a class='primary-fg' href='/front/dropdown.php' title="Configurar" class='itemP'>Configurar</a></dt><dd><a href='/front/dropdown.php'><i class='fa-fw fas fa-edit'></i>&nbsp;Listas suspensas</a></dd></dl></div><script type="text/javascript">
+//<![CDATA[
+
+
+         $(document).ready(
+            function() {
+               $('#show_all_menu').dialog({
+                  height: 'auto',
+                  width: 'auto',
+                  modal: true,
+                  autoOpen: false
+               });
+            }
+         );
+      
+
+//]]>
+</script><a href='#' onClick="$('#show_all_menu').dialog('open'); return false;"
+            id='menu_all_button'><i class='fa fa-bars'></i></a></div><div id='c_ssmenu2' ><ul><li class='breadcrumb_item'><a href='/front/central.php' title="Home">Home</a></li><li class='breadcrumb_item'><a href='/front/dashboard_helpdesk.php' title="Assistência">Assistência</a></li><li class='breadcrumb_item'><a href='/front/ticket.php' class='here' title="Chamados" ><i class='fas fa-exclamation-circle'></i>&nbsp;Chamados</a></li><li class='icons_block'><span><a href='/front/ticket.form.php' class='pointer'
+                                 title='Adicionar'><i class='fa fa-plus'></i>
+                                 <span class='sr-only'>Adicionar</span></a></span><span><a href='/front/ticket.php' class='pointer'
+                                 title='Pesquisar'><i class='fa fa-search'></i>
+                                 <span class='sr-only'>Pesquisar</span></a></span><span><a href="/front/tickettemplate.php" title="Gerenciar modelos..."><i class="pointer fa fa-layer-group"></i></a></span><span><a href="/front/ticket.php?reset=reset&amp;criteria%5B0%5D%5Bfield%5D=55&amp;criteria%5B0%5D%5Bsearchtype%5D=equals&amp;criteria%5B0%5D%5Bvalue%5D=2&amp;criteria%5B0%5D%5Blink%5D=AND&amp;criteria%5B1%5D%5Bfield%5D=59&amp;criteria%5B1%5D%5Bsearchtype%5D=equals&amp;criteria%5B1%5D%5Bvalue%5D=164&amp;criteria%5B1%5D%5Blink%5D=AND&amp;criteria%5B2%5D%5Bfield%5D=52&amp;criteria%5B2%5D%5Bsearchtype%5D=equals&amp;criteria%5B2%5D%5Bvalue%5D=2&amp;criteria%5B2%5D%5Blink%5D=AND&amp;criteria%5B3%5D%5Bfield%5D=12&amp;criteria%5B3%5D%5Bsearchtype%5D=equals&amp;criteria%5B3%5D%5Bvalue%5D=6&amp;criteria%5B3%5D%5Blink%5D=AND%20NOT&amp;criteria%5B4%5D%5Bfield%5D=12&amp;criteria%5B4%5D%5Bsearchtype%5D=equals&amp;criteria%5B4%5D%5Bvalue%5D=5&amp;criteria%5B4%5D%5Blink%5D=AND%20NOT" class="pointer"><img title="Chamado esperando sua aprova&ccedil;&atilde;o" alt="Chamado esperando sua aprova&ccedil;&atilde;o" src='/pics/menu_showall.png' class='pointer'></a></span></li><li class='profile-selector'><script type='text/javascript'>
+var entity_window;$(function() {entity_window=$('<div></div>').dialog({
+
+         width:800,
+
+         autoOpen: false,
+
+         height:400,
+
+         modal: true,
+
+         title: "Selecione a entidade desejada",
+
+         open: function (){
+            var fields = {"target":"\/front\/central.php"};
+            $(this).load('/ajax/entitytree.php', fields);
+         }
+      });
+});</script>
+<a onclick='entity_window.dialog("open");' href='#modal_entity_content' title="CAR PARK (estrutura de árvore)" class='entity_select' id='global_entity_select'>CAR PARK (estrutura de árvore)</a></li></ul></div></div>
+<span class='fa-stack fa-lg' id='backtotop' style='display: none'><i class='fa fa-circle fa-stack-2x primary-fg-inverse'></i><a href='#' class='fa fa-arrow-up fa-stack-1x primary-fg' title='Voltar ao in&iacute;cio da p&aacute;gina'><span class='sr-only'>Top of the page</span></a></span><main role='main' id='page'><div class='navigationheader'><a href='/front/ticket.form.php?id=20857&amp;'
+                     class='navicon left'>
+                     <i class='fas fa-angle-double-left pointer' title="Primeiro"></i>
+                  </a><a href='/front/ticket.form.php?id=19994&amp;'
+                     id='previouspage'
+                     class='navicon left'>
+                     <i class='fas fa-angle-left pointer' title="Anterior"></i>
+                  </a><script type="text/javascript">
+//<![CDATA[
+
+$("body").keydown(function(e) {
+                       if ($("input, textarea").is(":focus") === false) {
+                          if(e.keyCode == 37 && e.ctrlKey) {
+                            window.location = $("#previouspage").attr("href");
+                          }
+                       }
+                  });
+
+//]]>
+</script><a href='/front/ticket.php?is_deleted=0&start=0&count=1000' title="Lista"
+                  class='navicon left'>
+                  <i class='far fa-list-alt pointer'></i>
+               </a><span class='center nav_title'>&nbsp;<span class='status'><i class='itilstatus fas fa-calendar planned' title='Em atendimento (planejado)'></i></span>EMISSÃO DE TICKET SEM MASSA METALICA / CANCELA LEOPOLDO  - ID 20559 (CAR PARK &gt; AS &gt; 0198 - PARQUE DO POVO)</span><span class='single-actions'><button type='button' class='btn btn-secondary moreactions'>
+                        Ações
+                        <i class='fas fa-caret-down'></i>
+                     </button><div class='dropdown-menu' aria-labelledby='btnGroupDrop1'><a class='dropdown-item' data-action='MassiveAction:clone' href='#'>Clonar</a><a class='dropdown-item' data-action='Ticket:merge_as_followup' href='#'><i class='ma-icon fas fa-code-branch'></i>Unir como Acompanhamento</a><a class='dropdown-item' data-action='Item_Ticket:add_item' href='#'><i class='ma-icon fas fa-plus'></i>Adiciona um item</a><a class='dropdown-item' data-action='ITILFollowup:add_followup' href='#'><i class='ma-icon far fa-comment'></i>Adicionar um novo acompanhamento</a><a class='dropdown-item' data-action='Ticket:add_task' href='#'><i class='ma-icon far fa-check-square'></i>Adicionar uma nova tarefa</a><a class='dropdown-item' data-action='TicketValidation:submit_validation' href='#'><i class='ma-icon fas fa-check'></i>Requisição de validação</a><a class='dropdown-item' data-action='Ticket:add_actor' href='#'><i class='ma-icon fas fa-user'></i>Adicionar um ator</a><a class='dropdown-item' data-action='Ticket_Ticket:add' href='#'><i class='ma-icon fas fa-link'></i>Relacionar chamados</a><a class='dropdown-item' data-action='ProjectTask_Ticket:add' href='#'><i class='ma-icon fas fa-link'></i>Ligar tarefa do projeto</a><a class='dropdown-item' data-action='KnowbaseItem_Item:add' href='#'><i class='ma-icon fas fa-book'></i>Link para o artigo da base de conhecimento</a><a class='dropdown-item' data-action='MassiveAction:add_transfer_list' href='#'><i class='ma-icon fas fa-level-up-alt'></i>Adicionar à lista de transferência</a><a class='dropdown-item' data-action='Document_Item:add' href='#'><i class='ma-icon far fa-file'></i>Adicionar documento</a></div></span><form name='massaction_35325217' id='massaction_35325217' method='post'
+               action='/front/massiveaction.php'><div id='dialog_container_271673999'></div>
+<input type="hidden" name="_glpi_csrf_token" value="3b84d3b01dbc71bebfae754fb45b699d7b1021f6f40f2b01d8aa5dc572e57276" />
+<script type="text/javascript">
+//<![CDATA[
+
+   $('form').submit(function() {
+         $('input[type="checkbox"][data-glpicore-cb-zero-on-empty="1"]:not(:checked)').each(function(index){
+            // If the checkbox is not validated, we add a hidden field with '0' as value
+            if ($(this).attr('name')) {
+               $('<input>').attr({
+                  type: 'hidden',
+                  name: $(this).attr('name'),
+                  value: '0'
+               }).insertAfter($(this));
+            }
+         });
+      });
+
+//]]>
+</script>
+</form>
+<script type="text/javascript">
+//<![CDATA[
+
+$(function() {
+               var ma = {"is_deleted":0,"action_filter":{"MassiveAction:clone":["Ticket"],"Ticket:merge_as_followup":["Ticket"],"Item_Ticket:add_item":["Ticket"],"ITILFollowup:add_followup":["Ticket"],"Ticket:add_task":["Ticket"],"TicketValidation:submit_validation":["Ticket"],"Ticket:add_actor":["Ticket"],"Ticket_Ticket:add":["Ticket"],"ProjectTask_Ticket:add":["Ticket"],"KnowbaseItem_Item:add":["Ticket"],"MassiveAction:add_transfer_list":["Ticket"],"Document_Item:add":["Ticket"]},"actions":{"MassiveAction:clone":"Clonar","Ticket:merge_as_followup":"<i class='ma-icon fas fa-code-branch'><\/i>Unir como Acompanhamento","Item_Ticket:add_item":"<i class='ma-icon fas fa-plus'><\/i>Adiciona um item","ITILFollowup:add_followup":"<i class='ma-icon far fa-comment'><\/i>Adicionar um novo acompanhamento","Ticket:add_task":"<i class='ma-icon far fa-check-square'><\/i>Adicionar uma nova tarefa","TicketValidation:submit_validation":"<i class='ma-icon fas fa-check'><\/i>Requisi\u00e7\u00e3o de valida\u00e7\u00e3o","Ticket:add_actor":"<i class='ma-icon fas fa-user'><\/i>Adicionar um ator","Ticket_Ticket:add":"<i class='ma-icon fas fa-link'><\/i>Relacionar chamados","ProjectTask_Ticket:add":"<i class='ma-icon fas fa-link'><\/i>Ligar tarefa do projeto","KnowbaseItem_Item:add":"<i class='ma-icon fas fa-book'><\/i>Link para o artigo da base de conhecimento","MassiveAction:add_transfer_list":"<i class='ma-icon fas fa-level-up-alt'><\/i>Adicionar \u00e0 lista de transfer\u00eancia","Document_Item:add":"<i class='ma-icon far fa-file'><\/i>Adicionar documento"},"dont_filter_for":[],"items":{"Ticket":{"20559":20559}},"initial_items":{"Ticket":{"20559":20559}},"entity_restrict":236};
+
+               $(document).on('click', '.moreactions', function() {
+                  $('.moreactions + .dropdown-menu').toggle();
+               });
+
+               $(document).on('click', function(event) {
+                  var target = $(event.target);
+                  var parent = target.parent();
+
+                  if(!target.hasClass('moreactions')
+                     && !parent.hasClass('moreactions')) {
+                     $('.moreactions + .dropdown-menu').hide();
+                  }
+               });
+
+               $(document).on('click', '[data-action]', function() {
+                  $('.moreactions + .dropdown-menu').hide();
+
+                  var current_action = $(this).data('action');
+
+                  $('<div></div>').dialog({
+                     title: ma.actions[current_action],
+                     width: 500,
+                     height: 'auto',
+                     modal: true,
+                     appendTo: '#dialog_container_271673999',
+                     close: function() { $(this).remove(); },
+                  }).load(
+                     '/ajax/dropdownMassiveAction.php',
+                     Object.assign(
+                        {action: current_action},
+                        ma
+                     )
+                  );
+               });
+            });
+
+//]]>
+</script><span class='right navicon'>29/106</span><a href='/front/ticket.form.php?id=20658&amp;'
+                     id='nextpage'
+                     class='navicon right'><i class='fas fa-angle-right pointer' title="Pr&oacute;ximo"></i>
+                    </a><script type="text/javascript">
+//<![CDATA[
+
+$("body").keydown(function(e) {
+                       if ($("input, textarea").is(":focus") === false) {
+                          if(e.keyCode == 39 && e.ctrlKey) {
+                            window.location = $("#nextpage").attr("href");
+                          }
+                       }
+                  });
+
+//]]>
+</script><a href='/front/ticket.form.php?id=17257 &amp;'
+                     class='navicon right'><i class='fas fa-angle-double-right pointer' title="&Uacute;ltimo"></i></a></div><div class='glpi_tabs '><div id='tabspanel' class='center-h'></div><div id='tabs666243378' class='center vertical'><ul><li><a title="Processando chamado 3"  href='/ajax/common.tabs.php?_target=/front/ticket.form.php&amp;_itemtype=Ticket&amp;_glpi_tab=Ticket$1&amp;id=20559&amp;'>Processando chamado <sup class='tab_nb'>3</sup></a></li><li><a title="Chamado"  href='/ajax/common.tabs.php?_target=/front/ticket.form.php&amp;_itemtype=Ticket&amp;_glpi_tab=Ticket$main&amp;id=20559&amp;'>Chamado</a></li><li><a title="Estatísticas"  href='/ajax/common.tabs.php?_target=/front/ticket.form.php&amp;_itemtype=Ticket&amp;_glpi_tab=Ticket$4&amp;id=20559&amp;'>Estatísticas</a></li><li><a title="Aprovações"  href='/ajax/common.tabs.php?_target=/front/ticket.form.php&amp;_itemtype=Ticket&amp;_glpi_tab=TicketValidation$1&amp;id=20559&amp;'>Aprovações</a></li><li><a title="Base de Conhecimento"  href='/ajax/common.tabs.php?_target=/front/ticket.form.php&amp;_itemtype=Ticket&amp;_glpi_tab=KnowbaseItem_Item$1&amp;id=20559&amp;'>Base de Conhecimento</a></li><li><a title="Custos"  href='/ajax/common.tabs.php?_target=/front/ticket.form.php&amp;_itemtype=Ticket&amp;_glpi_tab=TicketCost$1&amp;id=20559&amp;'>Custos</a></li><li><a title="Projetos"  href='/ajax/common.tabs.php?_target=/front/ticket.form.php&amp;_itemtype=Ticket&amp;_glpi_tab=Itil_Project$1&amp;id=20559&amp;'>Projetos</a></li><li><a title="Tarefas do projeto"  href='/ajax/common.tabs.php?_target=/front/ticket.form.php&amp;_itemtype=Ticket&amp;_glpi_tab=ProjectTask_Ticket$1&amp;id=20559&amp;'>Tarefas do projeto</a></li><li><a title="Problemas"  href='/ajax/common.tabs.php?_target=/front/ticket.form.php&amp;_itemtype=Ticket&amp;_glpi_tab=Problem_Ticket$1&amp;id=20559&amp;'>Problemas</a></li><li><a title="Mudanças"  href='/ajax/common.tabs.php?_target=/front/ticket.form.php&amp;_itemtype=Ticket&amp;_glpi_tab=Change_Ticket$1&amp;id=20559&amp;'>Mudanças</a></li><li><a title="Histórico 14"  href='/ajax/common.tabs.php?_target=/front/ticket.form.php&amp;_itemtype=Ticket&amp;_glpi_tab=Log$1&amp;id=20559&amp;'>Histórico <sup class='tab_nb'>14</sup></a></li><li><a title="Todos"  href='/ajax/common.tabs.php?_target=/front/ticket.form.php&amp;_itemtype=Ticket&amp;_glpi_tab=-1&amp;id=20559&amp;'>Todos</a></li></ul></div><script type="text/javascript">
+//<![CDATA[
+
+
+         $(function(){
+         forceReload666243378 = false;
+         $('#tabs666243378').tabs({
+            active: 0,
+            // Loading indicator
+            beforeLoad: function (event, ui) {
+
+               if ($(ui.panel).html()
+                   && !forceReload666243378) {
+                  event.preventDefault();
+               } else {
+                  forceReload666243378 = false;
+                  var _loader = $('<div id=\'loadingtabs\'><div class=\'loadingindicator\'>Carregando...</div></div>');
+                  ui.panel.html(_loader);
+
+                  ui.jqXHR.always(function() {
+                     $('#loadingtabs').remove();
+                  });
+
+                  ui.jqXHR.fail(function(e) {
+                     console.log(e);
+                     if (e.statusText != 'abort') {
+                        ui.panel.html(
+                           '<div class=\'error\'><h3>Ocorreu um erro ao carregar o conteúdo!</h3><p>Por favor, verifique oslogs ou contate seu administrador<br/>ou <a href=\'#\' onclick=\'return reloadTab()\'>tente recarregar</a></p></div>'
+                        );
+                     }
+                  });
+               }
+               // We need to manually set the current tab if the main event was prevented.
+               // It happens when user switch between tabs and then select a tab that was already shown before.
+               // It is displayed without having to be reloaded.
+               if (event.isDefaultPrevented()) {
+                  var tabs = ui.tab.parent().children();
+                  if (tabs.length > 1) {
+                     var newIndex = tabs.index(ui.tab);
+                     $.get(
+                        '/ajax/updatecurrenttab.php',
+                        { itemtype: 'Ticket', id: '20559', tab: newIndex }
+                     );
+                  }
+               }
+            },
+            load: function(event) {
+               var _url = window.location.href;
+               //get the anchor
+               var _parts = _url.split('#');
+               if (_parts.length > 1) {
+                  var _anchor = _parts[1];
+
+                  //get the top offset of the target anchor
+                  if ($('#' + _anchor).length) {
+                     var target_offset = $('#' + _anchor).offset();
+                     var target_top = target_offset.top;
+
+                     //goto that anchor by setting the body scroll top to anchor top
+                     $('html, body').animate({scrollTop:target_top}, 2000, 'easeOutQuad');
+                  }
+               }
+            },
+            ajaxOptions: {type: 'POST'}
+         });$('#tabs666243378').tabs().addClass( 'ui-tabs-vertical ui-helper-clearfix' );$('#tabs666243378').removeClass( 'ui-corner-top' ).addClass( 'ui-corner-left' );});// force reload global function
+            function reloadTab(add) {
+               forceReload666243378 = true;
+               var current_index = $('#tabs666243378').tabs('option','active');
+
+               // remove scroll event bind, select2 bind it on parent with scrollbars (the tab currently)
+               // as the select2 disapear with this tab reload, remove the event to prevent issues (infinite scroll to top)
+               $('#tabs666243378 .ui-tabs-panel[aria-hidden=false]').unbind('scroll');
+
+               // Save tab
+               var currenthref = $('#tabs666243378 ul>li a').eq(current_index).attr('href');
+               $('#tabs666243378 ul>li a').eq(current_index).attr('href',currenthref+'&'+add);
+               $('#tabs666243378').tabs( 'load' , current_index);
+
+               // Restore tab
+               $('#tabs666243378 ul>li a').eq(current_index).attr('href',currenthref);
+            };
+
+//]]>
+</script></div></main><footer role='contentinfo' id='footer'><table role='presentation'><tr><td class='right'><a href="http://glpi-project.org/" title="Powered by Teclib and contributors" class="copyright">GLPI 9.5.8 Copyright (C) 2015-2022 Teclib' and contributors</a></td></tr></table></footer><script type="text/javascript" src="/js/notifications_ajax.min.js?v=9.5.8"></script><script type="text/javascript" src="/public/lib/leaflet.min.js?v=9.5.8"></script><script type="text/javascript" src="/public/lib/flatpickr.min.js?v=9.5.8"></script><script type="text/javascript" src="/public/lib/flatpickr/l10n/pt.min.js?v=9.5.8"></script><script type="text/javascript" src="/public/lib/jquery.rateit.min.js?v=9.5.8"></script><script type="text/javascript" src="/js/dashboard.min.js?v=9.5.8"></script><script type="text/javascript" src="/public/lib/gridstack.min.js?v=9.5.8"></script><script type="text/javascript" src="/public/lib/sortable.min.js?v=9.5.8"></script><script type="text/javascript" src="/public/lib/tinymce.min.js?v=9.5.8"></script><script type="text/javascript" src="/js/clipboard.min.js?v=9.5.8"></script><script type="text/javascript" src="/public/lib/chartist.min.js?v=9.5.8"></script><script type="text/javascript" src="/public/lib/photoswipe.min.js?v=9.5.8"></script><script type="text/javascript" src="/public/lib/file-type.min.js?v=9.5.8"></script><script type="text/javascript" src="/public/lib/jquery-file-upload.min.js?v=9.5.8"></script><script type="text/javascript" src="/js/fileupload.min.js?v=9.5.8"></script><script type="text/javascript" src="/public/lib/fuzzy.min.js?v=9.5.8"></script><script type="text/javascript" src="/js/fuzzysearch.min.js?v=9.5.8"></script><script type="text/javascript" src="/js/log_filters.min.js?v=9.5.8"></script><script type="text/javascript" src="/public/lib/select2/js/i18n/pt-BR.min.js?v=9.5.8"></script><script type="text/javascript">
+//<![CDATA[
+
+
+         var CFG_GLPI  = {"languages":{"ar_SA":["\u0627\u0644\u0639\u064e\u0631\u064e\u0628\u0650\u064a\u064e\u0651\u0629\u064f","ar_SA.mo","ar","ar","arabic",103],"bg_BG":["\u0411\u044a\u043b\u0433\u0430\u0440\u0441\u043a\u0438","bg_BG.mo","bg","bg","bulgarian",2],"id_ID":["Bahasa Indonesia","id_ID.mo","id","id","indonesian",2],"ms_MY":["Bahasa Melayu","ms_MY.mo","ms","ms","malay",2],"ca_ES":["Catal\u00e0","ca_ES.mo","ca","ca","catalan",2],"cs_CZ":["\u010ce\u0161tina","cs_CZ.mo","cs","cs","czech",10],"de_DE":["Deutsch","de_DE.mo","de","de","german",2],"da_DK":["Dansk","da_DK.mo","da","da","danish",2],"et_EE":["Eesti","et_EE.mo","et","et","estonian",2],"en_GB":["English","en_GB.mo","en-GB","en","english",2],"en_US":["English (US)","en_US.mo","en-GB","en","english",2],"es_AR":["Espa\u00f1ol (Argentina)","es_AR.mo","es","es","spanish",2],"es_CO":["Espa\u00f1ol (Colombia)","es_CO.mo","es","es","spanish",2],"es_ES":["Espa\u00f1ol (Espa\u00f1a)","es_ES.mo","es","es","spanish",2],"es_419":["Espa\u00f1ol (Am\u00e9rica Latina)","es_419.mo","es","es","spanish",2],"es_MX":["Espa\u00f1ol (Mexico)","es_MX.mo","es","es","spanish",2],"es_VE":["Espa\u00f1ol (Venezuela)","es_VE.mo","es","es","spanish",2],"eu_ES":["Euskara","eu_ES.mo","eu","eu","basque",2],"fr_FR":["Fran\u00e7ais","fr_FR.mo","fr","fr","french",2],"fr_CA":["Fran\u00e7ais (Canada)","fr_CA.mo","fr","fr","french",2],"fr_BE":["Fran\u00e7ais (Belgique)","fr_BE.mo","fr","fr","french",2],"gl_ES":["Galego","gl_ES.mo","gl","gl","galician",2],"el_GR":["\u0395\u03bb\u03bb\u03b7\u03bd\u03b9\u03ba\u03ac","el_GR.mo","el","el","greek",2],"he_IL":["\u05e2\u05d1\u05e8\u05d9\u05ea","he_IL.mo","he","he","hebrew",2],"hi_IN":["\u0939\u093f\u0928\u094d\u0926\u0940","hi_IN.mo","hi","hi_IN","hindi",2],"hr_HR":["Hrvatski","hr_HR.mo","hr","hr","croatian",2],"hu_HU":["Magyar","hu_HU.mo","hu","hu","hungarian",2],"it_IT":["Italiano","it_IT.mo","it","it","italian",2],"kn":["\u0c95\u0ca8\u0ccd\u0ca8\u0ca1","kn.mo","en-GB","en","kannada",2],"lv_LV":["Latvie\u0161u","lv_LV.mo","lv","lv","latvian",2],"lt_LT":["Lietuvi\u0173","lt_LT.mo","lt","lt","lithuanian",2],"mn_MN":["\u041c\u043e\u043d\u0433\u043e\u043b \u0445\u044d\u043b","mn_MN.mo","mn","mn","mongolian",2],"nl_NL":["Nederlands","nl_NL.mo","nl","nl","dutch",2],"nl_BE":["Flemish","nl_BE.mo","nl","nl","flemish",2],"nb_NO":["Norsk (Bokm\u00e5l)","nb_NO.mo","no","nb","norwegian",2],"nn_NO":["Norsk (Nynorsk)","nn_NO.mo","no","nn","norwegian",2],"fa_IR":["\u0641\u0627\u0631\u0633\u06cc","fa_IR.mo","fa","fa","persian",2],"pl_PL":["Polski","pl_PL.mo","pl","pl","polish",2],"pt_PT":["Portugu\u00eas","pt_PT.mo","pt","pt","portuguese",2],"pt_BR":["Portugu\u00eas do Brasil","pt_BR.mo","pt-BR","pt","brazilian portuguese",2],"ro_RO":["Rom\u00e2n\u0103","ro_RO.mo","ro","en","romanian",2],"ru_RU":["\u0420\u0443\u0441\u0441\u043a\u0438\u0439","ru_RU.mo","ru","ru","russian",2],"sk_SK":["Sloven\u010dina","sk_SK.mo","sk","sk","slovak",10],"sl_SI":["Sloven\u0161\u010dina","sl_SI.mo","sl","sl","slovenian slovene",2],"sr_RS":["Srpski","sr_RS.mo","sr","sr","serbian",2],"fi_FI":["Suomi","fi_FI.mo","fi","fi","finish",2],"sv_SE":["Svenska","sv_SE.mo","sv","sv","swedish",2],"vi_VN":["Ti\u1ebfng Vi\u1ec7t","vi_VN.mo","vi","vi","vietnamese",2],"th_TH":["\u0e20\u0e32\u0e29\u0e32\u0e44\u0e17\u0e22","th_TH.mo","th","th","thai",2],"tr_TR":["T\u00fcrk\u00e7e","tr_TR.mo","tr","tr","turkish",2],"uk_UA":["\u0423\u043a\u0440\u0430\u0457\u043d\u0441\u044c\u043a\u0430","uk_UA.mo","uk","en","ukrainian",2],"ja_JP":["\u65e5\u672c\u8a9e","ja_JP.mo","ja","ja","japanese",2],"zh_CN":["\u7b80\u4f53\u4e2d\u6587","zh_CN.mo","zh-CN","zh","chinese",2],"zh_TW":["\u7e41\u9ad4\u4e2d\u6587","zh_TW.mo","zh-TW","zh","chinese",2],"ko_KR":["\ud55c\uad6d\/\u97d3\u570b","ko_KR.mo","ko","ko","korean",1],"zh_HK":["\u9999\u6e2f","zh_HK.mo","zh-HK","zh","chinese",2],"be_BY":["Belarussian","be_BY.mo","be","be","belarussian",3],"is_IS":["\u00edslenska","is_IS.mo","is","en","icelandic",2],"eo":["Esperanto","eo.mo","eo","en","esperanto",2],"es_CL":["Espa\u00f1ol chileno","es_CL","es","es","spanish chilean",2]},"glpitables":[],"unicity_types":["Budget","Computer","Contact","Contract","Infocom","Monitor","NetworkEquipment","Peripheral","Phone","Printer","Software","SoftwareLicense","Supplier","User","Certicate","Rack","Enclosure","PDU","Cluster","Item_DeviceSimcard"],"state_types":["Computer","Monitor","NetworkEquipment","Peripheral","Phone","Printer","SoftwareLicense","Certificate","Enclosure","PDU","Line","Rack","SoftwareVersion","Cluster","Contract","Appliance"],"asset_types":["Computer","Monitor","NetworkEquipment","Peripheral","Phone","Printer","SoftwareLicense","Certificate"],"project_asset_types":["Computer","Monitor","NetworkEquipment","Peripheral","Phone","Printer","Software","DeviceMotherboard","DeviceProcessor","DeviceMemory","DeviceHardDrive","DeviceNetworkCard","DeviceDrive","DeviceControl","DeviceGraphicCard","DeviceSoundCard","DevicePci","DeviceCase","DevicePowerSupply","DeviceGeneric","DeviceBattery","DeviceFirmware","Certificate"],"document_types":["Budget","CartridgeItem","Change","Computer","ConsumableItem","Contact","Contract","Document","Entity","KnowbaseItem","Monitor","NetworkEquipment","Peripheral","Phone","Printer","Problem","Project","ProjectTask","Reminder","Software","Line","SoftwareLicense","Supplier","Ticket","User","Certificate","Cluster","ITILFollowup","ITILSolution","ChangeTask","ProblemTask","TicketTask","Appliance"],"consumables_types":["Group","User"],"report_types":["Computer","Monitor","NetworkEquipment","Peripheral","Phone","Printer","Project","Software","SoftwareLicense","Certificate"],"directconnect_types":["Monitor","Peripheral","Phone","Printer"],"infocom_types":["Cartridge","CartridgeItem","Computer","Consumable","ConsumableItem","Monitor","NetworkEquipment","Peripheral","Phone","Printer","Software","SoftwareLicense","Line","Certificate","Domain","Appliance","Item_DeviceSimcard","Rack","Enclosure","PDU","PassiveDCEquipment"],"reservation_types":["Computer","Monitor","NetworkEquipment","Peripheral","Phone","Printer","Software"],"linkuser_types":["Computer","Monitor","NetworkEquipment","Peripheral","Phone","Printer","Software","SoftwareLicense","Certificate","Appliance","Item_DeviceSimcard"],"linkgroup_types":["Computer","Consumable","Monitor","NetworkEquipment","Peripheral","Phone","Printer","Software","SoftwareLicense","Certificate","Appliance","Item_DeviceSimcard"],"linkuser_tech_types":["Computer","ConsumableItem","Monitor","NetworkEquipment","Peripheral","Phone","Printer","Software","SoftwareLicense","Certificate","Appliance"],"linkgroup_tech_types":["Computer","ConsumableItem","Monitor","NetworkEquipment","Peripheral","Phone","Printer","Software","SoftwareLicense","Certificate","Appliance"],"location_types":["Budget","CartridgeItem","ConsumableItem","Computer","Monitor","Netpoint","NetworkEquipment","Peripheral","Phone","Printer","Software","SoftwareLicense","Ticket","User","Certificate","Item_DeviceSimcard","Item_DeviceMotherboard","Item_DeviceFirmware","Item_DeviceProcessor","Item_DeviceMemory","Item_DeviceHardDrive","Item_DeviceNetworkCard","Item_DeviceDrive","Item_DeviceBattery","Item_DeviceGraphicCard","Item_DeviceSoundCard","Item_DeviceControl","Item_DevicePci","Item_DeviceCase","Item_DevicePowerSupply","Item_DeviceGeneric","Item_DeviceSimcard","Item_DeviceSensor"],"ticket_types":["Computer","Monitor","NetworkEquipment","Peripheral","Phone","Printer","Software","SoftwareLicense","Certificate","Line","DCRoom","Rack","Enclosure","Cluster","PDU","Domain","DomainRecord","Appliance","Item_DeviceSimcard","PassiveDCEquipment"],"link_types":["Budget","CartridgeItem","Computer","ConsumableItem","Contact","Contract","Monitor","NetworkEquipment","Peripheral","Phone","Printer","Software","Supplier","User","Certificate","Cluster","DCRoom","Domain","Appliance"],"dictionnary_types":["ComputerModel","ComputerType","Manufacturer","MonitorModel","MonitorType","NetworkEquipmentModel","NetworkEquipmentType","OperatingSystem","OperatingSystemServicePack","OperatingSystemVersion","PeripheralModel","PeripheralType","PhoneModel","PhoneType","Printer","PrinterModel","PrinterType","Software","OperatingSystemArchitecture","OperatingSystemKernel","OperatingSystemKernelVersion","OperatingSystemEdition"],"helpdesk_visible_types":["Software","Appliance"],"networkport_types":["Computer","Monitor","NetworkEquipment","Peripheral","Phone","Printer","Enclosure","PDU","Cluster"],"networkport_instantiations":["NetworkPortEthernet","NetworkPortWifi","NetworkPortAggregate","NetworkPortAlias","NetworkPortDialup","NetworkPortLocal","NetworkPortFiberchannel"],"device_types":["DeviceMotherboard","DeviceFirmware","DeviceProcessor","DeviceMemory","DeviceHardDrive","DeviceNetworkCard","DeviceDrive","DeviceBattery","DeviceGraphicCard","DeviceSoundCard","DeviceControl","DevicePci","DeviceCase","DevicePowerSupply","DeviceGeneric","DeviceSimcard","DeviceSensor"],"itemdevices":["Item_DeviceMotherboard","Item_DeviceFirmware","Item_DeviceProcessor","Item_DeviceMemory","Item_DeviceHardDrive","Item_DeviceNetworkCard","Item_DeviceDrive","Item_DeviceBattery","Item_DeviceGraphicCard","Item_DeviceSoundCard","Item_DeviceControl","Item_DevicePci","Item_DeviceCase","Item_DevicePowerSupply","Item_DeviceGeneric","Item_DeviceSimcard","Item_DeviceSensor"],"itemdevices_types":["Computer","NetworkEquipment","Peripheral","Phone","Printer","Enclosure"],"itemdevices_itemaffinity":["Computer"],"itemdevicememory_types":["Computer","NetworkEquipment","Peripheral","Printer"],"itemdevicepowersupply_types":["Computer","NetworkEquipment","Enclosure"],"itemdevicenetworkcard_types":["Computer","NetworkEquipment","Peripheral","Phone","Printer"],"itemdeviceharddrive_types":["Computer","Peripheral","NetworkEquipment","Printer","Phone"],"itemdevicebattery_types":["Computer","Peripheral","Phone","Printer"],"itemdevicefirmware_types":["Computer","Peripheral","Phone","NetworkEquipment","Printer"],"itemdevicesimcard_types":["Computer","Peripheral","Phone","NetworkEquipment","Printer"],"itemdevicegeneric_types":["*"],"itemdevicepci_types":["*"],"itemdevicesensor_types":["Computer","Peripheral"],"itemdeviceprocessor_types":["Computer"],"itemdevicesoundcard_types":["Computer"],"itemdevicegraphiccard_types":["Computer"],"itemdevicemotherboard_types":["Computer"],"notificationtemplates_types":["CartridgeItem","Change","ConsumableItem","Contract","CronTask","DBConnection","FieldUnicity","Infocom","MailCollector","ObjectLock","PlanningRecall","Problem","Project","ProjectTask","Reservation","SoftwareLicense","Ticket","User","SavedSearch_Alert","Certificate","Glpi\\Marketplace\\Controller","Domain"],"contract_types":["Computer","Monitor","NetworkEquipment","Peripheral","Phone","Printer","Project","Line","Software","SoftwareLicense","Certificate","DCRoom","Rack","Enclosure","Cluster","PDU","Appliance","Domain","Item_DeviceMotherboard","Item_DeviceFirmware","Item_DeviceProcessor","Item_DeviceMemory","Item_DeviceHardDrive","Item_DeviceNetworkCard","Item_DeviceDrive","Item_DeviceBattery","Item_DeviceGraphicCard","Item_DeviceSoundCard","Item_DeviceControl","Item_DevicePci","Item_DeviceCase","Item_DevicePowerSupply","Item_DeviceGeneric","Item_DeviceSimcard","Item_DeviceSensor"],"union_search_type":{"ReservationItem":"reservation_types","AllAssets":"asset_types"},"systeminformations_types":["AuthLDAP","DBConnection","MailCollector","Plugin"],"rulecollections_types":["RuleImportEntityCollection","RuleImportComputerCollection","RuleMailCollectorCollection","RuleRightCollection","RuleSoftwareCategoryCollection","RuleTicketCollection","RuleAssetCollection"],"planning_types":["ChangeTask","ProblemTask","Reminder","TicketTask","ProjectTask","PlanningExternalEvent"],"planning_add_types":["PlanningExternalEvent"],"caldav_supported_components":["VEVENT","VJOURNAL"],"globalsearch_types":["Computer","Contact","Contract","Document","Monitor","NetworkEquipment","Peripheral","Phone","Printer","Software","SoftwareLicense","Ticket","Problem","Change","User","Group","Project","Supplier","Budget","Certificate","Line","Datacenter","DCRoom","Enclosure","PDU","Rack","Cluster","Domain","Appliance"],"number_format":"0","decimal_number":"2","debug_lang":1,"debug_vars":1,"debug_sql":1,"user_pref_field":["backcreated","csv_delimiter","date_format","default_requesttypes_id","display_count_on_home","duedatecritical_color","duedatecritical_less","duedatecritical_unit","duedateok_color","duedatewarning_color","duedatewarning_less","duedatewarning_unit","followup_private","is_ids_visible","keep_devices_when_purging_item","language","list_limit","lock_autolock_mode","lock_directunlock_notification","names_format","notification_to_myself","number_format","pdffont","priority_1","priority_2","priority_3","priority_4","priority_5","priority_6","refresh_views","set_default_tech","set_default_requester","show_count_on_tabs","show_jobs_at_login","task_private","task_state","use_flat_dropdowntree","layout","palette","highcontrast_css","default_dashboard_central","default_dashboard_assets","default_dashboard_helpdesk","default_dashboard_mini_ticket"],"layout_excluded_pages":["profile.form.php","knowbaseitem.php","knowbaseitem.form.php","bookmark.php","displaypreference.form.php","central.php","preference.php","config.form.php","common.tabs.php","transfer.form.php","entity.form.php","queuednotification.form.php"],"lock_lockable_objects":["Budget","Change","Contact","Contract","Document","CartridgeItem","Computer","ConsumableItem","Entity","Group","KnowbaseItem","Line","Link","Monitor","NetworkEquipment","NetworkName","Peripheral","Phone","Printer","Problem","Profile","Project","Reminder","RSSFeed","Software","Supplier","Ticket","User","SoftwareLicense","Certificate"],"inventory_lockable_objects":["Computer_Item","Item_SoftwareLicense","Item_SoftwareVersion","Item_Disk","ComputerVirtualMachine","NetworkPort","NetworkName","IPAddress"],"kb_types":["Budget","Change","Computer","Contract","Entity","Monitor","NetworkEquipment","Peripheral","Phone","Printer","Problem","Project","Software","SoftwareLicense","Supplier","Ticket","Certificate","Appliance"],"certificate_types":["Computer","NetworkEquipment","Peripheral","Phone","Printer","SoftwareLicense","User","Domain","Appliance"],"rackable_types":["Computer","Monitor","NetworkEquipment","Peripheral","Enclosure","PDU","PassiveDCEquipment"],"cluster_types":["Computer","NetworkEquipment"],"operatingsystem_types":["Computer","Monitor","NetworkEquipment","Peripheral","Phone","Printer"],"software_types":["Computer","Monitor","NetworkEquipment","Peripheral","Phone","Printer"],"kanban_types":["Project"],"domain_types":["Computer","Monitor","NetworkEquipment","Peripheral","Phone","Printer","Software","Appliance","Certificate"],"appliance_types":["Computer","Monitor","NetworkEquipment","Peripheral","Phone","Printer","Software","Cluster"],"appliance_relation_types":["Location","Network","Domain"],"javascript":{"central":{"central":["fullcalendar","planning","tinymce","dashboard","gridstack","charts","clipboard","sortable"]},"assets":{"dashboard":["dashboard","gridstack","charts","clipboard","sortable"],"rack":["gridstack","rack"]},"helpdesk":{"dashboard":["dashboard","gridstack","charts","clipboard","sortable"],"planning":["clipboard","fullcalendar","tinymce","planning"],"ticket":["rateit","tinymce","photoswipe","dashboard","gridstack","charts","clipboard","sortable"],"problem":["tinymce","photoswipe"],"change":["tinymce","photoswipe"],"stat":["charts"]},"tools":{"project":["gantt","kanban","tinymce"],"knowbaseitem":["tinymce","jstree"],"knowbaseitemtranslation":["tinymce"],"reminder":["tinymce"],"remindertranslation":["tinymce"]},"management":{"datacenter":{"dcroom":["gridstack","rack"]}},"config":{"commondropdown":{"ITILFollowupTemplate":["tinymce"],"ProjectTaskTemplate":["tinymce"],"SolutionTemplate":["tinymce"],"TaskTemplate":["tinymce"]},"notification":{"notificationtemplate":["tinymce"]},"plugin":{"marketplace":["marketplace"]}},"admin":["clipboard"],"preference":["clipboard"],"self-service":["tinymce","photoswipe"]},"max_time_for_count":200,"default_impact_asset_types":{"Appliance":"pics\/impact\/appliance.png","Cluster":"pics\/impact\/cluster.png","Computer":"pics\/impact\/computer.png","Datacenter":"pics\/impact\/datacenter.png","DCRoom":"pics\/impact\/dcroom.png","Domain":"pics\/impact\/domain.png","Enclosure":"pics\/impact\/enclosure.png","Monitor":"pics\/impact\/monitor.png","NetworkEquipment":"pics\/impact\/networkequipment.png","PDU":"pics\/impact\/pdu.png","Peripheral":"pics\/impact\/peripheral.png","Phone":"pics\/impact\/phone.png","Printer":"pics\/impact\/printer.png","Rack":"pics\/impact\/rack.png","Software":"pics\/impact\/software.png"},"impact_asset_types":{"Appliance":"pics\/impact\/appliance.png","Cluster":"pics\/impact\/cluster.png","Computer":"pics\/impact\/computer.png","Datacenter":"pics\/impact\/datacenter.png","DCRoom":"pics\/impact\/dcroom.png","Domain":"pics\/impact\/domain.png","Enclosure":"pics\/impact\/enclosure.png","Monitor":"pics\/impact\/monitor.png","NetworkEquipment":"pics\/impact\/networkequipment.png","PDU":"pics\/impact\/pdu.png","Peripheral":"pics\/impact\/peripheral.png","Phone":"pics\/impact\/phone.png","Printer":"pics\/impact\/printer.png","Rack":"pics\/impact\/rack.png","Software":"pics\/impact\/software.png","AuthLDAP":"pics\/impact\/authldap.png","CartridgeItem":"pics\/impact\/cartridgeitem.png","Contract":"pics\/impact\/contract.png","CronTask":"pics\/impact\/crontask.png","DeviceSimcard":"pics\/impact\/devicesimcard.png","Entity":"pics\/impact\/entity.png","Group":"pics\/impact\/group.png","ITILCategory":"pics\/impact\/itilcategory.png","Line":"pics\/impact\/line.png","Location":"pics\/impact\/location.png","MailCollector":"pics\/impact\/mailcollector.png","Notification":"pics\/impact\/notification.png","Profile":"pics\/impact\/profile.png","Project":"pics\/impact\/project.png","SLM":"pics\/impact\/slm.png","SoftwareLicense":"pics\/impact\/softwarelicense.png","Supplier":"pics\/impact\/supplier.png","User":"pics\/impact\/user.png"},"root_doc":"","glpitablesitemtype":{"Config":"glpi_configs","Plugin":"glpi_plugins","Entity":"glpi_entities","Ticket":"glpi_tickets","Group_Ticket":"glpi_groups_tickets","Ticket_User":"glpi_tickets_users","Supplier_Ticket":"glpi_suppliers_tickets","Location":"glpi_locations","KnowbaseItem":"glpi_knowbaseitems","TicketTask":"glpi_tickettasks","ITILFollowup":"glpi_itilfollowups","Document_Item":"glpi_documents_items","ITILSolution":"glpi_itilsolutions","TicketValidation":"glpi_ticketvalidations","TicketSatisfaction":"glpi_ticketsatisfactions","TicketCost":"glpi_ticketcosts","Itil_Project":"glpi_itils_projects","ProjectTask":"glpi_projecttasks","ProjectTask_Ticket":"glpi_projecttasks_tickets","Problem":"glpi_problems","Problem_Ticket":"glpi_problems_tickets"},"glpiitemtypetables":{"glpi_configs":"Config","glpi_plugins":"Plugin","glpi_entities":"Entity","glpi_tickets":"Ticket","glpi_groups_tickets":"Group_Ticket","glpi_tickets_users":"Ticket_User","glpi_suppliers_tickets":"Supplier_Ticket","glpi_locations":"Location","glpi_knowbaseitems":"KnowbaseItem","glpi_tickettasks":"TicketTask","glpi_itilfollowups":"ITILFollowup","glpi_documents_items":"Document_Item","glpi_itilsolutions":"ITILSolution","glpi_ticketvalidations":"TicketValidation","glpi_ticketsatisfactions":"TicketSatisfaction","glpi_ticketcosts":"TicketCost","glpi_itils_projects":"Itil_Project","glpi_projecttasks":"ProjectTask","glpi_projecttasks_tickets":"ProjectTask_Ticket","glpi_problems":"Problem","glpi_problems_tickets":"Problem_Ticket"},"version":"9.5.8","show_jobs_at_login":"1","cut":"250","list_limit":"100","list_limit_max":"200","url_maxlength":"30","event_loglevel":"5","use_mailing":"1","admin_email_name":"Sistema GLPI","admin_reply_name":"Sistema GLPI","mailing_signature":"ESTE EMAIL FOI ENVIADO AUTOMATICAMENTE, FAVOR, NAO RESPONDER!","use_anonymous_helpdesk":"0","use_anonymous_followups":"0","language":"pt_BR","priority_1":"#fff2f2","priority_2":"#ffe0e0","priority_3":"#ffcece","priority_4":"#ffbfbf","priority_5":"#ffadad","priority_6":"#ff5555","date_tax":"2014-12-31","cas_host":"","cas_port":"443","cas_uri":"","cas_logout":"","existing_auth_server_field_clean_domain":"0","planning_begin":"08:00","planning_end":"18:00","utf8_conv":"1","use_public_faq":"0","url_base":"http:\/\/acesso.carpark.com.br:8080","show_link_in_mail":"0","text_login":"","founded_new_version":"","dropdown_max":"100","ajax_wildcard":"*","ajax_limit_count":"1","use_ajax_autocompletion":"1","is_users_auto_add":"0","date_format":"0","csv_delimiter":";","is_ids_visible":"1","smtp_mode":"2","smtp_host":"email-ssl.com.br","smtp_port":"465","smtp_username":"sistema.glpi@carpark.com.br","proxy_name":"","proxy_port":"8080","proxy_user":"","add_followup_on_update_ticket":"1","keep_tickets_on_delete":"1","time_step":"5","helpdesk_doc_url":"","central_doc_url":"","documentcategories_id_forticket":"0","monitors_management_restrict":"1","phones_management_restrict":"1","peripherals_management_restrict":"1","printers_management_restrict":"1","use_log_in_files":"1","time_offset":"-10800","is_contact_autoupdate":"1","is_user_autoupdate":"1","is_group_autoupdate":"1","is_location_autoupdate":"1","state_autoupdate_mode":"0","is_contact_autoclean":"0","is_user_autoclean":"0","is_group_autoclean":"0","is_location_autoclean":"0","state_autoclean_mode":"0","use_flat_dropdowntree":"1","use_autoname_by_entity":"0","softwarecategories_id_ondelete":"1","x509_email_field":"","x509_cn_restrict":"","x509_o_restrict":"","x509_ou_restrict":"","default_mailcollector_filesize_max":"33554432","followup_private":"0","task_private":"0","default_software_helpdesk_visible":"1","names_format":"1","default_requesttypes_id":"7","use_noright_users_add":"0","cron_limit":"5","priority_matrix":{"1":{"1":"1","2":"1","3":"2","4":"2","5":"2"},"2":{"1":"1","2":"2","3":"2","4":"3","5":"3"},"3":{"1":"2","2":"2","3":"3","4":"4","5":"4"},"4":{"1":"2","2":"3","3":"4","4":"4","5":"5"},"5":{"1":"2","2":"3","3":"4","4":"5","5":"5"}},"urgency_mask":"62","impact_mask":"62","user_deleted_ldap":"3","auto_create_infocoms":"1","use_slave_for_search":"0","transfers_id_auto":"0","show_count_on_tabs":"1","refresh_views":"5","set_default_tech":"0","allow_search_view":"2","allow_search_all":"1","allow_search_global":"1","display_count_on_home":"20","use_password_security":"0","password_min_length":"4","password_need_number":"1","password_need_letter":"0","password_need_caps":"0","password_need_symbol":"0","use_check_pref":"0","notification_to_myself":"1","duedateok_color":"#06ff00","duedatewarning_color":"#ffb800","duedatecritical_color":"#ff0000","duedatewarning_less":"20","duedatecritical_less":"5","duedatewarning_unit":"%","duedatecritical_unit":"%","realname_ssofield":"","firstname_ssofield":"","email1_ssofield":"","email2_ssofield":"","email3_ssofield":"","email4_ssofield":"","phone_ssofield":"","phone2_ssofield":"","mobile_ssofield":"","comment_ssofield":"","title_ssofield":"","category_ssofield":"","language_ssofield":"","entity_ssofield":"","registration_number_ssofield":"","ssovariables_id":"0","translate_kb":"0","translate_dropdowns":"0","pdffont":"helvetica","keep_devices_when_purging_item":"0","maintenance_mode":"0","maintenance_text":"","attach_ticket_documents_to_mail":"0","backcreated":"0","task_state":"1","palette":"auror","layout":"lefttab","lock_use_lock_item":"0","lock_autolock_mode":"1","lock_directunlock_notification":"0","lock_item_list":[],"lock_lockprofile_id":"17","set_default_requester":"1","enable_api":"0","enable_api_login_credentials":"0","enable_api_login_external_token":"1","url_base_api":"http:\/\/acesso.carpark.com.br:8080\/apirest.php\/","highcontrast_css":"0","smtp_check_certificate":"1","instance_uuid":"lOBlayvlQYBTKajOIkhJvqiF4uyPGnEUnOOzRj4D","registration_uuid":"Q8eB3945VNMfSoFyNQfgD5FSbX17YSXTuu7OmkTY","login_remember_time":"604800","login_remember_default":"1","use_notifications":"1","notifications_mailing":"1","notifications_ajax":"1","notifications_ajax_check_interval":"5","notifications_ajax_sound":"sound_b","notifications_ajax_icon_url":"\/pics\/glpi.png","dbversion":"9.5.7","smtp_max_retries":"5","smtp_sender":null,"from_email":null,"from_email_name":null,"smtp_retry_time":"5","purge_item_software_install":"12","purge_software_item_install":"12","purge_software_version_install":"12","purge_infocom_creation":"12","purge_profile_user":"12","purge_group_user":"12","purge_adddevice":"12","purge_updatedevice":"12","purge_deletedevice":"12","purge_connectdevice":"12","purge_disconnectdevice":"12","purge_userdeletedfromldap":"12","purge_addrelation":"12","purge_deleterelation":"12","purge_createitem":"12","purge_deleteitem":"12","purge_restoreitem":"12","purge_updateitem":"12","purge_comments":"12","purge_datemod":"12","purge_all":"12","purge_user_auth_changes":"12","purge_plugins":"12","display_login_source":"1","cas_version":"CAS_VERSION_2_0","timezone":null,"devices_in_menu":["Item_DeviceSimcard"],"impact_assets_list":"[]","default_dashboard_central":"central","default_dashboard_assets":"assets","default_dashboard_helpdesk":"assistance","default_dashboard_mini_ticket":"assistance","ssologout_url":"","password_expiration_delay":"-1","password_expiration_notice":"-1","password_expiration_lock_delay":"-1","translate_reminders":"0","impact_enabled_itemtypes":"[\"Appliance\",\"Cluster\",\"Computer\",\"Datacenter\",\"DCRoom\",\"Domain\",\"Enclosure\",\"Monitor\",\"NetworkEquipment\",\"PDU\",\"Peripheral\",\"Phone\",\"Printer\",\"Rack\",\"Software\"]","admin_email_noreply":"","admin_email_noreply_name":"","update_auth":"Salvar","marketplace_replace_plugins":"3","_blank_smtp_passwd":"on","init_all":"0","glpi_network_uuid":"JjPKa7DJhfCRd9PHIwTZZEJyY2t1ddCPpC2KK9Bg","_matrix":"1","_impact_5":"1","_impact_4":"1","_impact_3":"1","_impact_2":"1","_impact_1":"1","_urgency_5":"1","_matrix_5_5":"5","_matrix_5_4":"5","_matrix_5_3":"4","_matrix_5_2":"3","_matrix_5_1":"2","_urgency_4":"1","_matrix_4_5":"5","_matrix_4_4":"4","_matrix_4_3":"4","_matrix_4_2":"3","_matrix_4_1":"2","_urgency_3":"1","_matrix_3_5":"4","_matrix_3_4":"4","_matrix_3_3":"3","_matrix_3_2":"2","_matrix_3_1":"2","_urgency_2":"1","_matrix_2_5":"3","_matrix_2_4":"3","_matrix_2_3":"2","_matrix_2_2":"2","_matrix_2_1":"1","_urgency_1":"1","_matrix_1_5":"2","_matrix_1_4":"2","_matrix_1_3":"2","_matrix_1_2":"1","_matrix_1_1":"1","_dbslave_status":"0","typedoc_icon_dir":"\/pics\/icones"};
+         var GLPI_PLUGINS_PATH = {"costs":"marketplace\/costs"};
+      
+
+//]]>
+</script><script type="text/javascript" src="/js/common.min.js?v=9.5.8"></script><script type="text/javascript">
+//<![CDATA[
+
+
+      window.old_alert = window.alert;
+      window.alert = function(message, caption) {
+         // Don't apply methods on undefined objects... ;-) #3866
+         if(typeof message == 'string') {
+            message = message.replace('\n', '<br>');
+         }
+         caption = caption || 'Informa&ccedil;&atilde;o';
+         $('<div></div>').html(message).dialog({
+            title: caption,
+            buttons: {
+               OK: function() {
+                  $(this).dialog('close');
+               }
+            },
+            dialogClass: 'glpi_modal',
+            open: function(event, ui) {
+               $(this).parent().prev('.ui-widget-overlay').addClass('glpi_modal');
+               $(this).next('div').find('button').focus();
+            },
+            close: function(){
+               $(this).remove();
+            },
+            draggable: true,
+            modal: true,
+            resizable: false,
+            width: 'auto'
+         });
+      };
+
+//]]>
+</script><script type="text/javascript">
+//<![CDATA[
+
+
+      var confirmed = false;
+      var lastClickedElement;
+
+      // store last clicked element on dom
+      $(document).click(function(event) {
+          lastClickedElement = $(event.target);
+      });
+
+      // asynchronous confirm dialog with jquery ui
+      var newConfirm = function(message, caption) {
+         message = message.replace('\n', '<br>');
+         caption = caption || '';
+
+         $('<div></div>').html(message).dialog({
+            title: caption,
+            dialogClass: 'fixed glpi_modal',
+            buttons: {
+               'Confirmar': function () {
+                  $(this).dialog('close');
+                  confirmed = true;
+
+                  //trigger click on the same element (to return true value)
+                  lastClickedElement.click();
+
+                  // re-init confirmed (to permit usage of 'confirm' function again in the page)
+                  // maybe timeout is not essential ...
+                  setTimeout(function(){  confirmed = false; }, 100);
+               },
+               'Cancelar': function () {
+                  $(this).dialog('close');
+                  confirmed = false;
+               }
+            },
+            open: function(event, ui) {
+               $(this).parent().prev('.ui-widget-overlay').addClass('glpi_modal');
+            },
+            close: function () {
+                $(this).remove();
+            },
+            draggable: true,
+            modal: true,
+            resizable: false,
+            width: 'auto'
+         });
+      };
+
+      window.nativeConfirm = window.confirm;
+
+      // redefine native 'confirm' function
+      window.confirm = function (message, caption) {
+         // if watched var isn't true, we can display dialog
+         if(!confirmed) {
+            // call asynchronous dialog
+            newConfirm(message, caption);
+         }
+
+         // return early
+         return confirmed;
+      };
+
+//]]>
+</script><script type="text/javascript">
+//<![CDATA[
+
+$(function() {
+            notifications_ajax = new GLPINotificationsAjax({"interval":5000,"sound":"sound_b","icon":"\/pics\/glpi.png","user_id":164});
+            notifications_ajax.start();
+         });
+
+//]]>
+</script><script type="text/javascript">
+//<![CDATA[
+
+
+      displayAjaxMessageAfterRedirect = function() {
+         // attach MESSAGE_AFTER_REDIRECT to body
+         $('.message_after_redirect').remove();
+         $('[id^="message_after_redirect_"]').remove();
+         $.ajax({
+            url:  '/ajax/displayMessageAfterRedirect.php',
+            success: function(html) {
+               $('body').append(html);
+            }
+         });
+      }
+
+//]]>
+</script></body></html>
