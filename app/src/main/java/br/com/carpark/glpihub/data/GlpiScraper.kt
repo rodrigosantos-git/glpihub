@@ -261,6 +261,45 @@ class GlpiScraper {
         }
     }
 
+    suspend fun addSolution(
+        ticketId: String,
+        solutionTemplateId: String,
+        solutionTypeId: String,
+        content: String,
+        cookies: Map<String, String> = sessionCookies
+    ): Boolean = withContext(Dispatchers.IO) {
+        try {
+            val resTicket = Jsoup.connect("$baseUrl/front/ticket.form.php?id=$ticketId")
+                .cookies(cookies)
+                .method(Connection.Method.GET)
+                .execute()
+
+            val docTicket = resTicket.parse()
+            val csrfToken = docTicket.select("input[name=_glpi_csrf_token]").first()?.attr("value") ?: ""
+
+            if (csrfToken.isEmpty()) return@withContext false
+
+            val resPost = Jsoup.connect("$baseUrl/front/itilsolution.form.php")
+                .data("itemtype", "Ticket")
+                .data("items_id", ticketId)
+                .data("solutiontemplates_id", solutionTemplateId)
+                .data("solutiontypes_id", solutionTypeId)
+                .data("content", content)
+                .data("add", "Adicionar")
+                .data("_glpi_csrf_token", csrfToken)
+                .data("_no_message_link", "1")
+                .cookies(cookies)
+                .method(Connection.Method.POST)
+                .followRedirects(true)
+                .execute()
+
+            return@withContext resPost.statusCode() == 200
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return@withContext false
+        }
+    }
+
     fun clearSession() {
         sessionCookies.clear()
     }

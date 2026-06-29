@@ -130,6 +130,51 @@ class MainViewModel(
         }
     }
 
+    fun addSolution(
+        ticketId: String,
+        templateName: String,
+        typeName: String,
+        content: String,
+        onResult: (Boolean) -> Unit
+    ) {
+        val templateId = when (templateName) {
+            "01 - ACESSO REMOTO (3)" -> "3"
+            "02 - VISITA TECNICA CARPARK (2)" -> "2"
+            "03 - RESOLVIDO (1)" -> "1"
+            "04 - CUSTOMIZACAO (5)" -> "5"
+            "05 - TREINAMENTO (4)" -> "4"
+            "06 - CANCELADO (6)" -> "6"
+            else -> "0"
+        }
+
+        val typeId = when (typeName) {
+            "01 - OK REMOTAMENTE (4)" -> "4"
+            "02 - OK INLOCO (1)" -> "1"
+            "03 - OK SEM INTERVENCAO TECNICA (5)" -> "5"
+            "03 - OK VIA PRESTADOR DE SERVICO (11)" -> "11"
+            "04 - NAO RESOLVIDO (3)" -> "3"
+            "05 - CANCELADO (2)" -> "2"
+            "06 - PLANTAO TECNICO (12)" -> "12"
+            "CUSTOMIZACAO (7)" -> "7"
+            "DESENVOLVIMENTO (8)" -> "8"
+            "RESTART APLICACAO (10)" -> "10"
+            "TREINAMENTO (6)" -> "6"
+            "TROCA DE PEÇAS (9)" -> "9"
+            else -> "0"
+        }
+
+        viewModelScope.launch {
+            _isLoading.value = true
+            val success = scraper.addSolution(ticketId, templateId, typeId, content)
+            if (success) {
+                val tks = scraper.getTickets()
+                _tickets.value = tks
+            }
+            _isLoading.value = false
+            onResult(success)
+        }
+    }
+
     fun logout() {
         viewModelScope.launch {
             scraper.clearSession()

@@ -207,8 +207,11 @@ fun MainScreen(
             onDismiss = { selectedTicketIdForSolution = null },
             sheetState = solutionSheetState,
             onSolucionar = { modelo, tipo, desc ->
-                // TODO: Integrar com a API/Scraper no futuro
-                selectedTicketIdForSolution = null
+                viewModel.addSolution(selectedTicketIdForSolution!!, modelo, tipo, desc) { success ->
+                    if (success) {
+                        selectedTicketIdForSolution = null
+                    }
+                }
             }
         )
     }
