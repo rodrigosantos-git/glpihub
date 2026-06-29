@@ -29,21 +29,46 @@ private val LightColorScheme = lightColorScheme(
     surface = SurfaceLight,
 )
 
+private val MonokaiColorScheme = darkColorScheme(
+    primary = MonokaiPrimary,
+    secondary = MonokaiSecondary,
+    tertiary = MonokaiTertiary,
+    background = MonokaiBackground,
+    surface = MonokaiSurface,
+    onPrimary = MonokaiBackground,
+    onSecondary = MonokaiBackground,
+    onBackground = MonokaiText,
+    onSurface = MonokaiText,
+    onSurfaceVariant = MonokaiTextMuted
+)
+
+private val CyberpunkColorScheme = darkColorScheme(
+    primary = CyberpunkPrimary,
+    secondary = CyberpunkSecondary,
+    tertiary = CyberpunkTertiary,
+    background = CyberpunkBackground,
+    surface = CyberpunkSurface,
+    onPrimary = CyberpunkBackground,
+    onSecondary = CyberpunkBackground,
+    onBackground = CyberpunkText,
+    onSurface = CyberpunkText,
+    onSurfaceVariant = CyberpunkTextMuted
+)
+
 @Composable
 fun GLPIHubTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+ (desativado por padrão para usar cores institucionais)
-    dynamicColor: Boolean = false,
+    themeType: String = "light",
     content: @Composable () -> Unit
 ) {
-    val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        }
-        darkTheme -> DarkColorScheme
+    val colorScheme = when (themeType) {
+        "dark" -> DarkColorScheme
+        "monokai" -> MonokaiColorScheme
+        "cyberpunk" -> CyberpunkColorScheme
         else -> LightColorScheme
     }
+    
+    val darkTheme = themeType != "light"
+    
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {

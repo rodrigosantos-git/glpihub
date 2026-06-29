@@ -25,6 +25,9 @@ class DataStoreManager(private val context: Context) {
         val FILTER_CATEGORY = stringPreferencesKey("filter_category")
         val FILTER_REQUERENTE = stringPreferencesKey("filter_requerente")
         val FILTER_ENTIDADE = stringPreferencesKey("filter_entidade")
+        
+        val THEME_TYPE = stringPreferencesKey("theme_type")
+        val AI_API_KEY = stringPreferencesKey("ai_api_key")
     }
 
     val sessionCookieFlow: Flow<String?> = context.dataStore.data.map { it[COOKIE_SESSION] }
@@ -32,6 +35,9 @@ class DataStoreManager(private val context: Context) {
     val saveLoginFlow: Flow<Boolean> = context.dataStore.data.map { it[SAVE_LOGIN] ?: false }
     val usernameFlow: Flow<String?> = context.dataStore.data.map { it[USERNAME] }
     val passwordFlow: Flow<String?> = context.dataStore.data.map { it[PASSWORD] }
+    
+    val themeTypeFlow: Flow<String> = context.dataStore.data.map { it[THEME_TYPE] ?: "light" }
+    val aiApiKeyFlow: Flow<String> = context.dataStore.data.map { it[AI_API_KEY] ?: "" }
     
     val filterAssigneeFlow: Flow<String> = context.dataStore.data.map { it[FILTER_ASSIGNEE] ?: "" }
     val filterCategoryFlow: Flow<String> = context.dataStore.data.map { it[FILTER_CATEGORY] ?: "" }
@@ -66,6 +72,18 @@ class DataStoreManager(private val context: Context) {
         context.dataStore.edit { preferences ->
             preferences.remove(COOKIE_SESSION)
             preferences.remove(GLPI_CSRF_TOKEN)
+        }
+    }
+
+    suspend fun saveThemeType(theme: String) {
+        context.dataStore.edit { preferences ->
+            preferences[THEME_TYPE] = theme
+        }
+    }
+
+    suspend fun saveAiApiKey(key: String) {
+        context.dataStore.edit { preferences ->
+            preferences[AI_API_KEY] = key
         }
     }
 }

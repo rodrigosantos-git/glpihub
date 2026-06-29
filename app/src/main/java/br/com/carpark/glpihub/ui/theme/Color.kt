@@ -42,3 +42,21 @@ val StatusSolvedBgDark = Color(0x3334D399)
 val StatusSolvedTxtDark = Color(0xFF6EE7B7)
 val StatusDefaultBgDark = Color(0x339CA3AF)
 val StatusDefaultTxtDark = Color(0xFFD1D5DB)
+
+// Cores do Tema Monokai
+val MonokaiBackground = Color(0xFF272822)
+val MonokaiSurface = Color(0xFF3D3E35)
+val MonokaiPrimary = Color(0xFFF92672)
+val MonokaiSecondary = Color(0xFFA6E22E)
+val MonokaiTertiary = Color(0xFF66D9EF)
+val MonokaiText = Color(0xFFF8F8F2)
+val MonokaiTextMuted = Color(0xFF90908A)
+
+// Cores do Tema Cyberpunk 2077
+val CyberpunkBackground = Color(0xFF0C0817)
+val CyberpunkSurface = Color(0xFF1E1035)
+val CyberpunkPrimary = Color(0xFFF2E307)
+val CyberpunkSecondary = Color(0xFF00F0FF)
+val CyberpunkTertiary = Color(0xFFFF007F)
+val CyberpunkText = Color(0xFFFFFFFF)
+val CyberpunkTextMuted = Color(0xFF8C86A5)

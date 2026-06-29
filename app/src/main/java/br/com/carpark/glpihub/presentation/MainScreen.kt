@@ -18,6 +18,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.material.icons.filled.Assignment
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Message
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -39,6 +40,8 @@ fun MainScreen(
     
     val sheetState = rememberModalBottomSheetState()
     var showBottomSheet by remember { mutableStateOf(false) }
+    val settingsSheetState = rememberModalBottomSheetState()
+    var showSettingsSheet by remember { mutableStateOf(false) }
     var searchQuery by remember { mutableStateOf("") }
 
     LaunchedEffect(Unit) {
@@ -88,8 +91,8 @@ fun MainScreen(
                     IconButton(onClick = { viewModel.loadTickets() }) {
                         Icon(Icons.Default.Refresh, contentDescription = "Atualizar")
                     }
-                    IconButton(onClick = { viewModel.logout(); onLogout() }) {
-                        Icon(Icons.Default.Logout, contentDescription = "Sair", tint = MaterialTheme.colorScheme.error)
+                    IconButton(onClick = { showSettingsSheet = true }) {
+                        Icon(Icons.Default.Settings, contentDescription = "Ajustes")
                     }
                 }
             )
@@ -171,6 +174,19 @@ fun MainScreen(
             onApplyFilters = { assignee, category, req, ent ->
                 viewModel.saveFilters(assignee, category, req, ent)
                 showBottomSheet = false
+            }
+        )
+    }
+
+    if (showSettingsSheet) {
+        SettingsBottomSheet(
+            onDismiss = { showSettingsSheet = false },
+            sheetState = settingsSheetState,
+            viewModel = viewModel,
+            onLogout = {
+                showSettingsSheet = false
+                viewModel.logout()
+                onLogout()
             }
         )
     }
@@ -472,6 +488,141 @@ fun FilterBottomSheet(
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text("Aplicar Filtros")
+            }
+            Spacer(modifier = Modifier.height(32.dp))
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun SettingsBottomSheet(
+    onDismiss: () -> Unit,
+    sheetState: SheetState,
+    viewModel: MainViewModel,
+    onLogout: () -> Unit
+) {
+    val aiApiKey by viewModel.aiApiKey.collectAsState()
+    val themeType by viewModel.themeType.collectAsState()
+
+    var apiKeyInput by remember { mutableStateOf(aiApiKey) }
+
+    // Sincroniza o input local se o estado mudar externamente
+    LaunchedEffect(aiApiKey) {
+        apiKeyInput = aiApiKey
+    }
+
+    ModalBottomSheet(
+        onDismissRequest = onDismiss,
+        sheetState = sheetState,
+        windowInsets = WindowInsets.ime
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 24.dp)
+                .navigationBarsPadding()
+                .verticalScroll(rememberScrollState())
+        ) {
+            Text("Ajustes do Aplicativo", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Campo de API Key
+            Text("Inteligência Artificial (IA)", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+            Spacer(modifier = Modifier.height(8.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                OutlinedTextField(
+                    value = apiKeyInput,
+                    onValueChange = { apiKeyInput = it },
+                    label = { Text("Chave API ChatGPT/OpenAI") },
+                    shape = RoundedCornerShape(12.dp),
+                    modifier = Modifier.weight(1f),
+                    singleLine = true
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                Button(
+                    onClick = { viewModel.saveAiApiKey(apiKeyInput) },
+                    shape = RoundedCornerShape(12.dp)
+                ) {
+                    Text("Salvar")
+                }
+            }
+
+            Spacer(modifier = Modifier.height(24.dp))
+            Divider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Configuração de Temas
+            Text("Tema do Aplicativo", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+            Spacer(modifier = Modifier.height(12.dp))
+
+            val themes = listOf(
+                "light" to "Claro",
+                "dark" to "Escuro",
+                "monokai" to "Monokai",
+                "cyberpunk" to "Cyberpunk"
+            )
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                themes.forEach { (type, name) ->
+                    val isSelected = themeType == type
+                    val border = if (isSelected) BorderStroke(2.dp, MaterialTheme.colorScheme.primary) else null
+                    Card(
+                        modifier = Modifier
+                            .weight(1f)
+                            .height(54.dp)
+                            .clickable { viewModel.saveThemeType(type) },
+                        border = border,
+                        shape = RoundedCornerShape(12.dp),
+                        colors = CardDefaults.cardColors(
+                            containerColor = when (type) {
+                                "light" -> Color(0xFFF1F5F9)
+                                "dark" -> Color(0xFF1E293B)
+                                "monokai" -> Color(0xFF272822)
+                                "cyberpunk" -> Color(0xFF0C0817)
+                                else -> MaterialTheme.colorScheme.surface
+                            }
+                        )
+                    ) {
+                        Box(
+                            modifier = Modifier.fillMaxSize().padding(4.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(
+                                text = name,
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = when (type) {
+                                    "light" -> Color.Black
+                                    "dark" -> Color.White
+                                    "monokai" -> Color(0xFFF8F8F2)
+                                    "cyberpunk" -> Color(0xFFF2E307)
+                                    else -> MaterialTheme.colorScheme.onSurface
+                                }
+                            )
+                        }
+                    }
+                }
+            }
+
+            Spacer(modifier = Modifier.height(32.dp))
+            Divider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
+            Spacer(modifier = Modifier.height(20.dp))
+
+            // Botão Sair da Conta
+            Button(
+                onClick = onLogout,
+                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error),
+                shape = RoundedCornerShape(16.dp),
+                modifier = Modifier.fillMaxWidth().height(48.dp)
+            ) {
+                Text("SAIR DA CONTA", fontWeight = FontWeight.Bold, color = Color.White)
             }
             Spacer(modifier = Modifier.height(32.dp))
         }

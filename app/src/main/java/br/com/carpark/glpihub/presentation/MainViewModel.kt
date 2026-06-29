@@ -43,6 +43,21 @@ class MainViewModel(
     val savedPassword = dataStoreManager.passwordFlow.stateIn(viewModelScope, SharingStarted.Lazily, "")
     val savedSaveLogin = dataStoreManager.saveLoginFlow.stateIn(viewModelScope, SharingStarted.Lazily, false)
 
+    val themeType = dataStoreManager.themeTypeFlow.stateIn(viewModelScope, SharingStarted.Eagerly, "light")
+    val aiApiKey = dataStoreManager.aiApiKeyFlow.stateIn(viewModelScope, SharingStarted.Eagerly, "")
+
+    fun saveThemeType(theme: String) {
+        viewModelScope.launch {
+            dataStoreManager.saveThemeType(theme)
+        }
+    }
+
+    fun saveAiApiKey(key: String) {
+        viewModelScope.launch {
+            dataStoreManager.saveAiApiKey(key)
+        }
+    }
+
     fun saveFilters(assignee: String, category: String, requerente: String, entidade: String) {
         viewModelScope.launch {
             dataStoreManager.saveFilters(assignee, category, requerente, entidade)

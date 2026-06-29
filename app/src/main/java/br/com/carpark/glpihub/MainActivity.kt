@@ -40,7 +40,8 @@ class MainActivity : ComponentActivity() {
         viewModel.checkLoginStatus()
 
         setContent {
-            GLPIHubTheme {
+            val currentTheme by viewModel.themeType.collectAsState()
+            GLPIHubTheme(themeType = currentTheme) {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
